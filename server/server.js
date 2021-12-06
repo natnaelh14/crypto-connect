@@ -6,9 +6,6 @@ const { typeDefs, resolvers } = require('./schemas');
 const sequelize = require('./config/connection');
 const PORT = process.env.PORT || 3001;
 const path = require('path');
-// const { User, Post } = require('./models');
-// const userData = require('./seeds/userData.json');
-// const postData = require('./seeds/postData.json');
 
 async function startApolloServer() {
   try {
@@ -34,13 +31,6 @@ async function startApolloServer() {
       })
     );
     sessionStore.sync();
-
-    // app.use(express.static(path.join(__dirname, 'public')));
-
-    //   app.get('*', function(req, res) {
-    //     const index = path.join(__dirname, 'build', 'index.html');
-    //     res.sendFile(index);
-    //  });
 
     app.use(express.static(path.join(__dirname, '../client/build')));
 
