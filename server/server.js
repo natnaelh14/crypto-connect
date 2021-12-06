@@ -36,7 +36,7 @@ async function startApolloServer() {
     );
     sessionStore.sync();
 
-    // app.use(express.static(path.join(__dirname, 'public')));
+    app.use(express.static(path.join(__dirname, 'public')));
 
   //   app.get('*', function(req, res) {
   //     const index = path.join(__dirname, 'build', 'index.html');
@@ -62,4 +62,5 @@ async function startApolloServer() {
     console.log(err.message);
   }
 }
+
 startApolloServer();
