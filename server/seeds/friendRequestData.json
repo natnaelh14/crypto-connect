@@ -1,0 +1,62 @@
+[
+    {
+        "sender_id": "one",
+        "receiver_id": "two",
+        "status": "PENDING"
+    },
+    {
+        "sender_id": "one",
+        "receiver_id": "two",
+        "status": "CONFIRM"
+    },
+    {
+        "sender_id": "one",
+        "receiver_id": "two",
+        "status": "REJECT"
+    },
+    {
+        "sender_id": "two",
+        "receiver_id": "one",
+        "status": "PENDING"
+    },
+    {
+        "sender_id": "two",
+        "receiver_id": "three",
+        "status": "CONFIRM"
+    },
+    {
+        "sender_id": "two",
+        "receiver_id": "four",
+        "status": "REJECT"
+    },
+    {
+        "sender_id": "three",
+        "receiver_id": "one",
+        "status": "PENDING"
+    },
+    {
+        "sender_id": "thee",
+        "receiver_id": "one",
+        "status": "CONFIRM"
+    },
+    {
+        "sender_id": "three",
+        "receiver_id": "four",
+        "status": "REJECT"
+    },
+    {
+        "sender_id": "four",
+        "receiver_id": "one",
+        "status": "PENDING"
+    },
+    {
+        "sender_id": "four",
+        "receiver_id": "two",
+        "status": "CONFIRM"
+    },
+    {
+        "sender_id": "four",
+        "receiver_id": "three",
+        "status": "BLOCKED"
+    }
+]
