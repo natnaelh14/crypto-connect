@@ -80,7 +80,7 @@
   },
   "devDependencies": {
     "@types/react-datepicker": "^4.3.2",
-    "@types/styled-components": "^5.1.15",
+    "@types/styled-components": "^5.1.16",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.2",
