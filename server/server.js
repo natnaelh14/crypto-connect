@@ -43,9 +43,9 @@ async function startApolloServer() {
   //     res.sendFile(index);
   //  });
 
-    // app.get('*', (req, res) => {
-    //   res.sendFile(path.join(__dirname, '../client/build/index.html'));
-    // });
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../client/build/index.html'));
+    });
     
     await server.start();
     server.applyMiddleware({ app });
