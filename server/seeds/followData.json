@@ -1,0 +1,50 @@
+[
+    {
+        "follower_user_id": "two",
+        "followed_user_id": "one"
+    },
+    {
+        "follower_user_id": "three",
+        "followed_user_id": "one"
+    },
+    {
+        "follower_user_id": "four",
+        "followed_user_id": "one"
+    },
+    {
+        "follower_user_id": "one",
+        "followed_user_id": "two"
+    },
+    {
+        "follower_user_id": "three",
+        "followed_user_id": "two"
+    },
+    {
+        "follower_user_id": "four",
+        "followed_user_id": "two"
+    },
+    {
+        "follower_user_id": "one",
+        "followed_user_id": "three"
+    },
+    {
+        "follower_user_id": "two",
+        "followed_user_id": "three"
+    },
+    {
+        "follower_user_id": "four",
+        "followed_user_id": "three"
+    },
+    {
+        "follower_user_id": "one",
+        "followed_user_id": "four"
+    },
+    {
+        "follower_user_id": "two",
+        "followed_user_id": "four"
+    },
+    {
+        "follower_user_id": "three",
+        "followed_user_id": "four"
+    }
+]
