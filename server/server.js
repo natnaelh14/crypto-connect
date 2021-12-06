@@ -5,9 +5,10 @@ const { ApolloServer } = require('apollo-server-express');
 const { typeDefs, resolvers } = require('./schemas');
 const sequelize = require('./config/connection');
 const PORT = process.env.PORT || 3001;
-const { User, Post } = require('./models');
-const userData = require('./seeds/userData.json');
-const postData = require('./seeds/postData.json');
+const path = require('path')
+// const { User, Post } = require('./models');
+// const userData = require('./seeds/userData.json');
+// const postData = require('./seeds/postData.json');
 
 
 async function startApolloServer() {
@@ -34,21 +35,20 @@ async function startApolloServer() {
       })
     );
     sessionStore.sync();
+
+    // app.use(express.static(path.join(__dirname, 'public')));
+
+  //   app.get('*', function(req, res) {
+  //     const index = path.join(__dirname, 'build', 'index.html');
+  //     res.sendFile(index);
+  //  });
+
+    // app.get('*', (req, res) => {
+    //   res.sendFile(path.join(__dirname, '../client/build/index.html'));
+    // });
+    
     await server.start();
     server.applyMiddleware({ app });
-
-    // sequelize.sync({ force: false }).then(() => {
-    //     Post.bulkCreate(postData, {
-    //     individualHooks: true,
-    //     returning: true,
-    //   });
-    //   User.bulkCreate(userData, {
-    //      individualHooks: true,
-    //      returning: true,
-    //    }).then(() => {
-    //      console.log('wattttttttttttt')
-    //    })
-    //  })
 
     app.listen(() => {
       new Promise((resolve) => app.listen(PORT, resolve));
