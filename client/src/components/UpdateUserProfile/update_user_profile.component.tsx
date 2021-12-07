@@ -23,6 +23,7 @@ import { useAppSelector } from '../../app/hooks';
 import { userProps } from '../../index.types';
 import { UPDATE_USER_PROFILE } from '../../utils/mutations';
 import { useMutation } from '@apollo/client';
+import noAvatar from '../../img/no-avatar.png';
 
 type ModalProps = {
   open: boolean,
@@ -100,13 +101,13 @@ const UpdateUserProfile = ({
             <Avatar
               alt="Remy Sharp"
               sx={{ width: 80, height: 80, margin: 'auto' }}
-              src={userInfo.avatar}
+              src={userInfo?.avatar ? userInfo?.avatar : noAvatar}
             />
             <Typography fontFamily='inherit' textAlign='center' component="h1" variant="h6">
-              Natnael Haile
+              {userInfo?.handle}
             </Typography>
             <Typography fontFamily='inherit' textAlign='center' component="p" variant="subtitle2">
-              @natnaelhaile
+              {`@${userInfo?.handle}`}
             </Typography>
             <form noValidate>
               <TextField

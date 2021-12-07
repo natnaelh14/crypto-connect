@@ -17,6 +17,7 @@ import FollowModal from "../components/FollowModal/follow_modal.component";
 import cover from '../img/cover.jpeg';
 import { ProfileContainer } from './styles/profile_page.styles';
 import ProfilePageLoading from './loading/profile_page.loading';
+import noAvatar from '../img/no-avatar.png';
 
 const Profile = () => {
 
@@ -66,161 +67,167 @@ const Profile = () => {
             {(pending) && (
                 <ProfilePageLoading />
             )}
-            {(userInfo && followerData && followingData) && (
-                <Fade in={true} timeout={1000}>
-                    <div style={{ padding: '20px' }}>
-                        <Box>
-                            <Box borderBottom="1px solid #ccc" padding="8px 20px">
-                                <Grid container alignItems="center">
-                                    <Grid item sx={{ mr: "10px" }}>
-                                        <RouteLink to="/">
-                                            <IconButton>
-                                                <ArrowBackIcon />
-                                            </IconButton>
-                                        </RouteLink>
-                                    </Grid>
-                                    <Grid item>
-                                        <Typography fontFamily='inherit' variant="h6">
-                                            {userInfo.handle}
-                                        </Typography>
-                                        <Typography fontFamily='inherit' sx={{ fontSize: "12px", color: "#555" }}>
-                                            {postsData ? postsData.length : 0} posts
-                                        </Typography>{" "}
-                                    </Grid>
+            {/* {(userInfo && followerData && followingData) && ( */}
+            <Fade in={true} timeout={1000}>
+                <div style={{ padding: '20px' }}>
+                    <Box>
+                        <Box borderBottom="1px solid #ccc" padding="8px 20px">
+                            <Grid container alignItems="center">
+                                <Grid item sx={{ mr: "10px" }}>
+                                    <RouteLink to="/">
+                                        <IconButton>
+                                            <ArrowBackIcon />
+                                        </IconButton>
+                                    </RouteLink>
                                 </Grid>
+                                <Grid item>
+                                    <Typography fontFamily='inherit' variant="h6">
+                                        {userInfo?.handle}
+                                    </Typography>
+                                    <Typography fontFamily='inherit' sx={{ fontSize: "12px", color: "#555" }}>
+                                        {postsData ? postsData?.length : 0} posts
+                                    </Typography>{" "}
+                                </Grid>
+                            </Grid>
+                        </Box>
+                        <Box height="90vh" sx={{ overflowY: "scroll" }}>
+                            <Box position="relative">
+                                <img
+                                    width="100%"
+                                    height='300px'
+                                    src={cover}
+                                    alt="background"
+                                />
+                                <Box
+                                    sx={{
+                                        position: "absolute",
+                                        top: 120,
+                                        left: 15,
+                                        background: "#eee",
+                                        borderRadius: "50%",
+                                    }}
+                                >
+                                    <img width="150px" src={userInfo?.avatar ? userInfo?.avatar : noAvatar} alt="profile" />
+                                </Box>
                             </Box>
-                            <Box height="90vh" sx={{ overflowY: "scroll" }}>
-                                <Box position="relative">
-                                    <img
-                                        width="100%"
-                                        height='300px'
-                                        src={cover}
-                                        alt="background"
-                                    />
-                                    <Box
-                                        sx={{
-                                            position: "absolute",
-                                            top: 120,
-                                            left: 15,
-                                            background: "#eee",
-                                            borderRadius: "50%",
-                                        }}
-                                    >
-                                        <img width="150px" src={userInfo.avatar} alt="profile" />
-                                    </Box>
-                                </Box>
-                                <Box textAlign="right" padding="10px 20px">
-                                    <Button
-                                        onClick={() => setOpenUpdateModal(!openUpdateModal)}
-                                        size="small"
-                                        sx={{
-                                            textTransform: "capitalize",
-                                            padding: "6px 20px",
-                                            background: "black",
-                                            fontFamily: 'inherit',
-                                            "&:hover": {
-                                                background: "#333",
-                                            },
-                                        }}
-                                        variant="contained"
+                            <Box textAlign="right" padding="10px 20px">
+                                <Button
+                                    onClick={() => setOpenUpdateModal(!openUpdateModal)}
+                                    size="small"
+                                    sx={{
+                                        textTransform: "capitalize",
+                                        padding: "6px 20px",
+                                        background: "black",
+                                        fontFamily: 'inherit',
+                                        "&:hover": {
+                                            background: "#333",
+                                        },
+                                    }}
+                                    variant="contained"
 
-                                    >
-                                        UPDATE
-                                    </Button>
-                                </Box>
-                                <Box padding="10px 20px">
-                                    <Typography fontFamily='inherit' variant="h6" sx={{ fontWeight: "500" }}>
-                                        {userInfo.handle}
-                                    </Typography>
+                                >
+                                    UPDATE
+                                </Button>
+                            </Box>
+                            <Box padding="10px 20px">
+                                <Typography fontFamily='inherit' variant="h6" sx={{ fontWeight: "500" }}>
+                                    {userInfo?.handle}
+                                </Typography>
+                                {userInfo?.handle && (
                                     <Typography fontFamily='inherit' sx={{ fontSize: "14px", color: "#555" }}>
-                                        @{userInfo.handle.trim().toLowerCase()}
+                                        {`@${userInfo?.handle?.trim().toLowerCase()}`}
                                     </Typography>
-                                    <Typography fontFamily='inherit' fontSize="16px" color="#333" padding="10px 0">
-                                        {userInfo.bio}
-                                    </Typography>
-                                    <Box
-                                        display="flex"
-                                        alignItems="center"
-                                        padding="6px 0"
-                                        flexWrap="wrap"
-                                    >
+                                )}
+                                <Typography fontFamily='inherit' fontSize="16px" color="#333" padding="10px 0">
+                                    {userInfo?.bio}
+                                </Typography>
+                                <Box
+                                    display="flex"
+                                    alignItems="center"
+                                    padding="6px 0"
+                                    flexWrap="wrap"
+                                >
+                                    {(userInfo?.city || userInfo?.state || userInfo?.country) && (
                                         <Box display="flex">
                                             <LocationOnIcon htmlColor="#555" />
                                             <Typography fontFamily='inherit' sx={{ ml: "6px", color: "#555" }}>
-                                                {userInfo.city}, {userInfo.state}, {userInfo.country}
+                                                {userInfo?.city}, {userInfo?.state}, {userInfo?.country}
                                             </Typography>
                                         </Box>
+                                    )}
+                                    {userInfo?.birth_date && (
                                         <Box display="flex" marginLeft="1rem">
                                             <DateRangeIcon htmlColor="#555" />
                                             <Typography fontFamily='inherit' sx={{ ml: "6px", color: "#555" }}>
-                                                {Moment(userInfo.birth_date).format('MMMM Do YYYY')}
+                                                {Moment(userInfo?.birth_date).format('MMMM Do YYYY')}
                                             </Typography>
                                         </Box>
-                                    </Box>
-                                    <Box display="flex" marginTop='1rem'>
-                                        <Box
-                                            onClick={() => setOpenFollowingModal(!openFollowingModal)}
-                                            sx={{
-                                                "&:hover": {
+                                    )}
+                                </Box>
+                                <Box display="flex" marginTop='1rem'>
+                                    <Box
+                                        onClick={() => setOpenFollowingModal(!openFollowingModal)}
+                                        sx={{
+                                            "&:hover": {
 
-                                                    textDecoration: "underline",
-                                                    cursor: "pointer",
-                                                    fontWeight: "bold"
-                                                },
-                                            }}
-                                        >
-                                            <Typography fontFamily='inherit' color="#555" marginRight="1rem">
-                                                <strong style={{ color: "black" }}>
-                                                    {`${followings.length} `}
-                                                </strong>
-                                                Following
-                                            </Typography>
-                                        </Box>
-                                        <Box
-                                            onClick={() => setOpenFollowerModal(!openFollowerModal)}
-                                            sx={{
-                                                "&:hover": {
-                                                    textDecoration: "underline",
-                                                    cursor: "pointer",
-                                                    fontWeight: "bold"
-                                                },
-                                            }}
-                                        >
-                                            <Typography fontFamily='inherit' color="#555" marginRight="1rem">
-                                                <strong style={{ color: "black" }}>
-                                                    {`${followers.length} `}
-                                                </strong>
-                                                Followers
-                                            </Typography>
-                                        </Box>
-                                    </Box>
-                                    <Box display="flex" marginTop='1rem'>
-                                        <Typography fontFamily='inherit' color="#555" marginRight="1rem">Member Since {Moment(userInfo.created_at).format('YYYY')}</Typography>
-                                    </Box>
-                                </Box>
-                                <Box borderBottom="1px solid #ccc">
-                                    <Typography
-                                        display="inline-block"
-                                        variant="caption"
-                                        fontSize="16px"
-                                        marginX="1rem"
-                                        padding="6px 0"
-                                        fontWeight="500"
-                                        fontFamily='inherit'
-                                        borderBottom={`4px solid black`}
+                                                textDecoration: "underline",
+                                                cursor: "pointer",
+                                                fontWeight: "bold"
+                                            },
+                                        }}
                                     >
-                                        POSTS
-                                    </Typography>
+                                        <Typography fontFamily='inherit' color="#555" marginRight="1rem">
+                                            <strong style={{ color: "black" }}>
+                                                {`${followings?.length} `}
+                                            </strong>
+                                            Following
+                                        </Typography>
+                                    </Box>
+                                    <Box
+                                        onClick={() => setOpenFollowerModal(!openFollowerModal)}
+                                        sx={{
+                                            "&:hover": {
+                                                textDecoration: "underline",
+                                                cursor: "pointer",
+                                                fontWeight: "bold"
+                                            },
+                                        }}
+                                    >
+                                        <Typography fontFamily='inherit' color="#555" marginRight="1rem">
+                                            <strong style={{ color: "black" }}>
+                                                {`${followers?.length} `}
+                                            </strong>
+                                            Followers
+                                        </Typography>
+                                    </Box>
                                 </Box>
-                                <Box>
-                                    {postsData &&
-                                        postsData.map((post) => <Post key={post.id} postId={post.id} userId={post.user_id} postTime={post.created_at} text={post.text} />)}
+                                <Box display="flex" marginTop='1rem'>
+                                    <Typography fontFamily='inherit' color="#555" marginRight="1rem">Member Since {Moment(userInfo.created_at).format('YYYY')}</Typography>
                                 </Box>
                             </Box>
+                            <Box borderBottom="1px solid #ccc">
+                                <Typography
+                                    display="inline-block"
+                                    variant="caption"
+                                    fontSize="16px"
+                                    marginX="1rem"
+                                    padding="6px 0"
+                                    fontWeight="500"
+                                    fontFamily='inherit'
+                                    borderBottom={`4px solid black`}
+                                >
+                                    POSTS
+                                </Typography>
+                            </Box>
+                            <Box>
+                                {postsData &&
+                                    postsData.map((post) => <Post key={post.id} postId={post.id} userId={post.user_id} postTime={post.created_at} text={post.text} />)}
+                            </Box>
                         </Box>
-                    </div>
-                </Fade>
-            )}
+                    </Box>
+                </div>
+            </Fade>
+            {/* // )} */}
             {openUpdateModal && (
                 <UpdateUserProfile
                     open={openUpdateModal}

@@ -6,10 +6,11 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { useQuery, useMutation } from '@apollo/client';
 import { ADD_POST, UPDATE_USER_PROFILE } from "../../utils/mutations";
 import { userProps } from '../../index.types';
-import { QUERY_POSTS } from '../../utils/queries';
-import { listPosts } from '../../redux/actions/postActions';
+import { QUERY_POSTS_BY_FOLLOWING } from '../../utils/queries';
+import { listPostsByFollowing } from '../../redux/actions/postActions';
 import { setCurrentUser } from '../../redux/actions/userActions';
 import AddPostLoading from './add_post_loading.component';
+import noAvatar from '../../img/no-avatar.png';
 
 const AddPost = () => {
 
@@ -20,7 +21,13 @@ const AddPost = () => {
 
   const [postText, setPostText] = useState("");
   const [mood, setMood] = useState<string>(userInfo?.status)
-  const [addPost, { }] = useMutation(ADD_POST);
+  const [addPost, { }] = useMutation(ADD_POST,
+    {
+      refetchQueries: [
+        { query: QUERY_POSTS_BY_FOLLOWING }
+      ]
+    }
+  );
   const [updateProfile, { }] = useMutation(UPDATE_USER_PROFILE)
 
   const handleAddPost = async () => {
@@ -33,12 +40,12 @@ const AddPost = () => {
       })
       if (res) {
         setPostText("");
-        const { loading, error, data: { posts } } = await useQuery(QUERY_POSTS, {
+        const { loading, error, data: { postsByFollowing } } = await useQuery(QUERY_POSTS_BY_FOLLOWING, {
           variables: {
             id: userInfo.id
           },
         });
-        dispatch(listPosts(posts))
+        dispatch(listPostsByFollowing(postsByFollowing))
       }
     } catch (e) {
 
@@ -63,13 +70,13 @@ const AddPost = () => {
 
   return (
     <>
-      {(!userInfo.avatar || userLoading) ? (
+      {(userLoading) ? (
         <AddPostLoading />
       ) : (
         <Box padding="1rem 1rem 0 1rem" borderBottom="1px solid #ccc">
           <Grid >
             <Grid item sx={{ paddingRight: "1rem" }}>
-              <img src={userInfo.avatar} alt="logo" width="50px" />
+              <img src={userInfo.avatar ? userInfo.avatar : noAvatar} alt="logo" width="50px" />
             </Grid>
             <Grid item >
               <Box padding=".5rem 0">

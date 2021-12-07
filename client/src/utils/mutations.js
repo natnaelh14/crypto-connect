@@ -1,5 +1,15 @@
 import { gql } from "@apollo/client";
 
+export const CREATE_USER_PROFILE = gql`
+  mutation addUserProfileMutation($id: ID!, $email: String!, $handle: String!) {
+    addUserProfile(id: $id, email: $email, handle: $handle) {
+      id
+      email
+      handle
+    }
+  }
+`;
+
 export const UPDATE_USER_PROFILE = gql`
   mutation updateProfile(
     $id: ID!
@@ -120,14 +130,8 @@ export const DELETE_CRYPTO = gql`
   }
 `;
 export const FRIEND_REQUEST = gql`
-  mutation followRequestMutation(
-    $sender_id: String!
-    $receiver_id: String!
-  ) {
-    followRequest(
-      sender_id: $sender_id
-      receiver_id: $receiver_id
-    ) {
+  mutation followRequestMutation($sender_id: String!, $receiver_id: String!) {
+    followRequest(sender_id: $sender_id, receiver_id: $receiver_id) {
       id
       sender_id
       receiver_id
@@ -208,8 +212,16 @@ export const DELETE_MESSAGE = gql`
   }
 `;
 export const ADD_REACTION_POST = gql`
-  mutation addReactionOnPostMutation($reaction_type: String!, $user_id: ID!, $post_id: ID!) {
-    addReactionOnPost(reaction_type: $reaction_type, user_id: $user_id, post_id: $post_id) {
+  mutation addReactionOnPostMutation(
+    $reaction_type: String!
+    $user_id: ID!
+    $post_id: ID!
+  ) {
+    addReactionOnPost(
+      reaction_type: $reaction_type
+      user_id: $user_id
+      post_id: $post_id
+    ) {
       id
       reaction_type
       post_id
@@ -225,8 +237,16 @@ export const DELETE_REACTION_POST = gql`
   }
 `;
 export const ADD_REACTION_COMMENT = gql`
-  mutation addReactionOnCommentMutation($reaction_type: String!, $user_id: ID!, $comment_id: ID!) {
-    addReactionOnComment(reaction_type: $reaction_type, user_id: $user_id, comment_id: $comment_id) {
+  mutation addReactionOnCommentMutation(
+    $reaction_type: String!
+    $user_id: ID!
+    $comment_id: ID!
+  ) {
+    addReactionOnComment(
+      reaction_type: $reaction_type
+      user_id: $user_id
+      comment_id: $comment_id
+    ) {
       id
       reaction_type
       comment_id

@@ -17,6 +17,7 @@ import { auth, createUserProfileDocument } from '../firebase/firebase.utils';
 import { gql } from "@apollo/client";
 import { client } from '../index';
 import { QUERY_USER, QUERY_POSTS_BY_FOLLOWING } from '../utils/queries';
+import { CREATE_USER_PROFILE } from '../utils/mutations';
 import GuestProfile from "../components/GuestProfile/guest_profile.component";
 import ProfilePage from "../pages/profile_page";
 import CryptoPage from '../pages/crypto_page';
@@ -46,18 +47,18 @@ query posts($user_id: ID!) {
 }
 `;
 
-const newUser = gql`
-  mutation($id: ID!, $email: String!, $handle: String!) {
-    addUserProfile(        
-        id: $id
-        email: $email
-        handle: $handle) {
-        id
-        email
-        handle
-        }
-  }
-`;
+// const newUser = gql`
+//   mutation($id: ID!, $email: String!, $handle: String!) {
+//     addUserProfile(        
+//         id: $id
+//         email: $email
+//         handle: $handle) {
+//         id
+//         email
+//         handle
+//         }
+//   }
+// `;
 
 class Routes extends Component<MyProps, {}> {
   unsubscribeFromAuth: any = null;
@@ -69,22 +70,34 @@ class Routes extends Component<MyProps, {}> {
       // userAuth returns null when auth.signOut() is called
       if (userAuth) {
         try {
+          console.log('who to follow', userAuth)
           const result = await client.query({
             query: QUERY_USER,
             variables: {
               id: userAuth.uid
             }
           })
-        } catch (e) {
-          try {
+          if(!(result?.data?.userProfile)) {
             await client.mutate({
-              mutation: newUser,
+              mutation: CREATE_USER_PROFILE,
               variables: {
                 id: userAuth.uid,
                 email: userAuth.email,
                 handle: userAuth.displayName
               }
             })
+          }
+        } catch (e) {
+          try {
+            console.log('katyperry')
+            // await client.mutate({
+            //   mutation: CREATE_USER_PROFILE,
+            //   variables: {
+            //     id: userAuth.uid,
+            //     email: userAuth.email,
+            //     handle: userAuth.displayName
+            //   }
+            // })
           } catch (e) {
             console.log("Unable to create a user account")
           }

@@ -18,6 +18,7 @@ import { DELETE_POST, ADD_COMMENT } from '../../utils/mutations'
 import { useQuery, useMutation } from '@apollo/client';
 import CommentList from "../CommentList/comment_list.component";
 import PostLoading from "./post_loading.component";
+import noAvatar from '../../img/no-avatar.png';
 
 type postProps = {
     postId: number,
@@ -136,7 +137,7 @@ const Post = ({ postId, text, userId, postTime }: postProps) => {
                     <Grid container flexWrap="nowrap">
                         <Grid item sx={{ paddingRight: "1rem" }}>
                             <Link to={`/home/profile/${userProfile.id}`}>
-                                <img src={userProfile.avatar} alt="logo" width="50px" />
+                                <img src={userProfile.avatar ? userProfile.avatar : noAvatar} alt="logo" width="50px" />
                             </Link>
                         </Grid>
                         <Box width='100%' >

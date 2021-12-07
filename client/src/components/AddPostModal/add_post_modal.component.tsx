@@ -7,7 +7,7 @@ import React, { useState} from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/system";
-
+import noAvatar from '../../img/no-avatar.png';
 
 type ModalProps = {
   open: boolean,
@@ -51,7 +51,7 @@ const AddPostModal = ({
         <Box padding="1rem 1rem 0 1rem" borderBottom="1px solid #ccc">
           <Grid >
             <Grid item>
-              <img src={userInfo.avatar} alt="logo" width="60px" />
+              <img src={userInfo?.avatar ? userInfo?.avatar : noAvatar} alt="logo" width="60px" />
             </Grid>
             <Grid item>
               <Box padding=".5rem 0">

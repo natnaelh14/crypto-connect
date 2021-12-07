@@ -8,7 +8,7 @@ import MoreInfoCryptoModal from '../MoreInfoCryptoModal/more_info_crypto_modal.c
 type nameProps = {
     name: string
 }
-// @ts-ignore
+
 const CryptoCurrency = ({ name }: nameProps) => {
 
     const [coinData, setCoinData] = useState<any>();
@@ -136,4 +136,3 @@ const CryptoCurrency = ({ name }: nameProps) => {
 }
 
 export default CryptoCurrency
-// @ts-ignore
