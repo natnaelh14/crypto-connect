@@ -18,7 +18,7 @@ const httpLink = createHttpLink({
 export const client = new ApolloClient({
   //New instance of ApolloClient
   cache: new InMemoryCache(), //New instance of InMemoryCache
-  link: httpLink
+  uri: "/graphql"
 });
 
 ReactDOM.render(
