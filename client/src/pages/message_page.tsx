@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Fade, Typography } from "@mui/material";
+import { Fade, Typography, Button } from "@mui/material";
 import { Box } from "@mui/system";
 import MessageBox from '../components/MessageBox/message_box.component';
 import { useQuery } from '@apollo/client';
@@ -8,6 +8,7 @@ import { userProps } from '../index.types';
 import { useAppSelector } from '../app/hooks';
 import MessageBoxLoading from '../components/MessageBox/message_box_loading.component';
 import { MessagesContainer } from './styles/message_page.styles';
+import AddNewMessageModal from '../components/AddNewMessageModal/AddNewMessageModal.component';
 
 const MessagePage = () => {
 
@@ -21,11 +22,39 @@ const MessagePage = () => {
     var { messengers } = data;
   }
 
+  const [openModal, setOpenModal] = React.useState(false);
+  const handleModalClose = () => {
+    setOpenModal(false)
+  };
+
   return (
     <MessagesContainer>
       <Fade in={true} timeout={1000}>
         <div style={{ border: '1px solid #cdcdcd', height: "90vh", padding: '20px' }}>
           <Typography fontFamily='inherit' variant='h5' textAlign='center' >Messages</Typography>
+          <Box display='flex' justifyContent='flex-end'>
+            <Button
+              size="small"
+              onClick={() => setOpenModal(true)}
+              sx={{
+                textTransform: "capitalize",
+                fontFamily: 'inherit',
+                borderRadius: "12px",
+                marginLeft: 'auto',
+                padding: "10px",
+                fontSize: '15px',
+                mt: "4px",
+                background: "black",
+                "&:hover": {
+                  background: "#333",
+                },
+              }}
+              variant="contained"
+            >
+              SEND MESSAGE
+            </Button>
+          </Box>
+
           <Box
             paddingBottom=".5rem"
             paddingTop=".5rem"
@@ -48,6 +77,12 @@ const MessagePage = () => {
           </Box>
         </div>
       </Fade>
+      {openModal && (
+        <AddNewMessageModal
+          open={openModal}
+          handleClose={handleModalClose}
+        />
+      )}
     </MessagesContainer>
   )
 }

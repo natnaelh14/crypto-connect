@@ -88,6 +88,7 @@ const CryptoPage = () => {
                                         textTransform: "capitalize",
                                         padding: "6px 20px",
                                         background: "black",
+                                        borderRadius: "12px",
                                         "&:hover": {
                                             background: "#333",
                                             fontFamily: 'inherit'

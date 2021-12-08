@@ -7,11 +7,10 @@ import {
     HeaderContainer,
     LogoContainer,
     OptionsContainer,
-    OptionLink
+    OptionLink,
+    OptionTag
 } from './header.styles';
 import { useAppSelector } from '../../app/hooks';
-import { Link } from 'react-router-dom';
-
 
 const Header = () => {
     const currentUser = useAppSelector((state) => state.currentUser);
@@ -23,19 +22,21 @@ const Header = () => {
             <LogoContainer to='/home/feed'>
                 <Logo className='logo' />
             </LogoContainer>
-            <OptionsContainer>
+            <>
                 {user ? (
-                    <OptionLink onClick={() => auth.signOut()}>
-                        <span>SIGN OUT</span>
-                    </OptionLink>
+                    <OptionsContainer>
+                        <OptionTag onClick={() => auth.signOut()}>
+                            <span>SIGN OUT</span>
+                        </OptionTag>
+                    </OptionsContainer>
                 ) : (
-                    <OptionLink >
-                        <Link style={{ textDecoration: 'none' }} to='/aboutus'>
-                            <span style={{ fontFamily: 'inherit' }}>ABOUT US</span>
-                        </Link>
-                    </OptionLink>
+                    <OptionsContainer>
+                        <OptionLink to='/about-us' >
+                            <span>ABOUT US</span>
+                        </OptionLink>
+                    </OptionsContainer>
                 )}
-            </OptionsContainer>
+            </>
         </HeaderContainer>
     )
 };

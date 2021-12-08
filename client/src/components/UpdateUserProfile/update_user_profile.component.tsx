@@ -80,7 +80,8 @@ const UpdateUserProfile = ({
       handleClose();
     } catch (e) {
       handleClose();
-      throw new Error('Unable to Update Profile.')
+      return e;
+      // throw new Error('Unable to Update Profile.')
     }
   };
 

@@ -25,7 +25,7 @@ const AddModifyCrypto = ({
     const [addCoin, setAddCoin] = useState("")
     const { loading, error, data } = useQuery(QUERY_CRYPTOS, {
         variables: {
-            user_id: "chG0WmOFPheLzl528legA3iIpbO2"
+            user_id: userId
         },
     });
     if (data) {
@@ -49,7 +49,7 @@ const AddModifyCrypto = ({
                 setAddCoin("")
             }
         } catch (e) {
-            throw new Error('Unable to Add CryptoCurrency')
+            return e;
         }
     }
 

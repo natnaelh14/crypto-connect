@@ -47,19 +47,6 @@ query posts($user_id: ID!) {
 }
 `;
 
-// const newUser = gql`
-//   mutation($id: ID!, $email: String!, $handle: String!) {
-//     addUserProfile(        
-//         id: $id
-//         email: $email
-//         handle: $handle) {
-//         id
-//         email
-//         handle
-//         }
-//   }
-// `;
-
 class Routes extends Component<MyProps, {}> {
   unsubscribeFromAuth: any = null;
 
@@ -77,7 +64,7 @@ class Routes extends Component<MyProps, {}> {
               id: userAuth.uid
             }
           })
-          if(!(result?.data?.userProfile)) {
+          if (!(result?.data?.userProfile)) {
             await client.mutate({
               mutation: CREATE_USER_PROFILE,
               variables: {
@@ -88,19 +75,7 @@ class Routes extends Component<MyProps, {}> {
             })
           }
         } catch (e) {
-          try {
-            console.log('katyperry')
-            // await client.mutate({
-            //   mutation: CREATE_USER_PROFILE,
-            //   variables: {
-            //     id: userAuth.uid,
-            //     email: userAuth.email,
-            //     handle: userAuth.displayName
-            //   }
-            // })
-          } catch (e) {
-            console.log("Unable to create a user account")
-          }
+          console.log("Unable to create a user account")
         }
         const userRef: any = await createUserProfileDocument(userAuth);
         //From this, we are going to get back the first state from our data.
@@ -147,9 +122,7 @@ class Routes extends Component<MyProps, {}> {
           <Route exact path="/signin">
             {this.props.currentUser ? <Redirect to="/home/feed" /> : <SignIn />}
           </Route>
-          <Route exact path="/aboutus">
-            {this.props.currentUser ? <AboutUsPage /> : <AboutUsPage />}
-          </Route>
+          <Route exact path="/about-us" component={AboutUsPage} />
           <Route exact path="/">
             {this.props.currentUser ? <Redirect to="/home/feed" /> : <SignIn />}
           </Route>
