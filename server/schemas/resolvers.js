@@ -345,7 +345,9 @@ const resolvers = {
         isActive,
       }
     ) => {
-      const userData = await User.findOne({ id });
+      const userData = await User.findOne({ 
+        where: { id }
+      });
       return await userData.update({
         id,
         email,
