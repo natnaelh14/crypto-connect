@@ -18,6 +18,8 @@ import SingleMessageLoading from "./SingleMessage/single_message_loading.compone
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { MessagesContainer } from './messages.styles';
+import Avatar from "@material-ui/core/Avatar";
+import noAvatar from '../../img/no-avatar.png';
 
 const Messages = () => {
   const { messagesId } = useParams<{ messagesId: string | undefined }>();
@@ -79,8 +81,8 @@ const Messages = () => {
                 </Grid>
                 <Grid item sx={{ display: 'flex', justifyContent: 'center' }}>
                   <Box>
-                    {(userProfile.avatar || !currentUserLoading) ? (
-                      <img height="75px" width="75px" src={userProfile.avatar} alt="profile" />
+                    {(!currentUserLoading) ? (
+                      <Avatar alt="messenger-image" style={{ height: "75px", width:"75px"}} src={userProfile?.avatar ? userProfile?.avatar : noAvatar} />
                     ) : (
                       <Skeleton
                         circle

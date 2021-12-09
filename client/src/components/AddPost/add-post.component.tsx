@@ -10,6 +10,7 @@ import { QUERY_POSTS_BY_FOLLOWING } from '../../utils/queries';
 import { listPostsByFollowing } from '../../redux/actions/postActions';
 import AddPostLoading from './add_post_loading.component';
 import noAvatar from '../../img/no-avatar.png';
+import Avatar from '@material-ui/core/Avatar';
 
 const AddPost = () => {
 
@@ -76,7 +77,8 @@ const AddPost = () => {
         <Box padding="1rem 1rem 0 1rem" borderBottom="1px solid #ccc">
           <Grid >
             <Grid item sx={{ paddingRight: "1rem" }}>
-              <img src={userInfo.avatar ? userInfo.avatar : noAvatar} alt="logo" width="50px" />
+              <Avatar alt="user-image" src={userInfo.avatar ? userInfo.avatar : noAvatar} />
+              {/* <img src={userInfo.avatar ? userInfo.avatar : noAvatar} alt="logo" width="50px" /> */}
             </Grid>
             <Grid item >
               <Box padding=".5rem 0">

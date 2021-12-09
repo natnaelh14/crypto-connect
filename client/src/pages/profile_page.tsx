@@ -18,9 +18,10 @@ import cover from '../img/cover.jpeg';
 import { ProfileContainer } from './styles/profile_page.styles';
 import ProfilePageLoading from './loading/profile_page.loading';
 import noAvatar from '../img/no-avatar.png';
+import Avatar from "@material-ui/core/Avatar";
 
 const moodObj = (currentMood: string) => {
-    switch(currentMood) {
+    switch (currentMood) {
         case 'HAPPY':
             return '😀';
         case 'SAD':
@@ -126,7 +127,7 @@ const Profile = () => {
                                         borderRadius: "50%",
                                     }}
                                 >
-                                    <img width="150px" src={userInfo?.avatar ? userInfo?.avatar : noAvatar} alt="profile" />
+                                    <Avatar style={{ width: "150px", height: "150px" }} alt="profile-image" src={userInfo?.avatar ? userInfo?.avatar : noAvatar} />
                                 </Box>
                             </Box>
                             <Box textAlign="right" padding="10px 20px">

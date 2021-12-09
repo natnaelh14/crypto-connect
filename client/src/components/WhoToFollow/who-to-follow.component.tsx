@@ -8,6 +8,8 @@ import { useAppSelector } from '../../app/hooks';
 import { useMutation, useQuery } from '@apollo/client';
 import { QUERY_CHECK_FRIENDSHIP } from '../../utils/queries';
 import { FRIEND_REQUEST } from '../../utils/mutations';
+import Avatar from "@material-ui/core/Avatar";
+import noAvatar from '../../img/no-avatar.png';
 
 type userInfoProps = {
   id: string,
@@ -55,7 +57,7 @@ const WhoToFollow = ({ id, handle, avatar, isActive }: userInfoProps) => {
       <Grid container alignItems="center">
         <Grid item sx={{ paddingRight: "12px" }}>
           <NavLink to={`/home/profile/${id}`}>
-            <img src={avatar} width="50px" alt="logo" />
+            <Avatar style={{ height: "50px", width: "50px" }} alt="recommended-user" src={avatar ? avatar : noAvatar} />
           </NavLink>
         </Grid>
         <Grid item>

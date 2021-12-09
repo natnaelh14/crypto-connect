@@ -17,9 +17,11 @@ import CryptoDoughnut from "../CryptoDoughnut/crypto_doughnut.component";
 import { useAppSelector } from '../../app/hooks';
 import { GuestDataContainer, CryptoCarouselContainer, GuestUserInfoContainer, UserBioContainer } from './guest_profile.styles';
 import GuestProfileLoading from './guest_profile_loading.component';
+import Avatar from "@material-ui/core/Avatar";
+import noAvatar from '../../img/no-avatar.png';
 
 const moodObj = (currentMood: string) => {
-    switch(currentMood) {
+    switch (currentMood) {
         case 'HAPPY':
             return '😀';
         case 'SAD':
@@ -143,7 +145,7 @@ const GuestProfile = () => {
                         <GuestDataContainer>
                             <GuestUserInfoContainer>
                                 <Box padding="10px 20px" display="flex" alignItems="center" sx={{ flexDirection: 'column' }}>
-                                    <img width="100px" src={userData?.userProfile?.avatar} alt="profile" />
+                                    <Avatar style={{ width: "100px", height: "100px" }} alt="guest-profile-image" src={userData?.userProfile?.avatar ? userData?.userProfile?.avatar : noAvatar} />
                                     {checkFriendData?.checkFriendship ? (
                                         <Button
                                             onClick={handleRemoveFollowing}
@@ -198,16 +200,16 @@ const GuestProfile = () => {
                                             FOLLOW
                                         </Button>
                                     )}
-                                <Box sx={{ display: "flex", flexDirection: "row" }}>
-                                    <Typography fontFamily='inherit' variant="h6" mr="0.5rem" sx={{ fontWeight: "500" }}>
-                                        {userData?.userProfile?.handle}
-                                    </Typography>
-                                    {userData?.userProfile?.status && (
-                                        <Typography fontFamily='inherit' variant="h6" sx={{ fontWeight: "500" }}>
-                                            ({`${userData?.userProfile?.status} ${moodObj(currentMood)}`})
+                                    <Box sx={{ display: "flex", flexDirection: "row" }}>
+                                        <Typography fontFamily='inherit' variant="h6" mr="0.5rem" sx={{ fontWeight: "500" }}>
+                                            {userData?.userProfile?.handle}
                                         </Typography>
-                                    )}
-                                </Box>
+                                        {userData?.userProfile?.status && (
+                                            <Typography fontFamily='inherit' variant="h6" sx={{ fontWeight: "500" }}>
+                                                ({`${userData?.userProfile?.status} ${moodObj(currentMood)}`})
+                                            </Typography>
+                                        )}
+                                    </Box>
                                     <Typography textAlign='center' sx={{ fontSize: "14px", color: "#555" }}>
                                         @{userData?.userProfile?.handle.trim().toLowerCase()}
                                     </Typography>

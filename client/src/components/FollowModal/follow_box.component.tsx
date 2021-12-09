@@ -6,6 +6,7 @@ import { useMutation } from '@apollo/client';
 import { REMOVE_FOLLOWING, REMOVE_FOLLOWER } from '../../utils/mutations';
 import { useAppSelector } from '../../app/hooks';
 import { userProps } from '../../index.types';
+import Avatar from "@material-ui/core/Avatar";
 
 type followProps = {
     id: string,
@@ -57,7 +58,7 @@ const FollowBox = ({ id, handle, avatar, buttonText }: followProps) => {
         >
             <Grid sx={{ display: "flex", flexDirection: "row", paddingRight: "1rem" }}>
                 <Link to={`/home/profile/${id}`}>
-                    <img src={avatar} alt="logo" width="30px" />
+                    <Avatar style={{ width: "30px", height: "30px" }} alt="follow-user-image" src={avatar} />
                 </Link>
                 <Typography
                     sx={{ ml: '50px', mt: '10px', fontSize: "16px", fontWeight: 500, textAlign: "center" }}
