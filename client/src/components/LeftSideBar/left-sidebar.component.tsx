@@ -15,11 +15,31 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { NavLink } from "react-router-dom";
 import AddPostModal from "../AddPostModal/add_post_modal.component";
+import { QUERY_FRIEND_REQUESTS } from '../../utils/queries';
+import { useAppSelector } from '../../app/hooks';
+import { useQuery } from '@apollo/client';
 
+type userProps = {
+  id: string,
+  handle: string,
+  avatar: string
+}
 const LeftSidebar = () => {
+  const currentUser = useAppSelector(state => state.currentUser)
+  const { user }: { user: userProps } = currentUser
+  if (currentUser) {
+      var { loading, error, data } = useQuery(QUERY_FRIEND_REQUESTS, {
+          variables: {
+              id: user.id
+          },
+          pollInterval: 1000
+      });
+  }
+  if (data) {
+      var friendRequestsData = data.friendRequests
+  }
 
   const [openModal, setOpenModal] = React.useState(false);
-
   const handleModalOpen = () => {
     setOpenModal(true);
   };
@@ -142,7 +162,13 @@ const LeftSidebar = () => {
                     fontSize: "18px",
                     fontFamily: 'inherit'
                   }}
+                  secondaryTypographyProps={{
+                    color: 'red',
+                    fontSize: "18px",
+                    fontWeight: 'bold'
+                  }}
                   primary="FRIEND REQUESTS"
+                  secondary={friendRequestsData?.length ? `(${friendRequestsData?.length})` : ""}
                 />
               </Hidden>
             </ListItem>

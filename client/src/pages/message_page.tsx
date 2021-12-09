@@ -17,6 +17,7 @@ const MessagePage = () => {
   const userInfo: userProps = user
   const { loading, error, data } = useQuery(QUERY_MESSENGERS, {
     variables: { id: userInfo.id },
+    pollInterval: 1000
   });
   if (data) {
     var { messengers } = data;

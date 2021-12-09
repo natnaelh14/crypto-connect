@@ -160,7 +160,7 @@ const Post = ({ postId, text, userId, postTime }: postProps) => {
                                         <Typography fontFamily='inherit'
                                             sx={{ fontSize: "15px", mr: "10px", color: "#555" }}
                                         >
-                                            @{userProfile.handle.trim().toLowerCase()}
+                                            @{userProfile.handle.trim().replace(/ /g,'').toLowerCase()}
                                         </Typography>
                                         <Typography fontFamily='inherit'
                                             sx={{ fontSize: "15px", ml: "auto", color: "#555" }}

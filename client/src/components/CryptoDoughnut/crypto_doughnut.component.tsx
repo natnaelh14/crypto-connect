@@ -7,7 +7,8 @@ const CryptoDoughnut: React.FC<{ currentUser: string }> = ({ currentUser }) => {
     const { error: cryptoError, loading: cryptoLoading, data } = useQuery(QUERY_CRYPTOS, {
         variables: {
             user_id: currentUser
-        }
+        },
+        pollInterval: 1000
     })
     if (data) {
         var { cryptoByUserId } = data;

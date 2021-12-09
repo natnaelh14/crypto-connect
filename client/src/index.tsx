@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 export const client = new ApolloClient({
   //New instance of ApolloClient
   cache: new InMemoryCache(), //New instance of InMemoryCache
-  uri: "/graphql",
+  uri: "http://localhost:3001/graphql",
   // connectToDevTools
 });
 

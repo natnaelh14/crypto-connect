@@ -3,11 +3,12 @@ import { useAppSelector } from '../../app/hooks';
 import { userProps } from '../../index.types';
 import { ADD_POST } from '../../utils/mutations';
 import { useMutation } from '@apollo/client';
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/system";
 import noAvatar from '../../img/no-avatar.png';
+import Avatar from '@material-ui/core/Avatar';
 
 type ModalProps = {
   open: boolean,
@@ -51,7 +52,7 @@ const AddPostModal = ({
         <Box padding="1rem 1rem 0 1rem" borderBottom="1px solid #ccc">
           <Grid >
             <Grid item>
-              <img src={userInfo?.avatar ? userInfo?.avatar : noAvatar} alt="logo" width="60px" />
+              <Avatar alt="user-message-image" style={{ width: "60px", height: "60px" }} src={userInfo.avatar ? userInfo.avatar : noAvatar} />
             </Grid>
             <Grid item>
               <Box padding=".5rem 0">
@@ -80,6 +81,8 @@ const AddPostModal = ({
             marginBottom: '20px',
             width: "60%",
             background: "black",
+            borderRadius: "12px",
+            fontFamily: "inherit",
             "&:hover": {
               background: "#333",
             },
@@ -87,7 +90,7 @@ const AddPostModal = ({
           variant="contained"
           onClick={handleAddPost}
         >
-         POST
+          POST
         </Button>
       </DialogActions>
     </Dialog>
