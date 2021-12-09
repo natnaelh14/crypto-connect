@@ -8,7 +8,6 @@ import { ADD_POST, UPDATE_USER_PROFILE } from "../../utils/mutations";
 import { userProps } from '../../index.types';
 import { QUERY_POSTS_BY_FOLLOWING } from '../../utils/queries';
 import { listPostsByFollowing } from '../../redux/actions/postActions';
-import { setCurrentUser } from '../../redux/actions/userActions';
 import AddPostLoading from './add_post_loading.component';
 import noAvatar from '../../img/no-avatar.png';
 
@@ -20,7 +19,7 @@ const AddPost = () => {
   const userInfo: userProps = user
 
   const [postText, setPostText] = useState("");
-  const [mood, setMood] = useState<string>(userInfo?.status)
+  const [mood, setMood] = useState<string>(userInfo.status)
   const [addPost, { }] = useMutation(ADD_POST,
     {
       refetchQueries: [
@@ -56,6 +55,7 @@ const AddPost = () => {
   const handleChangeMood = async (event: SelectChangeEvent<any>) => {
     event.preventDefault();
     try {
+      setMood(event.target.value)
       const updatedUser = await updateProfile({
         variables: {
           ...userInfo,
@@ -101,7 +101,8 @@ const AddPost = () => {
                     <InputLabel id="demo-simple-select-label">Mood</InputLabel>
                     <Select
                       id="demo-simple-select"
-                      value={mood || ""}
+                      value={mood ? mood : ""}
+                      defaultValue={mood}
                       variant="standard"
                       onChange={handleChangeMood}
                       sx={{ fontFamily: 'inherit' }}

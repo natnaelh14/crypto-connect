@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Box } from "@mui/system";
+import { Box, typography } from "@mui/system";
 import { Button, CircularProgress, Grid, IconButton, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -18,6 +18,25 @@ import cover from '../img/cover.jpeg';
 import { ProfileContainer } from './styles/profile_page.styles';
 import ProfilePageLoading from './loading/profile_page.loading';
 import noAvatar from '../img/no-avatar.png';
+
+const moodObj = (currentMood: string) => {
+    switch(currentMood) {
+        case 'HAPPY':
+            return '😀';
+        case 'SAD':
+            return '😔';
+        case 'EXCITED':
+            return '😃';
+        case 'AMUSED':
+            return '🙂';
+        case 'OPTIMISTIC':
+            return '😊';
+        case 'FRUSTRATED':
+            return '😩';
+        default:
+            return "";
+    }
+}
 
 const Profile = () => {
 
@@ -61,7 +80,7 @@ const Profile = () => {
     };
 
     let pending = currentUserLoading || followerLoading || followingLoading || postsLoading || followingError || followerError || postsError || currentUserError
-
+    let currentMood = userInfo?.status
     return (
         <ProfileContainer>
             {(pending) && (
@@ -130,9 +149,16 @@ const Profile = () => {
                                 </Button>
                             </Box>
                             <Box padding="10px 20px">
-                                <Typography fontFamily='inherit' variant="h6" sx={{ fontWeight: "500" }}>
-                                    {userInfo?.handle}
-                                </Typography>
+                                <Box sx={{ display: "flex", flexDirection: "row" }}>
+                                    <Typography fontFamily='inherit' variant="h6" mr="0.5rem" sx={{ fontWeight: "500" }}>
+                                        {userInfo?.handle}
+                                    </Typography>
+                                    {userInfo?.status && (
+                                        <Typography fontFamily='inherit' variant="h6" sx={{ fontWeight: "500" }}>
+                                            ({`${userInfo?.status} ${moodObj(currentMood)}`})
+                                        </Typography>
+                                    )}
+                                </Box>
                                 {userInfo?.handle && (
                                     <Typography fontFamily='inherit' sx={{ fontSize: "14px", color: "#555" }}>
                                         {`@${userInfo?.handle?.trim().toLowerCase()}`}

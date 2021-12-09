@@ -18,6 +18,25 @@ import { useAppSelector } from '../../app/hooks';
 import { GuestDataContainer, CryptoCarouselContainer, GuestUserInfoContainer, UserBioContainer } from './guest_profile.styles';
 import GuestProfileLoading from './guest_profile_loading.component';
 
+const moodObj = (currentMood: string) => {
+    switch(currentMood) {
+        case 'HAPPY':
+            return '😀';
+        case 'SAD':
+            return '😔';
+        case 'EXCITED':
+            return '😃';
+        case 'AMUSED':
+            return '🙂';
+        case 'OPTIMISTIC':
+            return '😊';
+        case 'FRUSTRATED':
+            return '😩';
+        default:
+            return "";
+    }
+}
+
 const GuestProfile = () => {
     const history = useHistory();
     const { profileId } = useParams<{ profileId: string | undefined }>();
@@ -93,7 +112,7 @@ const GuestProfile = () => {
     }
 
     let pending = userLoading || userError || postsLoading || postsError || followerError || followerLoading || followingError || followingLoading
-
+    const currentMood = userData?.userProfile?.status
     return (
         <div style={{ width: '75%', margin: '20px' }}>
             {(pending) && (
@@ -179,9 +198,16 @@ const GuestProfile = () => {
                                             FOLLOW
                                         </Button>
                                     )}
-                                    <Typography textAlign='center' variant="h6" sx={{ fontWeight: "500" }}>
+                                <Box sx={{ display: "flex", flexDirection: "row" }}>
+                                    <Typography fontFamily='inherit' variant="h6" mr="0.5rem" sx={{ fontWeight: "500" }}>
                                         {userData?.userProfile?.handle}
                                     </Typography>
+                                    {userData?.userProfile?.status && (
+                                        <Typography fontFamily='inherit' variant="h6" sx={{ fontWeight: "500" }}>
+                                            ({`${userData?.userProfile?.status} ${moodObj(currentMood)}`})
+                                        </Typography>
+                                    )}
+                                </Box>
                                     <Typography textAlign='center' sx={{ fontSize: "14px", color: "#555" }}>
                                         @{userData?.userProfile?.handle.trim().toLowerCase()}
                                     </Typography>

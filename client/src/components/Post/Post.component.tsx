@@ -58,6 +58,7 @@ const Post = ({ postId, text, userId, postTime }: postProps) => {
     const currentUser = useAppSelector(state => state.currentUser)
     const { user } = currentUser
     const userInfo: userProps = user
+
     const { data: userPostData } = useQuery(QUERY_REACTIONS_BY_USER_POST, {
         variables: {
             user_id: userInfo.id,
@@ -81,7 +82,7 @@ const Post = ({ postId, text, userId, postTime }: postProps) => {
         e.preventDefault()
         await addComment({
             variables: {
-                user_id: userId,
+                user_id: userInfo?.id,
                 post_id: postId,
                 text: commentText
             }
@@ -96,7 +97,7 @@ const Post = ({ postId, text, userId, postTime }: postProps) => {
         try {
             addReactionOnPost({
                 variables: {
-                    user_id: userId,
+                    user_id: userInfo?.id,
                     post_id: postId,
                     reaction_type: Button.value
                 }
@@ -109,7 +110,7 @@ const Post = ({ postId, text, userId, postTime }: postProps) => {
         try {
             deleteReactionOnPost({
                 variables: {
-                    user_id: userId,
+                    user_id: userInfo?.id,
                     post_id: postId
                 }
             })
@@ -196,7 +197,7 @@ const Post = ({ postId, text, userId, postTime }: postProps) => {
                                 >
                                     <ChatBubbleOutlineIcon fontSize="small" />
                                 </IconButton>
-                                {(reactionsByUserAndPost && reactionsByUserAndPost.reaction_type === 'LIKE') ? (
+                                {(reactionsByUserAndPost && reactionsByUserAndPost?.reaction_type === 'LIKE') ? (
                                     <IconButton onClick={handleDeleteReaction} size="small">
                                         <FavoriteIcon style={{ color: "#e25349" }} fontSize="small" />
                                     </IconButton>
@@ -205,7 +206,7 @@ const Post = ({ postId, text, userId, postTime }: postProps) => {
                                         <FavoriteBorderIcon fontSize="small" />
                                     </IconButton>
                                 )}
-                                {(reactionsByUserAndPost && reactionsByUserAndPost.reaction_type === 'DISLIKE') ? (
+                                {(reactionsByUserAndPost && reactionsByUserAndPost?.reaction_type === 'DISLIKE') ? (
                                     <IconButton size="small" onClick={handleDeleteReaction}>
                                         <ThumbDownIcon style={{ color: "#e25349" }} fontSize="small" />
                                     </IconButton>
@@ -219,12 +220,14 @@ const Post = ({ postId, text, userId, postTime }: postProps) => {
                                         <IosShareIcon fontSize="small" />
                                     </IconButton>
                                 )}
-                                <IconButton
-                                    size="small"
-                                    onClick={handleDeletePost}
-                                >
-                                    <DeleteIcon fontSize="small" />
-                                </IconButton>
+                                {(userId === userInfo.id) && (
+                                    <IconButton
+                                        size="small"
+                                        onClick={handleDeletePost}
+                                    >
+                                        <DeleteIcon fontSize="small" />
+                                    </IconButton>
+                                )}
                             </Box>
                             {displayComment && (
                                 <Box >
