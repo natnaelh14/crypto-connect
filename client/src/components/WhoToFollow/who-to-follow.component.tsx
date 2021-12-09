@@ -63,8 +63,11 @@ const WhoToFollow = ({ id, handle, avatar, isActive }: userInfoProps) => {
         <Grid item>
           <Grid container alignItems="center">
             <Grid item>
-              <Typography fontFamily='inherit' sx={{ fontSize: "13px", fontWeight: "500" }}>
+              <Typography ml='0.1rem' fontFamily='inherit' sx={{ fontSize: "13px", fontWeight: "500" }}>
                 {handle}
+              </Typography>
+              <Typography ml='0.1rem' fontFamily='inherit' sx={{ fontSize: "11px", fontWeight: "500" }}>
+                @{handle.trim().replace(/ /g,'').toLowerCase()}
               </Typography>
               {checkFriendData?.checkFriendship ? (
                 <Button

@@ -8,6 +8,8 @@ import { ADD_MESSAGE } from '../../utils/mutations';
 import { useQuery, useMutation } from '@apollo/client';
 import { useAppSelector } from '../../app/hooks';
 import { userProps } from '../../index.types';
+import Avatar from '@material-ui/core/Avatar';
+import noAvatar from '../../img/no-avatar.png';
 
 type ModalProps = {
     open: boolean,
@@ -72,7 +74,7 @@ const AddNewMessageModal = ({ open, handleClose }: ModalProps) => {
                                 data?.allUsers.map((user: any) => {
                                     return <MenuItem key={user.id} value={user.id}>
                                         <>
-                                            <img src={user.avatar} alt="logo" width="30px" />
+                                            <Avatar style={{ width: "30px", height: "30px" }} alt="message-user" src={user?.avatar ? user?.avatar : noAvatar} />
                                             <Typography
                                                 sx={{ ml: '50px', mt: '10px', fontSize: "16px", fontWeight: 500, textAlign: "center" }}
                                             >

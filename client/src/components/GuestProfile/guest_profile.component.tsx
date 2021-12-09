@@ -211,7 +211,7 @@ const GuestProfile = () => {
                                         )}
                                     </Box>
                                     <Typography textAlign='center' sx={{ fontSize: "14px", color: "#555" }}>
-                                        @{userData?.userProfile?.handle.trim().toLowerCase()}
+                                        @{userData?.userProfile?.handle.trim().replace(/ /g,'').toLowerCase()}
                                     </Typography>
                                     <Box display="flex">
                                         <LocationOnIcon htmlColor="#555" />

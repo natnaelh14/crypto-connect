@@ -34,7 +34,8 @@ const CryptoPage = () => {
     const { error: cryptoError, loading: cryptoLoading, data } = useQuery(QUERY_CRYPTOS, {
         variables: {
             user_id: userInfo.id
-        }
+        },
+        pollInterval: 1000
     })
     if (data) {
         var { cryptoByUserId } = data;
