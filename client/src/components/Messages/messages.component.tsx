@@ -38,7 +38,7 @@ const Messages = () => {
     var userInfo: userProps = user
     var { loading: messageLoading, error: messageError, data } = useQuery(QUERY_MESSAGES, {
       variables: { sender_id: userInfo.id, receiver_id: messagesId },
-      pollInterval: 1000
+      // pollInterval: 1000
     });
   }
   if (data) {

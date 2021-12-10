@@ -59,13 +59,13 @@ const Profile = () => {
         variables: {
             id: userInfo.id
         },
-        pollInterval: 1000
+        // pollInterval: 1000
     });
     const { error: followingError, loading: followingLoading, data: followingData } = useQuery(QUERY_FOLLOWINGS, {
         variables: {
             id: userInfo.id
         },
-        pollInterval: 1000
+        // pollInterval: 1000
     });
 
     if (followerData && followingData) {

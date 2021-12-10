@@ -35,7 +35,7 @@ const CryptoPage = () => {
         variables: {
             user_id: userInfo.id
         },
-        pollInterval: 1000
+        // pollInterval: 1000
     })
     if (data) {
         var { cryptoByUserId } = data;
