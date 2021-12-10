@@ -3,7 +3,7 @@ import { FormControl, InputLabel, MenuItem, Select, TextField, Button, Dialog, D
 import { Box } from "@mui/system";
 import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from '@material-ui/icons/Send';
-import { QUERY_ALL_USERS } from '../../utils/queries';
+import { QUERY_ALL_USERS, QUERY_MESSENGERS } from '../../utils/queries';
 import { ADD_MESSAGE } from '../../utils/mutations';
 import { useQuery, useMutation } from '@apollo/client';
 import { useAppSelector } from '../../app/hooks';
@@ -24,7 +24,11 @@ const AddNewMessageModal = ({ open, handleClose }: ModalProps) => {
     const { loading, error, data } = useQuery(QUERY_ALL_USERS, {
         variables: { id: userInfo.id }
     });
-    const [addMessage, { }] = useMutation(ADD_MESSAGE)
+    const [addMessage, { }] = useMutation(ADD_MESSAGE, {
+        refetchQueries: [
+            { query: QUERY_MESSENGERS }
+        ]
+    })
     const [messageText, setMessageText] = useState("");
     const [receiver, setReceiver] = useState("");
 

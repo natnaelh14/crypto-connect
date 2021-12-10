@@ -57,7 +57,7 @@ class Routes extends Component<MyProps, {}> {
       // userAuth returns null when auth.signOut() is called
       if (userAuth) {
         try {
-          console.log('who to follow', userAuth)
+          // console.log('who to follow', userAuth)
           const result = await client.query({
             query: QUERY_USER,
             variables: {
@@ -122,7 +122,9 @@ class Routes extends Component<MyProps, {}> {
           <Route exact path="/signin">
             {this.props.currentUser ? <Redirect to="/home/feed" /> : <SignIn />}
           </Route>
-          <Route exact path="/about-us" component={AboutUsPage} />
+          <Route exact path="/about">
+            <AboutUsPage />
+          </Route>
           <Route exact path="/">
             {this.props.currentUser ? <Redirect to="/home/feed" /> : <SignIn />}
           </Route>

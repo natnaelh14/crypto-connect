@@ -34,7 +34,9 @@ const AboutUsPage = () => {
                     <Typography fontFamily='inherit' textAlign='left' sx={{ padding: '10px' }} >▹ POST / COMMENT / LIKES / DISLIKES</Typography>
                     <Typography fontFamily='inherit' textAlign='left' sx={{ padding: '10px' }} >▹ SEND MESSAGES</Typography>
                     <Typography fontFamily='inherit' textAlign='left' sx={{ padding: '10px' }} >▹ FOLLOW USERS</Typography>
-                    <Typography fontFamily='inherit' textAlign='left' sx={{ padding: '10px' }} >▹ TRACK CRYPTOCURRENY HOLDING</Typography>
+                    <Typography fontFamily='inherit' textAlign='left' sx={{ padding: '10px', lineHeight: '2rem' }} >▹ CREATE PERSONALIZED CRYPTOCURRENCY PORTFOLIO</Typography>
+                    <Typography fontFamily='inherit' textAlign='left' sx={{ padding: '10px' }} >▹ REAL-TIME CRYPTO PRICING AND OTHER CRYPTO INFO</Typography>
+
                 </Grid>
             </Box>
         </Grid>
