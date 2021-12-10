@@ -269,7 +269,7 @@ const Profile = () => {
                     handleClose={handleModalClose}
                     follow={followings}
                     title="Following"
-                    action='Following'
+                    action='Unfollow'
                 />
             )}
             {openFollowerModal && (
