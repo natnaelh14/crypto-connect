@@ -5,6 +5,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Link as RouteLink } from "react-router-dom";
 const Moment = require('moment')
 import { Fade } from "@mui/material";
+import { Link } from "react-router-dom";
 import { QUERY_MESSAGES } from '../../utils/queries';
 import { useQuery, useMutation } from '@apollo/client';
 import { useParams } from 'react-router-dom';
@@ -38,7 +39,7 @@ const Messages = () => {
     var userInfo: userProps = user
     var { loading: messageLoading, error: messageError, data } = useQuery(QUERY_MESSAGES, {
       variables: { sender_id: userInfo.id, receiver_id: messagesId },
-      pollInterval: 1000
+      pollInterval: 60000
     });
   }
   if (data) {
@@ -79,10 +80,12 @@ const Messages = () => {
                     </IconButton>
                   </RouteLink>
                 </Grid>
-                <Grid item sx={{ display: 'flex', justifyContent: 'center' }}>
-                  <Box>
+                <Grid item>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
                     {(!currentUserLoading) ? (
-                      <Avatar alt="messenger-image" style={{ height: "75px", width:"75px"}} src={userProfile?.avatar ? userProfile?.avatar : noAvatar} />
+                      <Link to={`/home/profile/${userProfile.id}`}>
+                        <Avatar alt="messenger-image" style={{ height: "75px", width: "75px" }} src={userProfile?.avatar ? userProfile?.avatar : noAvatar} />
+                      </Link>
                     ) : (
                       <Skeleton
                         circle
@@ -92,11 +95,22 @@ const Messages = () => {
                       />
                     )}
                     {(!userProfile.avatar || currentUserLoading) ? (
-                      <Skeleton
-                        width={100}
-                      />
+                      <>
+                        <Skeleton
+                          width={100}
+                        />
+                        <Skeleton
+                          width={100}
+                        />
+                      </>
                     ) : (
-                      <Typography fontFamily='inherit'>{userProfile.handle}</Typography>
+                      <>
+                        <Typography mt='0.5rem' fontFamily='inherit'>{userProfile?.handle.toUpperCase()}</Typography>
+                        <Typography fontFamily='inherit'>
+                          {`@${userProfile?.handle.trim().replace(/ /g, '').toLowerCase()}`}
+                        </Typography>
+                      </>
+
                     )}
                   </Box>
                 </Grid>

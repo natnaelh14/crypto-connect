@@ -120,7 +120,7 @@ const UpdateUserProfile = ({
                 {userInfo?.handle}
               </Typography>
               <Typography fontFamily='inherit' textAlign='center' component="p" variant="subtitle2">
-                {`@${userInfo?.handle}`}
+                {`@${userInfo?.handle.trim().replace(/ /g,'').toLowerCase()}`}
               </Typography>
               <form noValidate>
                 <TextField

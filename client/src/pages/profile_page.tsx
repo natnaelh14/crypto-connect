@@ -40,7 +40,6 @@ const moodObj = (currentMood: string) => {
 }
 
 const Profile = () => {
-
     const currentUser = useAppSelector(state => state.currentUser)
     const { error: currentUserError, loading: currentUserLoading, user } = currentUser
     const userInfo: userProps = user
@@ -59,13 +58,13 @@ const Profile = () => {
         variables: {
             id: userInfo.id
         },
-        pollInterval: 1000
+        pollInterval: 60000
     });
     const { error: followingError, loading: followingLoading, data: followingData } = useQuery(QUERY_FOLLOWINGS, {
         variables: {
             id: userInfo.id
         },
-        pollInterval: 1000
+        pollInterval: 60000
     });
 
     if (followerData && followingData) {
@@ -89,7 +88,6 @@ const Profile = () => {
             {(pending) && (
                 <ProfilePageLoading />
             )}
-            {/* {(userInfo && followerData && followingData) && ( */}
             <Fade in={true} timeout={1000}>
                 <div style={{ padding: '20px' }}>
                     <Box>
@@ -164,7 +162,7 @@ const Profile = () => {
                                 </Box>
                                 {userInfo?.handle && (
                                     <Typography fontFamily='inherit' sx={{ fontSize: "14px", color: "#555" }}>
-                                        {`@${userInfo?.handle?.trim().replace(/ /g,'').toLowerCase()}`}
+                                        {`@${userInfo?.handle?.trim().replace(/ /g, '').toLowerCase()}`}
                                     </Typography>
                                 )}
                                 <Typography fontFamily='inherit' fontSize="16px" color="#333" padding="10px 0">
@@ -256,7 +254,6 @@ const Profile = () => {
                     </Box>
                 </div>
             </Fade>
-            {/* // )} */}
             {openUpdateModal && (
                 <UpdateUserProfile
                     open={openUpdateModal}

@@ -43,7 +43,7 @@ const SingleMessage = ({ msgId, senderId, sentAt, text }: MsgProps) => {
       })
       setAnchorEl(null);
     } catch (e) {
-      throw new Error('Unable to delete message')
+      return e;
     }
   };
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {

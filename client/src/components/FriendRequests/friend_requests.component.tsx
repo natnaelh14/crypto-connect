@@ -24,7 +24,7 @@ const FriendRequests = () => {
             variables: {
                 id: user.id
             },
-            pollInterval: 1000
+            pollInterval: 60000
         });
     }
     if (data) {

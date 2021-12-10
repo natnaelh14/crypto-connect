@@ -8,7 +8,7 @@ const CryptoDoughnut: React.FC<{ currentUser: string }> = ({ currentUser }) => {
         variables: {
             user_id: currentUser
         },
-        pollInterval: 1000
+        pollInterval: 60000
     })
     if (data) {
         var { cryptoByUserId } = data;

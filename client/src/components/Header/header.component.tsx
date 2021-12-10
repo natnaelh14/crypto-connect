@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getCurrentUser } from '../../redux/user.selectors';
 import { ReactComponent as Logo } from '../../assets/logo.svg';
@@ -11,33 +11,42 @@ import {
     OptionTag
 } from './header.styles';
 import { useAppSelector } from '../../app/hooks';
+import { Link, Redirect } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import { withRouter } from 'react-router';
 
-const Header = () => {
+const Header = (props: any) => {
     const currentUser = useAppSelector((state) => state.currentUser);
     const { user } = currentUser;
-    useEffect(() => {
-    }, [user]);
+    const { push } = useHistory()
+
     return (
         <HeaderContainer>
             <LogoContainer to='/home/feed'>
                 <Logo className='logo' />
             </LogoContainer>
             <>
-                {user ? (
+                {user && (
                     <OptionsContainer>
                         <OptionTag onClick={() => auth.signOut()}>
                             <span>SIGN OUT</span>
                         </OptionTag>
                     </OptionsContainer>
-                ) : (
-                    <OptionsContainer>
-                        <OptionLink to='/about-us' >
+                )}
+                {/* : (
+                     <OptionsContainer>
+                    <OptionTag onClick={() => push('/about')}>
+                         <span>ABOUT</span>
+                     </OptionTag>
+                 </OptionsContainer>
+                 <OptionsContainer>
+                     <OptionLink to='/about' >
                             <span>ABOUT US</span>
                         </OptionLink>
-                    </OptionsContainer>
-                )}
+                     </OptionsContainer>
+                 )} */}
             </>
-        </HeaderContainer>
+        </HeaderContainer >
     )
 };
 
