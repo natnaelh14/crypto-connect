@@ -10,16 +10,11 @@
     right:0;
   }
   
-  .contact-info {
-    display: flex;
-    justify-content: center;
-    color: black;
-  }
-  
   .contact-link {
     display: flex;
-    justify-content: center;;
+    justify-content: center;
   }
+  
   .footer-social {
     list-style: none;
     display: flex;
@@ -33,7 +28,7 @@
     transition: 0.25s;
   }
   .footer-social a:hover {
-    color: rgb(255 108 91);
+    color: #b2dbfa;
     transform: translateY(-5px);
   }
   

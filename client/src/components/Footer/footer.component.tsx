@@ -5,15 +5,10 @@ import './footer.css';
 const Footer = () => {
   return (
     <footer className='footer'>
-      <section className='contact-info'>
-        <div>
-          <span>Copyright &copy; 2021 Crypto Connect. All Rights Reserved.</span>
-        </div>
-      </section>
       <section className='contact-link'>
         <ul className='footer-social'>
           <a
-            href='https://www.linkedin.com/in/natnael-haile-b146b41bb/'
+            href='https://www.linkedin.com/in/natnael-haile-b146b41bb'
             target='_blank'
             rel='noopener noreferrer'
           >

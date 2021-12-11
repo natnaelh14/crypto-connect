@@ -19,6 +19,7 @@ import { GuestDataContainer, CryptoCarouselContainer, GuestUserInfoContainer, Us
 import GuestProfileLoading from './guest_profile_loading.component';
 import Avatar from "@material-ui/core/Avatar";
 import noAvatar from '../../img/no-avatar.png';
+import FollowModal from '../FollowModal/follow_modal.component';
 
 const moodObj = (currentMood: string) => {
     switch (currentMood) {
@@ -61,14 +62,21 @@ const GuestProfile = () => {
         });
         var { error: followerError, loading: followerLoading, data: followerData } = useQuery(QUERY_FOLLOWERS, {
             variables: {
-                id: userInfo.id
+                id: profileId
             }
         });
         var { error: followingError, loading: followingLoading, data: followingData } = useQuery(QUERY_FOLLOWINGS, {
             variables: {
-                id: userInfo.id
+                id: profileId
             }
         });
+    }
+
+    if (followerData) {
+        var { followers } = followerData;
+    }
+    if (followingData) {
+        var { followings } = followingData;
     }
 
     if (profileId && userInfo) {
@@ -85,6 +93,13 @@ const GuestProfile = () => {
             }
         })
     }
+
+    const [openFollowingModal, setOpenFollowingModal] = React.useState(false);
+    const [openFollowerModal, setOpenFollowerModal] = React.useState(false);
+    const handleModalClose = () => {
+        setOpenFollowingModal(false)
+        setOpenFollowerModal(false)
+    };
 
     const [removeFollowing, { }] = useMutation(REMOVE_FOLLOWING)
     const handleRemoveFollowing = async () => {
@@ -211,7 +226,7 @@ const GuestProfile = () => {
                                         )}
                                     </Box>
                                     <Typography textAlign='center' sx={{ fontSize: "14px", color: "#555" }}>
-                                        @{userData?.userProfile?.handle.trim().replace(/ /g,'').toLowerCase()}
+                                        @{userData?.userProfile?.handle.trim().replace(/ /g, '').toLowerCase()}
                                     </Typography>
                                     <Box display="flex">
                                         <LocationOnIcon htmlColor="#555" />
@@ -231,18 +246,41 @@ const GuestProfile = () => {
                                         {userData?.userProfile?.bio}
                                     </Typography>
                                     <Box display="flex" marginTop='0.25rem'>
-                                        <Typography color="#555" marginRight="1rem">
-                                            <strong style={{ color: "black" }}>
-                                                {`${followingData?.followings.length} `}
-                                            </strong>
-                                            Following
-                                        </Typography>
-                                        <Typography color="#555" marginRight="1rem">
-                                            <strong style={{ color: "black" }}>
-                                                {`${followerData?.followers.length} `}
-                                            </strong>
-                                            Followers
-                                        </Typography>
+                                        <Box
+                                            onClick={() => setOpenFollowingModal(!openFollowingModal)}
+                                            sx={{
+                                                "&:hover": {
+
+                                                    textDecoration: "underline",
+                                                    cursor: "pointer",
+                                                    fontWeight: "bold"
+                                                },
+                                            }}
+                                        >
+                                            <Typography color="#555" marginRight="1rem">
+                                                <strong style={{ color: "black" }}>
+                                                    {`${followingData?.followings.length} `}
+                                                </strong>
+                                                Following
+                                            </Typography>
+                                        </Box>
+                                        <Box
+                                            onClick={() => setOpenFollowerModal(!openFollowerModal)}
+                                            sx={{
+                                                "&:hover": {
+                                                    textDecoration: "underline",
+                                                    cursor: "pointer",
+                                                    fontWeight: "bold"
+                                                },
+                                            }}
+                                        >
+                                            <Typography color="#555" marginRight="1rem">
+                                                <strong style={{ color: "black" }}>
+                                                    {`${followerData?.followers.length} `}
+                                                </strong>
+                                                Followers
+                                            </Typography>
+                                        </Box>
                                     </Box>
                                     <Box display="flex" marginTop='0.25rem'>
                                         <Typography color="#555">Member Since {Moment(userData?.userProfile?.created_at).format('YYYY')}</Typography>
@@ -279,15 +317,24 @@ const GuestProfile = () => {
                     </div>
                 </Fade>
             )}
-
-            {/* {openModal && (
-                <Modal
-                    open={openModal}
+            {openFollowingModal && (
+                <FollowModal
+                    open={openFollowingModal}
                     handleClose={handleModalClose}
-                >
-                    <UpdateUserProfile />
-                </Modal>
-            )} */}
+                    follow={followings}
+                    title="Following"
+                    action='Following'
+                />
+            )}
+            {openFollowerModal && (
+                <FollowModal
+                    open={openFollowerModal}
+                    handleClose={handleModalClose}
+                    follow={followers}
+                    title='Followers'
+                    action='Remove'
+                />
+            )}
         </div>
     );
 }
