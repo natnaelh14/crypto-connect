@@ -50,7 +50,7 @@ const FriendRequestBox = ({ userId, userHandle, userAvatar }: RequestsProps) => 
             >
                 <Grid container flexWrap="nowrap">
                     <Grid item sx={{ paddingRight: "1rem" }}>
-                        <Link to={`/home/profile`}>
+                        <Link to={`/home/profile/${userId}`}>
                             <Avatar alt="logo" src={userAvatar} />
                         </Link>
                     </Grid>

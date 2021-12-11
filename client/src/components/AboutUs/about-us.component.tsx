@@ -21,11 +21,10 @@ const AboutUsPage = () => {
     const classes = useStyles();
     return (
         <section style={{ marginTop: '500px' }}>
-            <Typography sx={{ fontSize: '3rem !Important' }} mb='2rem' fontFamily='inherit' textAlign='center'>FEATURES</Typography>
+            <Typography sx={{ fontSize: '3rem !Important', fontWeight: 800 }} mb='2rem' fontFamily='inherit' textAlign='center'>FEATURES</Typography>
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-around" }}>
                 <Box>
                     <Grid container component="main" className={classes.root}>
-
                         <Box
                             sx={{ margin: '20px', width: '500px' }}
                         >
@@ -39,10 +38,11 @@ const AboutUsPage = () => {
                                 <Typography fontFamily='inherit' textAlign='left' sx={{ padding: '10px' }} >▹ USER AUTHENTICATION USING GOOGLE</Typography>
                                 <Typography fontFamily='inherit' textAlign='left' sx={{ padding: '10px' }} >▹ PERSONALIZED USER PROFILE</Typography>
                                 <Typography fontFamily='inherit' textAlign='left' sx={{ padding: '10px' }} >▹ POST / COMMENT / LIKES / DISLIKES</Typography>
+                                <Typography fontFamily='inherit' textAlign='left' sx={{ padding: '10px' }} >▹ SHARE POSTS AND TWEETS</Typography>
                                 <Typography fontFamily='inherit' textAlign='left' sx={{ padding: '10px' }} >▹ SEND MESSAGES</Typography>
                                 <Typography fontFamily='inherit' textAlign='left' sx={{ padding: '10px' }} >▹ FOLLOW USERS</Typography>
                                 <Typography fontFamily='inherit' textAlign='left' sx={{ padding: '10px', lineHeight: '2rem' }} >▹ CREATE PERSONALIZED CRYPTOCURRENCY PORTFOLIO</Typography>
-                                <Typography fontFamily='inherit' textAlign='left' sx={{ padding: '10px' }} >▹ REAL-TIME CRYPTO PRICING AND OTHER CRYPTO INFO</Typography>
+                                <Typography fontFamily='inherit' textAlign='left' sx={{ padding: '10px' }} >▹ REAL-TIME CRYPTO PRICING, TWEETS ABOUT CRYPTO HOLDING AND OTHER CRYPTO INFO</Typography>
                             </Grid>
                         </Box>
                     </Grid>

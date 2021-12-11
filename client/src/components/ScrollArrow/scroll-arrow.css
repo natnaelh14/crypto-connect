@@ -1,7 +1,7 @@
     .scrollTop {
     position: fixed; 
     width: 100%;
-    bottom: 20px;
+    bottom: 100px;
     align-items: center;
     height: 20px;
     justify-content: center;
@@ -10,6 +10,13 @@
     animation: fadeIn 0.3s;
     transition: opacity 0.4s;
     opacity: 0.3;
+    margin-left: 40%;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    .scrollTop {
+      bottom: 80px;
+    }
   }
   
   .scrollTop:hover{

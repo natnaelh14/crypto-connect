@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import { userProps } from '../../index.types';
 import { useAppSelector } from '../../app/hooks';
 import { useMutation, useQuery } from '@apollo/client';
-import { QUERY_CHECK_FRIENDSHIP } from '../../utils/queries';
+import { QUERY_CHECK_FRIENDSHIP, QUERY_FRIEND_REQUEST } from '../../utils/queries';
 import { FRIEND_REQUEST } from '../../utils/mutations';
 import Avatar from "@material-ui/core/Avatar";
 import noAvatar from '../../img/no-avatar.png';
@@ -28,6 +28,13 @@ const WhoToFollow = ({ id, handle, avatar, isActive }: userInfoProps) => {
     variables: {
       follower: userInfo.id,
       followed: id
+    }
+  })
+
+  const { error: friendRequestError, loading: friendRequestLoading, data: friendRequestData } = useQuery(QUERY_FRIEND_REQUEST, {
+    variables: {
+      receiver_id: id,
+      sender_id: userInfo.id
     }
   })
 
@@ -89,9 +96,29 @@ const WhoToFollow = ({ id, handle, avatar, isActive }: userInfoProps) => {
                 >
                   FOLLOWING
                 </Button>
-              ): (userInfo.id === id) ? ( 
+              ): (userInfo.id === id || friendRequestData?.friendRequest?.status === 'BLOCKED') ? ( 
                 <div />
-              ) : ( 
+              ) : (friendRequestData?.friendRequest?.status === 'PENDING') ? ( 
+                <Button
+                size="small"
+                disabled={true}
+                onClick={handleFollowRequest}
+                sx={{
+                  borderRadius: theme.shape.borderRadius,
+                  textTransform: "capitalize",
+                  fontFamily: 'inherit',
+                  fontSize: '10px',
+                  mt: "4px",
+                  background: "black",
+                  "&:hover": {
+                    background: "#333",
+                  },
+                }}
+                variant="contained"
+              >
+                PENDING
+              </Button>
+              ) : (
                 <Button
                 size="small"
                 disabled={buttonDisable}

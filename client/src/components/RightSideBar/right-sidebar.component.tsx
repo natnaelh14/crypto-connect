@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Search } from "@mui/icons-material";
-import { Input, Typography, CircularProgress, Hidden } from "@mui/material";
+import { Input, Typography, Hidden } from "@mui/material";
 import { Box } from "@mui/system";
 import WhoToFollow from "../WhoToFollow/who-to-follow.component";
 import { QUERY_USERS_LIST, QUERY_WHO_TO_FOLLOW_USERS } from "../../utils/queries";

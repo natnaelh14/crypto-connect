@@ -13,9 +13,9 @@ import ScrollArrow from "../ScrollArrow/scroll-arrow.component";
 function Copyright() {
   return (
     <Typography style={{ fontFamily: 'inherit' }} variant="body2" color="textSecondary" align="center">
-      {"Copyright © Crypto Connect Natnael Haile "}
-      {new Date().getFullYear()}
-      {"."}
+      {"Copyright © Crypto Connect "}
+      {new Date().getFullYear() }
+      {". All Rights Reserved."}
     </Typography>
   );
 }

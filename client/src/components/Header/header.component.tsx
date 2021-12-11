@@ -11,14 +11,10 @@ import {
     OptionTag
 } from './header.styles';
 import { useAppSelector } from '../../app/hooks';
-import { Link, Redirect } from 'react-router-dom';
-import { useHistory } from "react-router-dom";
-import { withRouter } from 'react-router';
 
 const Header = (props: any) => {
     const currentUser = useAppSelector((state) => state.currentUser);
     const { user } = currentUser;
-    const { push } = useHistory()
 
     return (
         <HeaderContainer>
@@ -33,18 +29,6 @@ const Header = (props: any) => {
                         </OptionTag>
                     </OptionsContainer>
                 )}
-                {/* : (
-                     <OptionsContainer>
-                    <OptionTag onClick={() => push('/about')}>
-                         <span>ABOUT</span>
-                     </OptionTag>
-                 </OptionsContainer>
-                 <OptionsContainer>
-                     <OptionLink to='/about' >
-                            <span>ABOUT US</span>
-                        </OptionLink>
-                     </OptionsContainer>
-                 )} */}
             </>
         </HeaderContainer >
     )

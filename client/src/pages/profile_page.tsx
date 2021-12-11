@@ -67,8 +67,10 @@ const Profile = () => {
         pollInterval: 60000
     });
 
-    if (followerData && followingData) {
+    if (followerData) {
         var { followers } = followerData;
+    }
+    if (followingData) {
         var { followings } = followingData;
     }
 
