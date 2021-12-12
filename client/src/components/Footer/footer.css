@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-image: linear-gradient(white, #d5d4d4);
+    background-image: linear-gradient(white, #d4eaf8);
     position:sticky;
     width: 100%;
     left:0;
@@ -28,7 +28,7 @@
     transition: 0.25s;
   }
   .footer-social a:hover {
-    color: #b2dbfa;
+    color: #626098;
     transform: translateY(-5px);
   }
   
