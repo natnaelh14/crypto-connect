@@ -11,10 +11,11 @@ import Avatar from '@material-ui/core/Avatar';
 type RequestsProps = {
     userId: string,
     userHandle: string,
-    userAvatar: string
+    userAvatar: string,
+    updateRequest: () => void
 }
 
-const FriendRequestBox = ({ userId, userHandle, userAvatar }: RequestsProps) => {
+const FriendRequestBox = ({ userId, userHandle, userAvatar, updateRequest }: RequestsProps) => {
 
     const currentUser = useAppSelector(state => state.currentUser)
     const { user } = currentUser
@@ -32,7 +33,9 @@ const FriendRequestBox = ({ userId, userHandle, userAvatar }: RequestsProps) => 
                 receiver_id: userInfo.id,
                 status: Button.value
             }
-        });
+        }).then(() => {
+            updateRequest();
+        })
         setShowButton(false)
     }
 

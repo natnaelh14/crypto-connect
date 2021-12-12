@@ -37,9 +37,8 @@ const Messages = () => {
   }
   if (user && messagesId) {
     var userInfo: userProps = user
-    var { loading: messageLoading, error: messageError, data } = useQuery(QUERY_MESSAGES, {
+    var { loading: messageLoading, error: messageError, data, refetch } = useQuery(QUERY_MESSAGES, {
       variables: { sender_id: userInfo.id, receiver_id: messagesId },
-      pollInterval: 60000
     });
   }
   if (data) {
@@ -58,12 +57,18 @@ const Messages = () => {
             sender_id: userInfo.id,
             receiver_id: messagesId
           },
+        }).then(() => {
+          refetch()
         })
       };
       setMessageText("")
     } catch (e) {
       return e;
     }
+  }
+
+  const getMessages = () => {
+    refetch()
   }
 
   return (
@@ -123,9 +128,12 @@ const Messages = () => {
                     <SingleMessageLoading />
                   </>
                 )}
+                <Box display="flex" justifyContent='center'>
+                  <Button sx={{ fontSize: '0.8rem', borderRadius: '12px' }} onClick={getMessages}>Refresh</Button>
+                </Box>
                 {messages && (
                   messages.map((msg: any, index: any) => {
-                    return <SingleMessage key={msg.id} msgId={msg.id} senderId={msg.sender_id} sentAt={msg.sent_at} text={msg.text} />
+                    return <SingleMessage key={msg.id} msgId={msg.id} senderId={msg.sender_id} sentAt={msg.sent_at} text={msg.text} refetchMessages={refetch} />
                   })
                 )}
               </Box>

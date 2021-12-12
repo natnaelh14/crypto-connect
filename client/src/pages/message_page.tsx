@@ -3,7 +3,7 @@ import { Fade, Typography, Button } from "@mui/material";
 import { Box } from "@mui/system";
 import MessageBox from '../components/MessageBox/message_box.component';
 import { useQuery } from '@apollo/client';
-import { QUERY_MESSENGERS, QUERY_MESSAGES } from '../utils/queries';
+import { QUERY_MESSENGERS } from '../utils/queries';
 import { userProps } from '../index.types';
 import { useAppSelector } from '../app/hooks';
 import MessageBoxLoading from '../components/MessageBox/message_box_loading.component';
@@ -15,18 +15,24 @@ const MessagePage = () => {
   const currentUser = useAppSelector(state => state.currentUser)
   const { loading: userLoading, user } = currentUser
   const userInfo: userProps = user
-  const { loading, error, data } = useQuery(QUERY_MESSENGERS, {
-    variables: { id: userInfo.id },
-    pollInterval: 60000
+
+  let { loading, error, data, refetch } = useQuery(QUERY_MESSENGERS, {
+    variables: { id: userInfo.id }
   });
+
   if (data) {
     var { messengers } = data;
   }
 
   const [openModal, setOpenModal] = React.useState(false);
   const handleModalClose = () => {
+    refetch();
     setOpenModal(false)
   };
+
+  const getMessages = () => {
+    refetch()
+  }
 
   return (
     <MessagesContainer>
@@ -55,7 +61,6 @@ const MessagePage = () => {
               SEND MESSAGE
             </Button>
           </Box>
-
           <Box
             paddingBottom=".5rem"
             paddingTop=".5rem"
@@ -70,6 +75,9 @@ const MessagePage = () => {
                 <MessageBoxLoading />
               </>
             )}
+            <Box display="flex" justifyContent='center'>
+              <Button sx={{fontSize: '0.8rem', borderRadius: '12px' }} onClick={getMessages}>Refresh</Button>
+            </Box>
             {messengers && (
               messengers.map((msg: any) => {
                 return <MessageBox key={msg.id} currentUser={userInfo.id} msgId={msg.id} msgHandle={msg.handle} msgAvatar={msg.avatar} />

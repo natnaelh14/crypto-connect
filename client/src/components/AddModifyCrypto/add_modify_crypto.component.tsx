@@ -23,7 +23,7 @@ const AddModifyCrypto = ({
     const [addCrypto, { }] = useMutation(ADD_CRYPTO);
     const [addHolding, setAddHolding] = useState("");
     const [addCoin, setAddCoin] = useState("")
-    const { loading, error, data } = useQuery(QUERY_CRYPTOS, {
+    const { loading, error, data, refetch } = useQuery(QUERY_CRYPTOS, {
         variables: {
             user_id: userId
         },
@@ -32,25 +32,26 @@ const AddModifyCrypto = ({
         var { cryptoByUserId } = data;
     }
 
-    const handleCrypto = () => {
-    }
-
     const handleAddCrypto = async () => {
         try {
-            const { data } = await addCrypto({
+            await addCrypto({
                 variables: {
                     cryptoName: addCoin.toLowerCase(),
                     holdingAmount: Number(addHolding),
                     userId: userId
                 }
-            });
-            if (data) {
+            }).then(() => {
+                refetch();
+            })
                 setAddHolding("")
                 setAddCoin("")
-            }
         } catch (e) {
             return e;
         }
+    }
+
+    const refreshCrypto = () =>{
+        refetch();
     }
 
     return (
@@ -117,7 +118,7 @@ const AddModifyCrypto = ({
                             </Box>
                             {cryptoByUserId && (
                                 cryptoByUserId.map((val: any) => {
-                                    return <CryptoUpdateInput name={val.crypto_name} holding={val.holding_amount} cryptoId={val.id} key={val.id} />
+                                    return <CryptoUpdateInput name={val.crypto_name} holding={val.holding_amount} cryptoId={val.id} key={val.id} refreshCrypto={refreshCrypto} />
                                 })
                             )
                             }
@@ -139,7 +140,7 @@ const AddModifyCrypto = ({
                                 },
                             }}
                             variant="contained"
-                            onClick={handleCrypto}
+                            onClick={handleClose}
                         >
                             CLOSE
                         </Button>

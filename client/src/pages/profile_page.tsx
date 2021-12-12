@@ -250,7 +250,7 @@ const Profile = () => {
                             </Box>
                             <Box>
                                 {postsData &&
-                                    postsData.map((post) => <Post key={post.id} postId={post.id} userId={post.user_id} postTime={post.created_at} text={post.text} />)}
+                                    postsData.map((post) => <Post key={post.id} postId={post.id} userId={post.user_id} postTime={post.created_at} text={post.text} refetchPosts={() => {}} />)}
                             </Box>
                         </Box>
                     </Box>
