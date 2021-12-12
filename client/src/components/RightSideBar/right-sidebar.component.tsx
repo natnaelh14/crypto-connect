@@ -14,12 +14,12 @@ const RightSidebar = () => {
   const currentUser = useAppSelector(state => state.currentUser)
   const { error: currentUserError, loading: currentUserLoading, user } = currentUser
   const userInfo: userProps = user
-  const { error: whoToFollowError, loading: whoToFollowLoading, data: whoToFollowData } = useQuery(QUERY_WHO_TO_FOLLOW_USERS, {
+  const { error: whoToFollowError, loading: whoToFollowLoading, data: whoToFollowData, refetch: whoToRefetch } = useQuery(QUERY_WHO_TO_FOLLOW_USERS, {
     variables: { id: userInfo.id }
   })
 
   const [searchText, setSearchText] = useState<string>("")
-  const { loading: userListLoading, error: userLostError, data } = useQuery(QUERY_USERS_LIST, {
+  const { loading: userListLoading, error: userLostError, data, refetch } = useQuery(QUERY_USERS_LIST, {
     variables: { handle: searchText },
   });
   if (data) {
@@ -90,11 +90,11 @@ const RightSidebar = () => {
               </>
             )}
             {(searchText && usersArray) && (
-              usersArray.map((user) => <WhoToFollow key={user.id} id={user.id} handle={user.handle} avatar={user.avatar} isActive={user.isActive} />)
+              usersArray.map((user) => <WhoToFollow key={user.id} id={user.id} handle={user.handle} avatar={user.avatar} isActive={user.isActive} userRefetch={refetch} whoToRefetch={whoToRefetch} />)
             )}
             {(!searchText && whoToFollowData) && (
               whoToFollowData?.whoToFollowUsers.map((user: any) => {
-                return <WhoToFollow key={user.id} id={user.id} handle={user.handle} avatar={user.avatar} isActive={user.isActive} />
+                return <WhoToFollow key={user.id} id={user.id} handle={user.handle} avatar={user.avatar} isActive={user.isActive} userRefetch={refetch} whoToRefetch={whoToRefetch} />
               })
 
             )}

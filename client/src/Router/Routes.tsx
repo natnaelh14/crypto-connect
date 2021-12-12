@@ -152,9 +152,9 @@ class Routes extends Component<MyProps, {}> {
             <Route exact path="/home/chat">
               {this.props.currentUser ? <ChatPage /> : <Redirect to="/signin" />}
             </Route>
-            <Route exact path="/home/add-post">
+            {/* <Route exact path="/home/add-post">
               {this.props.currentUser ? <AddPost /> : <Redirect to="/signin" />}
-            </Route>
+            </Route> */}
             <Route exact path="/home/feed">
               {this.props.currentUser ? <PostList /> : <Redirect to="/signin" />}
             </Route>

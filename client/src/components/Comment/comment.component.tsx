@@ -14,16 +14,20 @@ import { QUERY_USER, QUERY_REACTIONS_BY_COMMENT, QUERY_REACTIONS_BY_USER_COMMENT
 import { DELETE_COMMENT, ADD_REACTION_COMMENT, DELETE_REACTION_COMMENT } from '../../utils/mutations';
 import { useAppSelector } from '../../app/hooks';
 import { userProps } from '../../index.types';
+import Avatar from '@material-ui/core/Avatar';
+import noAvatar from '../../img/no-avatar.png';
+import { Link } from 'react-router-dom';
 
 type commentProps = {
   commentId: number,
   postId: number,
   userId: string,
   text: string,
-  commentTime: Date
+  commentTime: Date,
+  commentsRefetch: () => void
 };
 
-const Comment = ({ commentId, postId, userId, text, commentTime }: commentProps) => {
+const Comment = ({ commentId, postId, userId, text, commentTime, commentsRefetch }: commentProps) => {
 
   const { loading, error, data } = useQuery(QUERY_USER, {
     variables: {
@@ -31,7 +35,7 @@ const Comment = ({ commentId, postId, userId, text, commentTime }: commentProps)
     },
   });
   const { userProfile } = data;
-  const { data: likeData } = useQuery(QUERY_REACTIONS_BY_COMMENT, {
+  const { data: likeData, refetch: likesRefetch } = useQuery(QUERY_REACTIONS_BY_COMMENT, {
     variables: {
       reaction_type: 'LIKE',
       comment_id: commentId
@@ -40,7 +44,7 @@ const Comment = ({ commentId, postId, userId, text, commentTime }: commentProps)
   if (likeData) {
     var { reactionsByComment: likeList } = likeData;
   }
-  const { data: dislikeData } = useQuery(QUERY_REACTIONS_BY_COMMENT, {
+  const { data: dislikeData, refetch: dislikesRefetch } = useQuery(QUERY_REACTIONS_BY_COMMENT, {
     variables: {
       reaction_type: 'DISLIKE',
       comment_id: commentId
@@ -52,7 +56,7 @@ const Comment = ({ commentId, postId, userId, text, commentTime }: commentProps)
   const currentUser = useAppSelector(state => state.currentUser)
   const { user } = currentUser
   const userInfo: userProps = user
-  const { data: userPostData } = useQuery(QUERY_REACTIONS_BY_USER_COMMENT, {
+  const { data: userPostData, refetch: userReactionsRefetch } = useQuery(QUERY_REACTIONS_BY_USER_COMMENT, {
     variables: {
       user_id: userInfo.id,
       comment_id: commentId
@@ -67,6 +71,8 @@ const Comment = ({ commentId, postId, userId, text, commentTime }: commentProps)
     try {
       await deleteComment({
         variables: { id: commentId }
+      }).then(() => {
+        commentsRefetch();
       })
     } catch (e) {
       throw new Error('Unable to delete comment')
@@ -85,6 +91,10 @@ const Comment = ({ commentId, postId, userId, text, commentTime }: commentProps)
           comment_id: commentId,
           reaction_type: Button.value
         }
+      }).then(() => {
+        userReactionsRefetch();
+        dislikesRefetch();
+        likesRefetch();
       })
     } catch (e) {
       throw new Error('Unable to Add a Reaction')
@@ -97,6 +107,10 @@ const Comment = ({ commentId, postId, userId, text, commentTime }: commentProps)
           user_id: userId,
           comment_id: commentId
         }
+      }).then(() => {
+        userReactionsRefetch();
+        dislikesRefetch();
+        likesRefetch();
       })
     } catch (e) {
       throw new Error('Unable to Delete a Reaction')
@@ -114,7 +128,9 @@ const Comment = ({ commentId, postId, userId, text, commentTime }: commentProps)
     >
       <Grid container flexWrap="nowrap">
         <Grid item sx={{ paddingRight: "1rem" }}>
-          <img src={userProfile.avatar} alt="lgoog" width="50px" />
+          <Link to={`/home/profile/${userProfile?.id}`}>
+            <Avatar src={userProfile?.avatar ? userProfile?.avatar : noAvatar} alt='user-logo' style={{ width: '50px', height: '50px' }} />
+          </Link>
         </Grid>
         <Box width="100%"
         >

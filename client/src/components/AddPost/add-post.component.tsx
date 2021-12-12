@@ -12,7 +12,11 @@ import AddPostLoading from './add_post_loading.component';
 import noAvatar from '../../img/no-avatar.png';
 import Avatar from '@material-ui/core/Avatar';
 
-const AddPost = () => {
+type postProps = {
+  refetchPosts: () => void
+}
+
+const AddPost = ({ refetchPosts }: postProps) => {
 
   const dispatch = useAppDispatch()
   const currentUser = useAppSelector((state) => state.currentUser);
@@ -21,34 +25,23 @@ const AddPost = () => {
 
   const [postText, setPostText] = useState("");
   const [mood, setMood] = useState<string>(userInfo.status)
-  const [addPost, { }] = useMutation(ADD_POST,
-    {
-      refetchQueries: () => [
-        { query: QUERY_POSTS_BY_FOLLOWING }
-      ]
-    }
-  );
+  const [addPost, { }] = useMutation(ADD_POST);
   const [updateProfile, { }] = useMutation(UPDATE_USER_PROFILE)
 
   const handleAddPost = async () => {
     try {
-      const res = await addPost({
+      await addPost({
         variables: {
           user_id: userInfo.id,
           text: postText
         }
+      }).then(() => {
+        refetchPosts();
       })
-      if (res) {
         setPostText("");
-        const { loading, error, data: { postsByFollowing } } = await useQuery(QUERY_POSTS_BY_FOLLOWING, {
-          variables: {
-            id: userInfo.id
-          },
-        });
-        dispatch(listPostsByFollowing(postsByFollowing))
-      }
-    } catch (e) {
 
+    } catch (e) {
+      return e;
     }
 
   }

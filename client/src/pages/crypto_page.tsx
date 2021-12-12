@@ -31,11 +31,10 @@ const CryptoPage = () => {
     const { error: currentUserError, loading: currentUserLoading, user } = currentUser
     const userInfo: userProps = user
 
-    const { error: cryptoError, loading: cryptoLoading, data } = useQuery(QUERY_CRYPTOS, {
+    const { error: cryptoError, loading: cryptoLoading, data, refetch } = useQuery(QUERY_CRYPTOS, {
         variables: {
             user_id: userInfo.id
-        },
-        pollInterval: 60000
+        }
     })
     if (data) {
         var { cryptoByUserId } = data;
@@ -47,6 +46,7 @@ const CryptoPage = () => {
         setOpenModal(true);
     };
     const handleModalClose = () => {
+        refetch()
         setOpenModal(false);
     };
 

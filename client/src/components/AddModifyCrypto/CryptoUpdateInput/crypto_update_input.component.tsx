@@ -11,10 +11,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 type cryptoProps = {
     name: string,
     holding: number,
-    cryptoId: number
+    cryptoId: number,
+    refreshCrypto: () => void
 }
 
-const CryptoUpdateInput = ({ name, holding, cryptoId }: cryptoProps) => {
+const CryptoUpdateInput = ({ name, holding, cryptoId, refreshCrypto }: cryptoProps) => {
 
     const [updateCrypto, { }] = useMutation(UPDATE_CRYPTO);
     const [holdingValue, setHoldingValue] = useState<number>(holding)
@@ -40,6 +41,8 @@ const CryptoUpdateInput = ({ name, holding, cryptoId }: cryptoProps) => {
                         id: cryptoId,
                         holding_amount: holdingValue
                     }
+                }).then(() => {
+                    refreshCrypto()
                 })
             } catch (e) {
                 throw new Error('Unable to update CryptoCurrency')
@@ -55,6 +58,8 @@ const CryptoUpdateInput = ({ name, holding, cryptoId }: cryptoProps) => {
                 variables: {
                     id: cryptoId
                 },
+            }).then(() => {
+                refreshCrypto();
             })
         } catch (e) {
             throw new Error('Unable to delete CryptoCurrency')

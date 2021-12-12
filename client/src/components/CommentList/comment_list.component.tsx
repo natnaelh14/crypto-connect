@@ -1,17 +1,23 @@
-import React, { useEffect } from 'react'
-import { useQuery } from '@apollo/client';
+import React, { useEffect, useState } from 'react'
+import { useQuery, useMutation } from '@apollo/client';
+import { Grid, IconButton, Typography, Input, Button } from "@mui/material";
+import { Box } from "@mui/system";
 import { QUERY_COMMENTS } from '../../utils/queries';
 import Comment from '../Comment/comment.component';
-const Moment = require('moment')
+const Moment = require('moment');
+import { ADD_COMMENT } from '../../utils/mutations';
 
 type postListProps = {
     postId: number,
+    userId: string
 };
 
-const CommentList = ({ postId }: postListProps) => {
+const CommentList = ({ postId, userId }: postListProps) => {
 
+    const [commentText, setCommentText] = useState("");
+    const [addComment, { }] = useMutation(ADD_COMMENT);
 
-    const { error, loading, data } = useQuery(QUERY_COMMENTS, {
+    const { error, loading, data, refetch: commentsRefetch } = useQuery(QUERY_COMMENTS, {
         variables: { post_id: postId },
     });
     if (data) {
@@ -25,18 +31,64 @@ const CommentList = ({ postId }: postListProps) => {
         }> | undefined = [...comments].sort((a: any, b: any) => new Moment(b.created_at).format('YYYYMMDDHHMMSS') - new Moment(a.created_at).format('YYYYMMDDHHMMSS'));
     }
 
+    const handleAddComment = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        await addComment({
+            variables: {
+                user_id: userId,
+                post_id: postId,
+                text: commentText
+            }
+        }).then(() => {
+            commentsRefetch();
+        }) 
+        setCommentText("");
+    }
+
     return (
         <>
-            {error && (
-                <div>No Comment</div>
-            )}
-            {loading && (
-                <div>It is loading</div>
-            )}
-            {(commentArray) &&
-                commentArray.map((comment) => <Comment key={comment.id} commentId={comment.id} postId={comment.post_id} userId={comment.user_id} commentTime={comment.created_at} text={comment.text} />)}
+            <Box >
+                <Grid item padding="1rem 1rem 0 1rem" borderBottom="1px solid #ccc">
+                    <Box padding=".5rem 0">
+                        <Input
+                            onChange={(e) => setCommentText(e.target.value)}
+                            value={commentText}
+                            multiline
+                            rows="2"
+                            disableUnderline
+                            type="text"
+                            placeholder="Post your comment"
+                            sx={{ width: "100%" }}
+                        />
+                    </Box>
+                    <Box textAlign="right" paddingBottom=".5rem">
+                        <Button
+                            onClick={handleAddComment}
+                            variant="contained"
+                            disabled={commentText.length === 0}
+                            color="primary"
+                            size="small"
+                            sx={{
+                                fontSize: "12px",
+                                fontFamily: 'inherit'
+                            }}
+                        >
+                            Comment
+                        </Button>
+                    </Box>
+                </Grid>
+            </Box>
+            <Box marginTop="1rem" width="100%">
+                {error && (
+                    <div>No Comment</div>
+                )}
+                {loading && (
+                    <div>It is loading</div>
+                )}
+                {(commentArray) &&
+                    commentArray.map((comment) => <Comment key={comment.id} commentId={comment.id} postId={comment.post_id} userId={comment.user_id} commentTime={comment.created_at} text={comment.text} commentsRefetch={commentsRefetch} />)}
+            </Box>
         </>
     )
 }
-
 export default CommentList;

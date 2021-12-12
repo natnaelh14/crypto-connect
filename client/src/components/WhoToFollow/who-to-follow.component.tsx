@@ -15,44 +15,46 @@ type userInfoProps = {
   id: string,
   handle: string,
   avatar: string,
-  isActive: string
+  isActive: string,
+  userRefetch: () => void,
+  whoToRefetch: () => void
 };
 
-const WhoToFollow = ({ id, handle, avatar, isActive }: userInfoProps) => {
+const WhoToFollow = ({ id, handle, avatar, isActive, userRefetch, whoToRefetch }: userInfoProps) => {
 
   const currentUser = useAppSelector(state => state.currentUser)
   const { error, loading, user } = currentUser
   const userInfo: userProps = user
 
-  const { error: checkFriendError, loading: checkFriendLoading, data: checkFriendData } = useQuery(QUERY_CHECK_FRIENDSHIP, {
+  const { error: checkFriendError, loading: checkFriendLoading, data: checkFriendData, refetch: checkRefetch } = useQuery(QUERY_CHECK_FRIENDSHIP, {
     variables: {
       follower: userInfo.id,
       followed: id
     }
   })
 
-  const { error: friendRequestError, loading: friendRequestLoading, data: friendRequestData } = useQuery(QUERY_FRIEND_REQUEST, {
+  const { error: friendRequestError, loading: friendRequestLoading, data: friendRequestData, refetch: queryFriendRefetch } = useQuery(QUERY_FRIEND_REQUEST, {
     variables: {
       receiver_id: id,
       sender_id: userInfo.id
     }
   })
 
-  const [buttonDisable, setButtonDisable] = useState(false)
-  const [buttonText, setButtonText] = useState("FOLLOW")
   const [followRequest, { }] = useMutation(FRIEND_REQUEST)
   const handleFollowRequest = async () => {
     try {
-      const makeRequest = await followRequest({
+      await followRequest({
         variables: {
           sender_id: userInfo.id,
           receiver_id: id
         }
+      }).then(() => {
+        userRefetch()
+        whoToRefetch()
+        checkRefetch()
+        queryFriendRefetch()
+
       })
-      if (makeRequest) {
-        setButtonText('PENDING')
-        setButtonDisable(true)
-      }
     } catch (e) {
       return e;
     }
@@ -121,7 +123,7 @@ const WhoToFollow = ({ id, handle, avatar, isActive }: userInfoProps) => {
               ) : (
                 <Button
                 size="small"
-                disabled={buttonDisable}
+                disabled={false}
                 onClick={handleFollowRequest}
                 sx={{
                   borderRadius: theme.shape.borderRadius,
@@ -136,7 +138,7 @@ const WhoToFollow = ({ id, handle, avatar, isActive }: userInfoProps) => {
                 }}
                 variant="contained"
               >
-                {buttonText}
+                FOLLOW
               </Button>
               )}
             </Grid>

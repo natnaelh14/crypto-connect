@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Fade, Typography } from "@mui/material";
+import { Fade, Typography, Button } from "@mui/material";
 import FriendRequestBox from '../FriendRequestBox/friend_request_box.component';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_FRIEND_REQUESTS } from '../../utils/queries';
@@ -20,7 +20,7 @@ const FriendRequests = () => {
         loading: boolean
     } = currentUser
     if (currentUser) {
-        var { loading, error, data } = useQuery(QUERY_FRIEND_REQUESTS, {
+        var { loading, error, data, refetch } = useQuery(QUERY_FRIEND_REQUESTS, {
             variables: {
                 id: user.id
             },
@@ -30,6 +30,11 @@ const FriendRequests = () => {
     if (data) {
         var friendRequestsData = data.friendRequests
     }
+
+    const getMessages = () => {
+        refetch();
+    }
+
     return (
         <FriendRequestsContainer>
             <Fade in={true} timeout={1000}>
@@ -50,9 +55,12 @@ const FriendRequests = () => {
                                 <FriendRequestBoxLoading />
                             </>
                         )}
+                        <Box display="flex" justifyContent='center'>
+                            <Button sx={{ fontSize: '0.8rem', borderRadius: '12px' }} onClick={getMessages}>Refresh</Button>
+                        </Box>
                         {friendRequestsData && (
                             friendRequestsData.map((user: any) => {
-                                return <FriendRequestBox key={user.id} userId={user.id} userHandle={user.handle} userAvatar={user.avatar} />
+                                return <FriendRequestBox key={user.id} userId={user.id} userHandle={user.handle} userAvatar={user.avatar} updateRequest={refetch} />
                             })
                         )}
                     </Box>

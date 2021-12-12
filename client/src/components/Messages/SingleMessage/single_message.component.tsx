@@ -19,9 +19,10 @@ type MsgProps = {
   msgId: string,
   senderId: string,
   sentAt: string,
-  text: string
+  text: string,
+  refetchMessages: () => void
 }
-const SingleMessage = ({ msgId, senderId, sentAt, text }: MsgProps) => {
+const SingleMessage = ({ msgId, senderId, sentAt, text, refetchMessages }: MsgProps) => {
 
   const currentUser = useAppSelector(state => state.currentUser)
   const { user } = currentUser
@@ -41,7 +42,11 @@ const SingleMessage = ({ msgId, senderId, sentAt, text }: MsgProps) => {
       await deleteMessage({
         variables: { id: msgId }
       })
-      setAnchorEl(null);
+      .then(() => {
+        refetchMessages()
+      })
+      // refetchMessages();
+      // setAnchorEl(false);
     } catch (e) {
       return e;
     }
