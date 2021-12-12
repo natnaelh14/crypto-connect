@@ -1,0 +1,5 @@
+#bulletin::before {
+        content: '▹';
+        padding-right: 1em;
+        color: #2c5f83;
+    };

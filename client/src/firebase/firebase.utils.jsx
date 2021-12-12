@@ -17,10 +17,29 @@ firebase.initializeApp(firebaseConfig);
 export const firestore = firebase.firestore();
 export const auth = firebase.auth();
 
+//GOOGLE
 const provider = new firebase.auth.GoogleAuthProvider();
 // We want to trigger the google pop whenever we use the GoogleAuthProvider
 provider.setCustomParameters({ prompt: "select_account" });
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const signInWithGoogle = () => auth.signInWithPopup(provider).catch(function (error) {
+  console.error(error);
+});
+
+//GITHUB
+const providerTwo = new firebase.auth.GithubAuthProvider();
+// We want to trigger the google pop whenever we use the GoogleAuthProvider
+providerTwo.setCustomParameters({ prompt: "select_account" });
+export const signInWithGithub = () => auth.signInWithPopup(providerTwo).catch(function (error) {
+  console.error(error);
+});
+
+//TWITTER
+const providerThree = new firebase.auth.TwitterAuthProvider();
+// We want to trigger the google pop whenever we use the GoogleAuthProvider
+providerThree.setCustomParameters({ prompt: "select_account" });
+export const signInWithTwitter = () => auth.signInWithPopup(providerThree).catch(function (error) {
+  console.error(error);
+});
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   //If the userAuth object doesn't exist, we don't want to run the function

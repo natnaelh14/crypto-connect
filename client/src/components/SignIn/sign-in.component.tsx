@@ -6,6 +6,9 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { signInWithGithub } from '../../firebase/firebase.utils';
+import { signInWithTwitter } from '../../firebase/firebase.utils';
+import { GoogleLoginButton, GithubLoginButton, TwitterLoginButton } from 'react-social-login-buttons';
 import coinImage from './coin.jpeg';
 import AboutUsPage from '../AboutUs/about-us.component';
 import Footer from '../Footer/footer.component';
@@ -14,7 +17,7 @@ function Copyright() {
   return (
     <Typography style={{ fontFamily: 'inherit' }} variant="body2" color="textSecondary" align="center">
       {"Copyright © Crypto Connect "}
-      {new Date().getFullYear() }
+      {new Date().getFullYear()}
       {". All Rights Reserved."}
     </Typography>
   );
@@ -22,10 +25,13 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: '40px',
+    marginTop: '120px',
     display: "flex",
     alignItems: "center",
     justifyContent: "space-around",
+    "@media (max-width: 1000px)": {
+      marginTop: "40px"
+    }
   },
   paper: {
     margin: theme.spacing(2, 6),
@@ -42,7 +48,8 @@ const useStyles = makeStyles((theme) => ({
   },
   textFont: {
     fontFamily: "inherit",
-    color: '#55595C'
+    color: '#55595C',
+    textAlign: 'center'
   },
   image: {
     "@media (max-width: 1300px)": {
@@ -86,27 +93,13 @@ const SignIn = () => {
               <Typography className={classes.textFont} style={{ marginTop: '0.5rem', fontSize: '1.5rem' }} >
                 WELCOME TO CRYPTO CONNECT
               </Typography>
-              <Typography className={classes.textFont} style={{ marginTop: '0.5rem', fontSize: '1rem' }}>
+              <Typography className={classes.textFont} style={{ marginTop: '0.5rem', fontSize: '1.2rem' }}>
                 A cryptocurrency based social media application
               </Typography>
               <form className={classes.form} noValidate>
-                <Button
-                  onClick={signInWithGoogle}
-                  disableElevation
-                  size="small"
-                  sx={{
-                    textTransform: "capitalize",
-                    padding: "6px 20px",
-                    marginBottom: '20px',
-                    background: "black",
-                    "&:hover": {
-                      background: "#333",
-                    },
-                  }}
-                  variant="contained"
-                >
-                  SIGN IN WITH GOOGLE
-                </Button>
+                <GoogleLoginButton style={{ width: '300px' }} onClick={signInWithGoogle} />
+                <GithubLoginButton style={{ width: '300px' }} onClick={signInWithGithub} />
+                <TwitterLoginButton style={{ width: '300px' }} onClick={signInWithTwitter} />
                 <Box mt={5}>
                   <Copyright />
                 </Box>
@@ -116,12 +109,8 @@ const SignIn = () => {
         </Grid>
         <ScrollArrow />
       </div>
-      {/* <Fade in={true} timeout={1000}>
-        <> */}
-          <AboutUsPage />
-          <Footer />
-        {/* </>
-      </Fade> */}
+      <AboutUsPage />
+      <Footer />
     </>
   );
 }
