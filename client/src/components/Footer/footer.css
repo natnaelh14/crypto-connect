@@ -3,11 +3,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: linear-gradient(white, #d4eaf8);
-    background: -webkit-linear-gradient(white, #d4eaf8);
-    background: -moz-linear-gradient(white, #d4eaf8);
-    background: -ms-linear-gradient(white, #d4eaf8);
-    background: -o-linear-gradient(white, #d4eaf8);
+    background-image: linear-gradient(white, #d4eaf8)!important;
+    background: -webkit-linear-gradient(white, #d4eaf8)!important;
+    background: -moz-linear-gradient(white, #d4eaf8)!important;
+    background: -ms-linear-gradient(white, #d4eaf8)!important;
+    background: -o-linear-gradient(white, #d4eaf8)!important;
     position:sticky;
     width: 100%;
     left:0;
