@@ -4,10 +4,10 @@
     flex-direction: column;
     justify-content: center;
     background-image: linear-gradient(white, #d4eaf8);
-    background: -webkit-linear-gradient(white, #d4eaf8);
-    background: -moz-linear-gradient(white, #d4eaf8);
-    background: -ms-linear-gradient(white, #d4eaf8);
-    background: -o-linear-gradient(white, #d4eaf8);
+    background-image: -webkit-linear-gradient(white, #d4eaf8);
+    background-image: -moz-linear-gradient(white, #d4eaf8);
+    background-image: -ms-linear-gradient(white, #d4eaf8);
+    background-image: -o-linear-gradient(white, #d4eaf8);
     position:sticky;
     width: 100%;
     left:0;

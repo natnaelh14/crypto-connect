@@ -3,33 +3,31 @@ import { Fade, Typography, Grid, Box } from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import feature from './feature.jpg';
-import { ImageContainer } from './about-us.styles';
+import { ImageContainer, AboutUsContainer, FeatureContainer } from './about-us.styles';
 import './about.css';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        marginBottom: '100px',
-        marginTop: '3rem',
-        display: "flex",
-        justifyContent: "center"
+        // marginBottom: '3rem',
+        // marginTop: '3rem'
     },
     paper: {
         margin: theme.spacing(2, 6),
     },
     featureTitle: {
         fontSize: '3rem !Important',
-        fontWeight: 900,
+        fontWeight: 1200,
         color: '#222060',
         marginBottom: '1rem',
-        fontFamily: 'inherit',
+        fontFamily: 'inherit !Important',
         textAlign: 'center',
         "@media (max-width: 800px)": {
-            fontSize: '1.9rem !Important'
+            fontSize: '2rem !Important'
         }
     },
     featureText: {
         lineHeight: 2,
-        textIndent: '-1.4em', 
+        textIndent: '-1.4em',
         padding: '10px',
         fontFamily: 'inherit',
         textAlign: 'left',
@@ -38,33 +36,51 @@ const useStyles = makeStyles((theme) => ({
             paddingRight: '1em',
             color: 'red'
         },
-        "@media (max-width: 800px)": {
+        "@media (max-width: 1200px)": {
             fontSize: '0.8rem'
+        },
+        "@media (max-width: 800px)": {
+            fontSize: '0.5rem'
         }
     },
     featureContainer: {
-        "@media (max-width: 1200px)": {
-            marginBottom: '6rem'
-        }
+        // "@media (max-width: 1200px)": {
+        //     width: '300px'
+        // },
+        // "@media (max-width: 800px)": {
+        //     width: '150px'
+        // }
     },
+    image : {
+        width: '500px', 
+        height: '500px',
+        "@media (max-width: 1200px)": {
+            width: '300px', 
+            height: '300px',
+        },
+        "@media (max-width: 800px)": {
+            width: '250px', 
+            height: '250px',
+        }
+    }
 }))
 
 const AboutUsPage = () => {
     const classes = useStyles();
     return (
-        <section style={{ marginTop: '400px' }}>
-            <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-around" }}>
+        <AboutUsContainer>
+            <FeatureContainer>
                 <Box className={classes.featureContainer}>
                     <Grid container component="main" className={classes.root}>
                         <Box
-                            sx={{ margin: '20px', width: '500px' }}
+                            sx={{ margin: '20px' }}
                         >
                             <Grid
                                 item
                                 component={Paper}
                                 elevation={3}
                                 square
-                                sx={{ margin: '20px', padding: '20px', width: '500px', display: "flex", flexDirection: "column" }}
+                                sx={{ margin: '20px', padding: '20px', minWidth: '400px', maxWidth: '600px', width: 'auto', display: "flex", flexDirection: "column" }}
                             >
                                 <Typography className={classes.featureTitle}>FEATURES</Typography>
                                 <Typography id='bulletin' className={classes.featureText}>USER AUTHENTICATION USING GOOGLE, GITHUB, TWITTER</Typography>
@@ -79,11 +95,11 @@ const AboutUsPage = () => {
                         </Box>
                     </Grid>
                 </Box>
-                <ImageContainer>
-                    <img src={feature} style={{ width: '500px', height: '500px' }} alt='feature-image' />
-                </ImageContainer>
-            </Box>
-        </section>
+            </FeatureContainer>
+            <ImageContainer>
+                <img src={feature} className={classes.image} alt='feature-image' />
+            </ImageContainer>
+        </AboutUsContainer>
     )
 }
 

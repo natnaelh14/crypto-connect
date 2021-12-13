@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { createMemoryHistory } from 'history';
-const history = createMemoryHistory()
+const history = createMemoryHistory();
 import Header from "../components/Header/header.component";
 import SignIn from "../components/SignIn/sign-in.component";
 import LeftSidebar from "../components/LeftSideBar/left-sidebar.component";
 import RightSidebar from "../components/RightSideBar/right-sidebar.component";
 import { BrowserRouter as Switch, Route, Router, Redirect } from "react-router-dom";
 import PostList from "../components/PostList/post-list.component";
-import AddPost from "../components/AddPost/add-post.component";
 import { FeedContainer } from "./Router.styles";
 import { setCurrentUser } from '../redux/actions/userActions';
-import { listPosts, listPostsByFollowing } from '../redux/actions/postActions'
+import { listPosts, listPostsByFollowing } from '../redux/actions/postActions';
 import { getCurrentUser } from '../redux/user.selectors';
 import { auth, createUserProfileDocument } from '../firebase/firebase.utils';
 import { gql } from "@apollo/client";
@@ -51,7 +50,6 @@ class Routes extends Component<MyProps, {}> {
 
   componentDidMount = () => {
     const { listPosts, listPostsByFollowing, setCurrentUser } = this.props;
-
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       // userAuth returns null when auth.signOut() is called
       if (userAuth) {
@@ -102,7 +100,6 @@ class Routes extends Component<MyProps, {}> {
           })
           setCurrentUser({ id: snapShot.id, ...snapShot.data(), ...userProfile });
         });
-
       }
       setCurrentUser(userAuth);
     });
@@ -118,7 +115,7 @@ class Routes extends Component<MyProps, {}> {
       <Router history={history}>
         <Header />
         <Switch>
-          <Route exact path="/signin">
+          <Route exact path="/signin" >
             {this.props.currentUser ? <Redirect to="/home/feed" /> : <SignIn />}
           </Route>
           <Route exact path="/">
@@ -152,16 +149,13 @@ class Routes extends Component<MyProps, {}> {
             <Route exact path="/home/chat">
               {this.props.currentUser ? <ChatPage /> : <Redirect to="/signin" />}
             </Route>
-            {/* <Route exact path="/home/add-post">
-              {this.props.currentUser ? <AddPost /> : <Redirect to="/signin" />}
-            </Route> */}
             <Route exact path="/home/feed">
               {this.props.currentUser ? <PostList /> : <Redirect to="/signin" />}
             </Route>
             <Route exact path="/home/requests">
               {this.props.currentUser ? <FriendRequests /> : <Redirect to="/signin" />}
             </Route>
-            <Route path="/home">
+            <Route  path="/home">
               {this.props.currentUser ? <RightSidebar /> : <Redirect to="/signin" />}
             </Route>
           </FeedContainer>

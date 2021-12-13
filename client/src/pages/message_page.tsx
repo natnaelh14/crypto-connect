@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Fade, Typography, Button } from "@mui/material";
+import { Fade, Typography, Button, IconButton } from "@mui/material";
 import { Box } from "@mui/system";
 import MessageBox from '../components/MessageBox/message_box.component';
 import { useQuery } from '@apollo/client';
@@ -9,6 +9,7 @@ import { useAppSelector } from '../app/hooks';
 import MessageBoxLoading from '../components/MessageBox/message_box_loading.component';
 import { MessagesContainer } from './styles/message_page.styles';
 import AddNewMessageModal from '../components/AddNewMessageModal/AddNewMessageModal.component';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 const MessagePage = () => {
 
@@ -75,8 +76,10 @@ const MessagePage = () => {
                 <MessageBoxLoading />
               </>
             )}
-            <Box display="flex" justifyContent='center'>
-              <Button sx={{fontSize: '0.8rem', borderRadius: '12px' }} onClick={getMessages}>Refresh</Button>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }} >
+              <IconButton size="medium" onClick={getMessages} >
+                <RefreshIcon fontSize="small" />
+              </IconButton>
             </Box>
             {messengers && (
               messengers.map((msg: any) => {

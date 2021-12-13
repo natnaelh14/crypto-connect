@@ -21,6 +21,8 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import { MessagesContainer } from './messages.styles';
 import Avatar from "@material-ui/core/Avatar";
 import noAvatar from '../../img/no-avatar.png';
+import RefreshIcon from '@mui/icons-material/Refresh';
+
 
 const Messages = () => {
   const { messagesId } = useParams<{ messagesId: string | undefined }>();
@@ -128,8 +130,10 @@ const Messages = () => {
                     <SingleMessageLoading />
                   </>
                 )}
-                <Box display="flex" justifyContent='center'>
-                  <Button sx={{ fontSize: '0.8rem', borderRadius: '12px' }} onClick={getMessages}>Refresh</Button>
+                <Box sx={{ display: 'flex', justifyContent: 'center' }} >
+                  <IconButton size="medium" onClick={getMessages} >
+                    <RefreshIcon fontSize="small" />
+                  </IconButton>
                 </Box>
                 {messages && (
                   messages.map((msg: any, index: any) => {

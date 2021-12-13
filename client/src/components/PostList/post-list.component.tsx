@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Post from '../Post/Post.component';
 import AddPost from '../AddPost/add-post.component';
-import { Fade } from "@mui/material";
+import { Fade, IconButton } from "@mui/material";
 import { useAppSelector } from '../../app/hooks';
 import { CircularProgress, Box } from "@mui/material";
 const Moment = require('moment');
@@ -10,6 +10,7 @@ import PostLoading from '../Post/post_loading.component';
 import { useQuery } from '@apollo/client';
 import { QUERY_POSTS_BY_FOLLOWING } from '../../utils/queries';
 import { userProps } from '../../index.types';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 const PostList: React.FC = () => {
 
@@ -30,7 +31,8 @@ const PostList: React.FC = () => {
     variables: {
       user_id: userInfo.id
     }
-  })
+  });
+
   //   let postData: Array<{
   //   id: number,
   //   user_id: string,
@@ -42,28 +44,34 @@ const PostList: React.FC = () => {
   // useEffect(() => {
   //   console.log('ariana', data?.postsByFollowing)
   // }, )
+
   return (
     <PostListContainer>
       <Fade in={true} timeout={1000}>
         <div style={{ border: '1px solid #cdcdcd', padding: '20px' }}>
           {/* {postsData && ( */}
-            <>
-              <AddPost refetchPosts={refetch} />
-              <Box height="90vh" sx={{ overflowY: "scroll" }}>
-                {(postsLoading || postsError) && (
-                  <>
-                    <PostLoading />
-                    <PostLoading />
-                    <PostLoading />
-                    <PostLoading />
-                    <PostLoading />
-                  </>
-                )}
-                {data?.postsByFollowing && (
-                  data?.postsByFollowing.map((post: any) => <Post key={post.id} postId={post.id} userId={post.user_id} postTime={post.created_at} text={post.text} refetchPosts={refetch} />
-                  ))}
+          <>
+            <AddPost refetchPosts={refetch} />
+            <Box height="90vh" sx={{ overflowY: "scroll" }}>
+              {(postsLoading || postsError) && (
+                <>
+                  <PostLoading />
+                  <PostLoading />
+                  <PostLoading />
+                  <PostLoading />
+                  <PostLoading />
+                </>
+              )}
+              <Box sx={{ display: 'flex', justifyContent: 'center' }} >
+                <IconButton size="medium" onClick={() => refetch()} >
+                  <RefreshIcon fontSize="small" />
+                </IconButton>
               </Box>
-            </>
+              {data?.postsByFollowing && (
+                data?.postsByFollowing.map((post: any) => <Post key={post.id} postId={post.id} userId={post.user_id} postTime={post.created_at} text={post.text} refetchPosts={refetch} />
+                ))}
+            </Box>
+          </>
           {/* )} */}
         </div>
       </Fade>

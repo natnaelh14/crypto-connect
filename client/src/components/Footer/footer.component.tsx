@@ -1,4 +1,3 @@
-import React from 'react';
 import { GrCompass, GrLinkedinOption, GrGithub, GrMail } from 'react-icons/gr';
 import './footer.css';
 

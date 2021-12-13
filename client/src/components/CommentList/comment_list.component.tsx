@@ -6,6 +6,7 @@ import { QUERY_COMMENTS } from '../../utils/queries';
 import Comment from '../Comment/comment.component';
 const Moment = require('moment');
 import { ADD_COMMENT } from '../../utils/mutations';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 type postListProps = {
     postId: number,
@@ -41,7 +42,7 @@ const CommentList = ({ postId, userId }: postListProps) => {
             }
         }).then(() => {
             commentsRefetch();
-        }) 
+        })
         setCommentText("");
     }
 
@@ -77,6 +78,11 @@ const CommentList = ({ postId, userId }: postListProps) => {
                         </Button>
                     </Box>
                 </Grid>
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }} >
+                <IconButton size="medium" onClick={() => commentsRefetch()} >
+                    <RefreshIcon fontSize="small" />
+                </IconButton>
             </Box>
             <Box marginTop="1rem" width="100%">
                 {error && (
