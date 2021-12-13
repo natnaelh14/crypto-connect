@@ -7,22 +7,17 @@ import { ImageContainer, AboutUsContainer, FeatureContainer } from './about-us.s
 import './about.css';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        // marginBottom: '3rem',
-        // marginTop: '3rem'
-    },
     paper: {
         margin: theme.spacing(2, 6),
     },
     featureTitle: {
-        fontSize: '3rem !Important',
-        fontWeight: 1200,
+        fontSize: '3rem !important',
         color: '#222060',
         marginBottom: '1rem',
-        fontFamily: 'inherit !Important',
+        fontFamily: 'inherit !important',
         textAlign: 'center',
         "@media (max-width: 800px)": {
-            fontSize: '2rem !Important'
+            fontSize: '2rem !important'
         }
     },
     featureText: {
@@ -37,19 +32,11 @@ const useStyles = makeStyles((theme) => ({
             color: 'red'
         },
         "@media (max-width: 1300px)": {
-            fontSize: '0.8rem'
+            fontSize: '1rem !important'
         },
         "@media (max-width: 800px)": {
-            fontSize: '0.5rem'
+            fontSize: '0.8rem !important'
         }
-    },
-    featureContainer: {
-        // "@media (max-width: 1200px)": {
-        //     width: '300px'
-        // },
-        // "@media (max-width: 800px)": {
-        //     width: '150px'
-        // }
     },
     image : {
         width: '500px', 
@@ -70,8 +57,8 @@ const AboutUsPage = () => {
     return (
         <AboutUsContainer>
             <FeatureContainer>
-                <Box className={classes.featureContainer}>
-                    <Grid container component="main" className={classes.root}>
+                <Box>
+                    <Grid container component="main">
                         <Box
                             sx={{ margin: '20px' }}
                         >

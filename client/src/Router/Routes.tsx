@@ -111,7 +111,6 @@ class Routes extends Component<MyProps, {}> {
   };
 
   render() {
-    console.log('rohanna', this.props.currentUser)
     return (
       <Router history={history}>
         <Header />

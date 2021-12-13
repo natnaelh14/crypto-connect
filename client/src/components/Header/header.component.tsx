@@ -14,7 +14,7 @@ import { useAppSelector } from '../../app/hooks';
 
 const Header = (props: any) => {
     const currentUser = useAppSelector((state) => state.currentUser);
-    const { user } = currentUser;
+    const { user, loading, error } = currentUser;
 
     return (
         <HeaderContainer>
@@ -22,7 +22,7 @@ const Header = (props: any) => {
                 <Logo className='logo' />
             </LogoContainer>
             <>
-                {user && (
+                {(!(loading || error) && user) && (
                     <OptionsContainer>
                         <OptionTag onClick={() => auth.signOut()}>
                             <span>SIGN OUT</span>

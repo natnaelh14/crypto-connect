@@ -248,10 +248,10 @@ const GuestProfile = () => {
                                     </Box>
                                 </Box>
                                 <UserBioContainer>
-                                    <Typography fontSize="16px" color="#333" padding="10px 0">
+                                    <Typography fontSize="16px" color="#333" textAlign='center' padding="10px 0">
                                         {userData?.userProfile?.bio}
                                     </Typography>
-                                    <Box display="flex" marginTop='0.25rem'>
+                                    <Box display="flex" justifyContent='center' marginTop='0.25rem'>
                                         <Box
                                             onClick={() => setOpenFollowingModal(!openFollowingModal)}
                                             sx={{
@@ -288,7 +288,7 @@ const GuestProfile = () => {
                                             </Typography>
                                         </Box>
                                     </Box>
-                                    <Box display="flex" marginTop='0.25rem'>
+                                    <Box display="flex" justifyContent='center' marginTop='0.25rem'>
                                         <Typography color="#555">Member Since {Moment(userData?.userProfile?.created_at).format('YYYY')}</Typography>
                                     </Box>
                                 </UserBioContainer>
