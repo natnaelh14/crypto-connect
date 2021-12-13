@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Fade, Typography, Button } from "@mui/material";
+import { Fade, Typography, Button, IconButton } from "@mui/material";
 import FriendRequestBox from '../FriendRequestBox/friend_request_box.component';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_FRIEND_REQUESTS } from '../../utils/queries';
@@ -7,6 +7,8 @@ import { useAppSelector } from "../../app/hooks";
 import FriendRequestBoxLoading from '../FriendRequestBox/friend_request_box_loading.component';
 import { FriendRequestsContainer } from './friend_request.styles';
 import { Box } from "@mui/system";
+import RefreshIcon from '@mui/icons-material/Refresh';
+
 type userProps = {
     id: string,
     handle: string,
@@ -23,15 +25,14 @@ const FriendRequests = () => {
         var { loading, error, data, refetch } = useQuery(QUERY_FRIEND_REQUESTS, {
             variables: {
                 id: user.id
-            },
-            pollInterval: 60000
+            }
         });
     }
     if (data) {
         var friendRequestsData = data.friendRequests
     }
 
-    const getMessages = () => {
+    const getRequests = () => {
         refetch();
     }
 
@@ -55,8 +56,10 @@ const FriendRequests = () => {
                                 <FriendRequestBoxLoading />
                             </>
                         )}
-                        <Box display="flex" justifyContent='center'>
-                            <Button sx={{ fontSize: '0.8rem', borderRadius: '12px' }} onClick={getMessages}>Refresh</Button>
+                        <Box sx={{ display: 'flex', justifyContent: 'center' }} >
+                            <IconButton size="medium" onClick={getRequests} >
+                                <RefreshIcon fontSize="small" />
+                            </IconButton>
                         </Box>
                         {friendRequestsData && (
                             friendRequestsData.map((user: any) => {
@@ -64,7 +67,6 @@ const FriendRequests = () => {
                             })
                         )}
                     </Box>
-
                 </div>
             </Fade>
         </FriendRequestsContainer>
