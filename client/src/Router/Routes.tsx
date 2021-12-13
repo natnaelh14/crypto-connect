@@ -111,15 +111,16 @@ class Routes extends Component<MyProps, {}> {
   };
 
   render() {
+    console.log('rohanna', this.props.currentUser)
     return (
       <Router history={history}>
         <Header />
         <Switch>
           <Route exact path="/signin" >
-            {this.props.currentUser ? <Redirect to="/home/feed" /> : <SignIn />}
+            {this.props.currentUser === null ? <SignIn /> : Object.keys(this.props.currentUser).length ? <Redirect to="/home/feed" /> : <SignIn />}
           </Route>
           <Route exact path="/">
-            {this.props.currentUser ? <Redirect to="/home/feed" /> : <SignIn />}
+            {this.props.currentUser === null ? <SignIn /> : Object.keys(this.props.currentUser).length ? <Redirect to="/home/feed" /> : <SignIn />}
           </Route>
           <FeedContainer>
             <Route path="/home">
@@ -155,7 +156,7 @@ class Routes extends Component<MyProps, {}> {
             <Route exact path="/home/requests">
               {this.props.currentUser ? <FriendRequests /> : <Redirect to="/signin" />}
             </Route>
-            <Route  path="/home">
+            <Route path="/home">
               {this.props.currentUser ? <RightSidebar /> : <Redirect to="/signin" />}
             </Route>
           </FeedContainer>
@@ -167,7 +168,6 @@ class Routes extends Component<MyProps, {}> {
 
 const mapStateToProps = (state: any) => ({
   currentUser: getCurrentUser(state),
-  // postsList: getPostsList(state)
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

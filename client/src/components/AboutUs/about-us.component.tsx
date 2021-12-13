@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
             paddingRight: '1em',
             color: 'red'
         },
-        "@media (max-width: 1200px)": {
+        "@media (max-width: 1300px)": {
             fontSize: '0.8rem'
         },
         "@media (max-width: 800px)": {

@@ -27,7 +27,6 @@ const MessagePage = () => {
 
   const [openModal, setOpenModal] = React.useState(false);
   const handleModalClose = () => {
-    refetch();
     setOpenModal(false)
   };
 
@@ -93,6 +92,7 @@ const MessagePage = () => {
         <AddNewMessageModal
           open={openModal}
           handleClose={handleModalClose}
+          messagesRefresh={refetch}
         />
       )}
     </MessagesContainer>

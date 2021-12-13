@@ -14,9 +14,10 @@ import noAvatar from '../../img/no-avatar.png';
 type ModalProps = {
     open: boolean,
     handleClose: () => void,
+    messagesRefresh: () => void
 }
 
-const AddNewMessageModal = ({ open, handleClose }: ModalProps) => {
+const AddNewMessageModal = ({ open, handleClose, messagesRefresh }: ModalProps) => {
     const currentUser = useAppSelector(state => state.currentUser)
     const { error: currentUserError, loading: currentUserLoading, user } = currentUser
     const userInfo: userProps = user
@@ -42,6 +43,7 @@ const AddNewMessageModal = ({ open, handleClose }: ModalProps) => {
                         receiver_id: receiver
                     },
                 }).then(() => {
+                    messagesRefresh()
                     setMessageText("")
                     setReceiver("")
                     handleClose()
