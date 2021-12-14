@@ -95,8 +95,8 @@ const Profile = () => {
     };
 
     useEffect(() => {
-        console.log('grande', userData)
-    }, [userData])
+        userRefetch()
+    }, [])
 
     let pending = currentUserLoading || followerLoading || followingLoading || postsLoading || followingError || followerError || postsError || currentUserError || userLoading || userError
     let currentMood = userData?.userProfile?.status
