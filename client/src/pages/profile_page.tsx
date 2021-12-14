@@ -177,7 +177,7 @@ const Profile = () => {
                                         </Typography>
                                     )}
                                 </Box>
-                                {userData?.userProfile?.status && (
+                                {userData?.userProfile?.handle && (
                                     <Typography fontFamily='inherit' sx={{ fontSize: "14px", color: "#555" }}>
                                         {`@${userData?.userProfile?.handle?.trim().replace(/ /g, '').toLowerCase()}`}
                                     </Typography>

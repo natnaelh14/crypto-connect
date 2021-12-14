@@ -5,6 +5,7 @@ import { Box } from "@mui/system";
 import { useAppSelector } from '../../app/hooks';
 import { useQuery, useMutation } from '@apollo/client';
 import { ADD_POST, UPDATE_USER_PROFILE } from "../../utils/mutations";
+import { QUERY_USER } from '../../utils/queries';
 import { userProps } from '../../index.types';
 import AddPostLoading from './add_post_loading.component';
 import noAvatar from '../../img/no-avatar.png';
@@ -16,11 +17,17 @@ type postProps = {
 
 const AddPost = ({ refetchPosts }: postProps) => {
   const currentUser = useAppSelector((state) => state.currentUser);
-  const { user, loading: userLoading } = currentUser
+  const { user, loading } = currentUser
   const userInfo: userProps = user
 
+  const { error: userError, loading: userLoading, data: userData, refetch: userRefetch } = useQuery(QUERY_USER, {
+    variables: {
+        id: userInfo.id
+    }
+});
+
   const [postText, setPostText] = useState("");
-  const [mood, setMood] = useState<string>(userInfo?.status)
+  const [mood, setMood] = useState<string>(userData?.userProfile?.status)
   const [addPost, { }] = useMutation(ADD_POST);
   const [updateProfile, { }] = useMutation(UPDATE_USER_PROFILE)
 
@@ -46,13 +53,12 @@ const AddPost = ({ refetchPosts }: postProps) => {
     event.preventDefault();
     try {
       setMood(event.target.value)
-      const updatedUser = await updateProfile({
+      await updateProfile({
         variables: {
-          ...userInfo,
+          ...userData?.userProfile,
           status: event.target.value
         }
       })
-      // await dispatch(setCurrentUser(updatedUser))
     } catch (e) {
       throw new Error('Unable to Update Profile')
     }
@@ -60,13 +66,13 @@ const AddPost = ({ refetchPosts }: postProps) => {
 
   return (
     <>
-      {(userLoading) ? (
+      {(userLoading || userError) ? (
         <AddPostLoading />
       ) : (
         <Box padding="1rem 1rem 0 1rem" borderBottom="1px solid #ccc">
           <Grid >
             <Grid item sx={{ paddingRight: "1rem" }}>
-              <Avatar alt="user-image" style={{ width: "50px", height: "50px" }} src={userInfo.avatar ? userInfo.avatar : noAvatar} />
+              <Avatar alt="user-image" style={{ width: "50px", height: "50px" }} src={userData?.userProfile?.avatar ? userData?.userProfile?.avatar : noAvatar} />
             </Grid>
             <Grid item >
               <Box padding=".5rem 0">

@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-image: linear-gradient(white, #d4eaf8)!important;
+    background: linear-gradient(to bottom,rgba(255,255,255), rgba(212	234	248))!important;
     position:sticky;
     width: 100%;
     left:0;
