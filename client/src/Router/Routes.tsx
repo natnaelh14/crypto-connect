@@ -15,8 +15,8 @@ import { getCurrentUser } from '../redux/user.selectors';
 import { auth, createUserProfileDocument } from '../firebase/firebase.utils';
 import { gql } from "@apollo/client";
 import { client } from '../index';
-import { QUERY_USER, QUERY_POSTS_BY_FOLLOWING } from '../utils/queries';
-import { CREATE_USER_PROFILE } from '../utils/mutations';
+import { QUERY_USER, QUERY_POSTS_BY_FOLLOWING, QUERY_FRIEND_REQUEST } from '../utils/queries';
+import { CREATE_USER_PROFILE, FRIEND_REQUEST } from '../utils/mutations';
 import GuestProfile from "../components/GuestProfile/guest_profile.component";
 import ProfilePage from "../pages/profile_page";
 import CryptoPage from '../pages/crypto_page';
@@ -91,6 +91,22 @@ class Routes extends Component<MyProps, {}> {
               user_id: userAuth.uid
             }
           })
+          const { data } = await client.query({
+            query: QUERY_FRIEND_REQUEST,
+            variables: {
+              sender_id: "chG0WmOFPheLzl528legA3iIpbO2",
+              receiver_id: userAuth.uid
+            }
+          })
+          if(!data?.friendRequest) {
+            await client.mutate({
+              mutation: FRIEND_REQUEST,
+              variables: {
+                sender_id: "chG0WmOFPheLzl528legA3iIpbO2",
+                receiver_id: userAuth.uid,
+              }
+            })
+          }
           listPostsByFollowing(postsDataByFollowing)
           const { data: { userProfile } } = await client.query({
             query: QUERY_USER,

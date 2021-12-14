@@ -8,13 +8,13 @@ import './about.css';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        margin: theme.spacing(2, 6),
+        margin: theme.spacing(2, 6)
     },
     featureTitle: {
         fontSize: '3rem !important',
         color: '#222060',
         marginBottom: '1rem',
-        fontFamily: 'Prompt !important',
+        fontFamily: 'Prompt',
         textAlign: 'center',
         "@media (max-width: 800px)": {
             fontSize: '2rem !important'
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
         lineHeight: 2,
         textIndent: '-1.4em',
         padding: '10px',
-        fontFamily: 'inherit !important',
+        fontFamily: 'inherit',
         textAlign: 'left',
         "&::before": {
             content: '▹',
