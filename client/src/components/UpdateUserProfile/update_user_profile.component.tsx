@@ -22,7 +22,8 @@ import {
 import { useAppSelector } from '../../app/hooks';
 import { userProps } from '../../index.types';
 import { UPDATE_USER_PROFILE } from '../../utils/mutations';
-import { useMutation } from '@apollo/client';
+import { QUERY_USER } from '../../utils/queries';
+import { useMutation, useQuery } from '@apollo/client';
 import noAvatar from '../../img/no-avatar.png';
 import AvatarChoice from '../AvatarChoice/avatar-choice.component';
 
@@ -41,15 +42,20 @@ const UpdateUserProfile = ({
   const currentUser = useAppSelector((state) => state.currentUser);
   const { user } = currentUser
   const userInfo: userProps = user
+  const { error: userError, loading: userLoading, data: userData } = useQuery(QUERY_USER, {
+    variables: {
+        id: userInfo.id
+    }
+});
 
-  const [bio, setBio] = useState<string>(userInfo.bio)
-  const [city, setCity] = useState<string>(userInfo.city)
-  const [state, setState] = useState<string>(userInfo.state)
-  const [country, setCountry] = useState<string>(userInfo.country)
-  const [gender, setGender] = useState<string>(userInfo.gender)
+  const [bio, setBio] = useState<string>(userData?.userProfile?.bio)
+  const [city, setCity] = useState<string>(userData?.userProfile?.city)
+  const [state, setState] = useState<string>(userData?.userProfile?.state)
+  const [country, setCountry] = useState<string>(userData?.userProfile?.country)
+  const [gender, setGender] = useState<string>(userData?.userProfile?.gender)
   const [avatar, setAvatar] = useState<FileList | any>()
   const [sampleAvatar, setSampleAvatar] = useState<string>("")
-  const [birthDate, setBirthDate] = useState<Date | any>(userInfo.birth_date)
+  const [birthDate, setBirthDate] = useState<Date | any>(userData?.userProfile?.birth_date)
   const [updateUserProfile, { data, loading, error }] = useMutation(UPDATE_USER_PROFILE)
   const [openModal, setOpenModal] = useState<boolean>(false);
 
@@ -85,7 +91,7 @@ const UpdateUserProfile = ({
           state,
           country,
           gender,
-          status: userInfo.status,
+          status: userData?.userProfile?.status,
           birth_date: birthDate,
           isActive: userInfo.isActive
         },
@@ -118,7 +124,7 @@ const UpdateUserProfile = ({
               <Avatar
                 alt="Remy Sharp"
                 sx={{ width: "100px", height: "100px", margin: 'auto' }}
-                src={userInfo?.avatar ? userInfo?.avatar : noAvatar}
+                src={userData?.userProfile?.avatar ? userData?.userProfile?.avatar : noAvatar}
               />
               <Typography fontFamily='inherit' textAlign='center' component="h1" variant="h6">
                 {userInfo?.handle}
