@@ -75,41 +75,43 @@ const SignIn = () => {
   return (
     <>
       <div>
-        <Grid container component="main" className={classes.root}>
-          <div>
-            <img className={classes.image} src={coinImage} alt='crypto_image' />
-          </div>
-          <Grid
-            item
-            xs={12}
-            sm={8}
-            md={5}
-            component={Paper}
-            elevation={1}
-            square
-          >
-            <div className={classes.paper}>
-              <Logo className='logo' />
-              <Typography className={classes.textFont} style={{ marginTop: '0.5rem', fontSize: '1.5rem' }} >
-                WELCOME TO CRYPTO CONNECT
-              </Typography>
-              <Typography className={classes.textFont} style={{ marginTop: '0.5rem', fontSize: '1.2rem' }}>
-                A cryptocurrency based social media application
-              </Typography>
-              <form className={classes.form} noValidate>
-                <GoogleLoginButton style={{ width: '300px' }} onClick={signInWithGoogle} />
-                <GithubLoginButton style={{ width: '300px' }} onClick={signInWithGithub} />
-                <TwitterLoginButton style={{ width: '300px' }} onClick={signInWithTwitter} />
-                <Box mt={5}>
-                  <Copyright />
-                </Box>
-              </form>
+        <Fade in={true} timeout={1000}>
+          <Grid container component="main" className={classes.root}>
+            <div>
+              <img className={classes.image} src={coinImage} alt='crypto_image' />
             </div>
+            <Grid
+              item
+              xs={12}
+              sm={8}
+              md={5}
+              component={Paper}
+              elevation={1}
+              square
+            >
+              <div className={classes.paper}>
+                <Logo className='logo' />
+                <Typography className={classes.textFont} style={{ marginTop: '0.5rem', fontSize: '1.5rem' }} >
+                  WELCOME TO CRYPTO CONNECT
+                </Typography>
+                <Typography className={classes.textFont} style={{ marginTop: '0.5rem', fontSize: '1.2rem' }}>
+                  A cryptocurrency based social media application
+                </Typography>
+                <form className={classes.form} noValidate>
+                  <GoogleLoginButton style={{ width: '300px' }} onClick={signInWithGoogle} />
+                  <GithubLoginButton style={{ width: '300px' }} onClick={signInWithGithub} />
+                  <TwitterLoginButton style={{ width: '300px' }} onClick={signInWithTwitter} />
+                  <Box mt={5}>
+                    <Copyright />
+                  </Box>
+                </form>
+              </div>
+            </Grid>
           </Grid>
-        </Grid>
+        </Fade>
         <ScrollArrow />
       </div>
-      <AboutUsPage />
+        <AboutUsPage />
       <Footer />
     </>
   );

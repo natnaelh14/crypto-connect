@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '3rem !important',
         color: '#222060',
         marginBottom: '1rem',
-        fontFamily: 'inherit !important',
+        fontFamily: 'Merriweather Sans !important',
         textAlign: 'center',
         "@media (max-width: 800px)": {
             fontSize: '2rem !important'
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
         lineHeight: 2,
         textIndent: '-1.4em',
         padding: '10px',
-        fontFamily: 'inherit',
+        fontFamily: 'Merriweather Sans !important',
         textAlign: 'left',
         "&::before": {
             content: '▹',

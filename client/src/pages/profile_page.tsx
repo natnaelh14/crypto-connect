@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Box, typography } from "@mui/system";
-import { Button, CircularProgress, Grid, IconButton, Typography } from "@mui/material";
+import { Button, Grid, IconButton, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import DateRangeIcon from "@mui/icons-material/DateRange";
@@ -11,7 +11,7 @@ import { useAppSelector } from "../app/hooks";
 import { userProps } from '../index.types';
 import Post from "../components/Post/Post.component";
 import UpdateUserProfile from "../components/UpdateUserProfile/update_user_profile.component";
-import { QUERY_FOLLOWERS, QUERY_FOLLOWINGS } from '../utils/queries';
+import { QUERY_FOLLOWERS, QUERY_FOLLOWINGS, QUERY_POSTS, QUERY_USER } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 import FollowModal from "../components/FollowModal/follow_modal.component";
 import cover from '../img/cover.jpeg';
@@ -19,6 +19,7 @@ import { ProfileContainer } from './styles/profile_page.styles';
 import ProfilePageLoading from './loading/profile_page.loading';
 import noAvatar from '../img/no-avatar.png';
 import Avatar from "@material-ui/core/Avatar";
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 const moodObj = (currentMood: string) => {
     switch (currentMood) {
@@ -44,22 +45,34 @@ const Profile = () => {
     const { error: currentUserError, loading: currentUserLoading, user } = currentUser
     const userInfo: userProps = user
 
-    const postList = useAppSelector((state) => state.postList)
-    const { error: postsError, loading: postsLoading, posts } = postList
-    let postData: Array<{
-        id: number,
-        user_id: string,
-        text: string,
-        created_at: Date
-    }> = posts
-    let postsData = [...postData].sort((a: any, b: any) => new Moment(b.created_at).format('YYYYMMDDHHMMSS') - new Moment(a.created_at).format('YYYYMMDDHHMMSS'));
+    const { error: userError, loading: userLoading, data: userData, refetch: userRefetch } = useQuery(QUERY_USER, {
+        variables: {
+            id: userInfo.id
+        }
+    });
 
-    const { error: followerError, loading: followerLoading, data: followerData } = useQuery(QUERY_FOLLOWERS, {
+    const { error: postsError, loading: postsLoading, data, refetch } = useQuery(QUERY_POSTS, {
+        variables: {
+            user_id: userInfo.id
+        }
+    });
+
+    if (data) {
+        var { posts } = data;
+        var postsArray: Array<{
+            id: number,
+            user_id: string,
+            text: string,
+            created_at: Date
+        }> | undefined = [...posts].sort((a: any, b: any) => new Moment(b.created_at).format('YYYYMMDDHHMMSS') - new Moment(a.created_at).format('YYYYMMDDHHMMSS'));
+    }
+
+    const { error: followerError, loading: followerLoading, data: followerData, refetch: followerRefetch } = useQuery(QUERY_FOLLOWERS, {
         variables: {
             id: userInfo.id
         },
     });
-    const { error: followingError, loading: followingLoading, data: followingData } = useQuery(QUERY_FOLLOWINGS, {
+    const { error: followingError, loading: followingLoading, data: followingData, refetch: followingRefetch } = useQuery(QUERY_FOLLOWINGS, {
         variables: {
             id: userInfo.id
         },
@@ -81,8 +94,12 @@ const Profile = () => {
         setOpenFollowerModal(false)
     };
 
-    let pending = currentUserLoading || followerLoading || followingLoading || postsLoading || followingError || followerError || postsError || currentUserError
-    let currentMood = userInfo?.status
+    useEffect(() => {
+        console.log('grande', userData)
+    }, [userData])
+
+    let pending = currentUserLoading || followerLoading || followingLoading || postsLoading || followingError || followerError || postsError || currentUserError || userLoading || userError
+    let currentMood = userData?.userProfile?.status
     return (
         <ProfileContainer>
             {(pending) && (
@@ -102,10 +119,10 @@ const Profile = () => {
                                 </Grid>
                                 <Grid item>
                                     <Typography fontFamily='inherit' variant="h6">
-                                        {userInfo?.handle}
+                                        {userData?.userProfile?.handle}
                                     </Typography>
                                     <Typography fontFamily='inherit' sx={{ fontSize: "12px", color: "#555" }}>
-                                        {postsData ? postsData?.length : 0} posts
+                                        {postsArray ? postsArray?.length : 0} posts
                                     </Typography>{" "}
                                 </Grid>
                             </Grid>
@@ -127,7 +144,7 @@ const Profile = () => {
                                         borderRadius: "50%",
                                     }}
                                 >
-                                    <Avatar style={{ width: "150px", height: "150px" }} alt="profile-image" src={userInfo?.avatar ? userInfo?.avatar : noAvatar} />
+                                    <Avatar style={{ width: "150px", height: "150px" }} alt="profile-image" src={userData?.userProfile?.avatar ? userData?.userProfile?.avatar : noAvatar} />
                                 </Box>
                             </Box>
                             <Box textAlign="right" padding="10px 20px">
@@ -152,21 +169,21 @@ const Profile = () => {
                             <Box padding="10px 20px">
                                 <Box sx={{ display: "flex", flexDirection: "row" }}>
                                     <Typography fontFamily='inherit' variant="h6" mr="0.5rem" sx={{ fontWeight: "500" }}>
-                                        {userInfo?.handle}
+                                        {userData?.userProfile?.handle}
                                     </Typography>
-                                    {userInfo?.status && (
+                                    {userData?.userProfile?.status && (
                                         <Typography fontFamily='inherit' variant="h6" sx={{ fontWeight: "500" }}>
-                                            ({`${userInfo?.status} ${moodObj(currentMood)}`})
+                                            ({`${userData?.userProfile?.status} ${moodObj(currentMood)}`})
                                         </Typography>
                                     )}
                                 </Box>
-                                {userInfo?.handle && (
+                                {userData?.userProfile?.status && (
                                     <Typography fontFamily='inherit' sx={{ fontSize: "14px", color: "#555" }}>
-                                        {`@${userInfo?.handle?.trim().replace(/ /g, '').toLowerCase()}`}
+                                        {`@${userData?.userProfile?.handle?.trim().replace(/ /g, '').toLowerCase()}`}
                                     </Typography>
                                 )}
                                 <Typography fontFamily='inherit' fontSize="16px" color="#333" padding="10px 0">
-                                    {userInfo?.bio}
+                                    {userData?.userProfile?.bio}
                                 </Typography>
                                 <Box
                                     display="flex"
@@ -174,19 +191,19 @@ const Profile = () => {
                                     padding="6px 0"
                                     flexWrap="wrap"
                                 >
-                                    {(userInfo?.city || userInfo?.state || userInfo?.country) && (
+                                    {(userData?.userProfile?.city || userData?.userProfile?.state || userData?.userProfile?.country) && (
                                         <Box display="flex">
                                             <LocationOnIcon htmlColor="#555" />
                                             <Typography fontFamily='inherit' sx={{ ml: "6px", color: "#555" }}>
-                                                {userInfo?.city}, {userInfo?.state}, {userInfo?.country}
+                                                {userData?.userProfile?.city}, {userData?.userProfile?.state}, {userData?.userProfile?.country}
                                             </Typography>
                                         </Box>
                                     )}
-                                    {userInfo?.birth_date && (
+                                    {userData?.userProfile?.birth_date && (
                                         <Box display="flex" marginLeft="1rem">
                                             <DateRangeIcon htmlColor="#555" />
                                             <Typography fontFamily='inherit' sx={{ ml: "6px", color: "#555" }}>
-                                                {Moment(userInfo?.birth_date).format('MMMM Do YYYY')}
+                                                {Moment(userData?.userProfile?.birth_date).format('MMMM Do YYYY')}
                                             </Typography>
                                         </Box>
                                     )}
@@ -229,7 +246,7 @@ const Profile = () => {
                                     </Box>
                                 </Box>
                                 <Box display="flex" marginTop='1rem'>
-                                    <Typography fontFamily='inherit' color="#555" marginRight="1rem">Member Since {Moment(userInfo.created_at).format('YYYY')}</Typography>
+                                    <Typography fontFamily='inherit' color="#555" marginRight="1rem">Member Since {Moment(userData?.userProfile?.created_at).format('YYYY')}</Typography>
                                 </Box>
                             </Box>
                             <Box borderBottom="1px solid #ccc">
@@ -246,9 +263,16 @@ const Profile = () => {
                                     POSTS
                                 </Typography>
                             </Box>
+                            {postsArray && (
+                                <Box sx={{ display: 'flex', justifyContent: 'center' }} >
+                                    <IconButton size="medium" onClick={() => refetch()} >
+                                        <RefreshIcon fontSize="small" />
+                                    </IconButton>
+                                </Box>
+                            )}
                             <Box>
-                                {postsData &&
-                                    postsData.map((post) => <Post key={post.id} postId={post.id} userId={post.user_id} postTime={post.created_at} text={post.text} refetchPosts={() => {}} />)}
+                                {postsArray &&
+                                    postsArray.map((post: any) => <Post key={post.id} postId={post.id} userId={post.user_id} postTime={post.created_at} text={post.text} refetchPosts={() => refetch()} />)}
                             </Box>
                         </Box>
                     </Box>
@@ -258,6 +282,7 @@ const Profile = () => {
                 <UpdateUserProfile
                     open={openUpdateModal}
                     handleClose={handleModalClose}
+                    userRefetch={userRefetch}
                 />
             )}
             {openFollowingModal && (
@@ -267,6 +292,8 @@ const Profile = () => {
                     follow={followings}
                     title="Following"
                     action='Following'
+                    refetch={followingRefetch}
+                    buttonStatus={false}
                 />
             )}
             {openFollowerModal && (
@@ -276,6 +303,8 @@ const Profile = () => {
                     follow={followers}
                     title='Followers'
                     action='Remove'
+                    refetch={followerRefetch}
+                    buttonStatus={false}
                 />
             )}
         </ProfileContainer>
