@@ -330,6 +330,8 @@ const GuestProfile = () => {
                     follow={followings}
                     title="Following"
                     action='Following'
+                    refetch={() => {}}
+                    buttonStatus={true}
                 />
             )}
             {openFollowerModal && (
@@ -339,6 +341,8 @@ const GuestProfile = () => {
                     follow={followers}
                     title='Followers'
                     action='Remove'
+                    refetch={() => {}}
+                    buttonStatus={true}
                 />
             )}
         </div>

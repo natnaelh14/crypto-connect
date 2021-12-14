@@ -13,7 +13,9 @@ type ModalProps = {
         avatar: string,
     }>,
     title: string,
-    action: string
+    action: string,
+    refetch: () => void,
+    buttonStatus: boolean
 }
 
 const FollowModal = ({
@@ -21,7 +23,9 @@ const FollowModal = ({
     handleClose,
     follow,
     title,
-    action
+    action,
+    refetch,
+    buttonStatus
 }: ModalProps) => {
     return (
         <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
@@ -36,7 +40,7 @@ const FollowModal = ({
             <DialogContent style={{ height: 'auto' }}>
                 <>
                     {follow.map((fol) => {
-                        return <FollowBox key={fol.id} buttonText={action} id={fol.id} handle={fol.handle} avatar={fol.avatar} />
+                        return <FollowBox key={fol.id} buttonText={action} id={fol.id} handle={fol.handle} avatar={fol.avatar} refetch={refetch} buttonStatus={buttonStatus} />
                     })}
                 </>
             </DialogContent>

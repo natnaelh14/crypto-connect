@@ -12,10 +12,12 @@ type followProps = {
     id: string,
     handle: string,
     avatar: string,
-    buttonText: string
+    buttonText: string,
+    refetch: () => void,
+    buttonStatus: boolean
 }
 
-const FollowBox = ({ id, handle, avatar, buttonText }: followProps) => {
+const FollowBox = ({ id, handle, avatar, buttonText, refetch, buttonStatus }: followProps) => {
 
     const [removeFollowing, { }] = useMutation(REMOVE_FOLLOWING);
     const [removeFollower, { }] = useMutation(REMOVE_FOLLOWER);
@@ -33,7 +35,9 @@ const FollowBox = ({ id, handle, avatar, buttonText }: followProps) => {
                     follower_user_id: userInfo.id,
                     followed_user_id: id
                 }
-            });
+            }).then(() => {
+                refetch()
+            } )
         }
         if (Button.name === "Remove") {
             await removeFollower({
@@ -41,7 +45,9 @@ const FollowBox = ({ id, handle, avatar, buttonText }: followProps) => {
                     follower_user_id: id,
                     followed_user_id: userInfo.id
                 }
-            });
+            }).then(() => {
+                refetch()
+            })
         }
         setShowButton(false);
     }
@@ -69,6 +75,7 @@ const FollowBox = ({ id, handle, avatar, buttonText }: followProps) => {
                     <Button
                         variant="outlined"
                         onClick={handleRemoveFollow}
+                        disabled={buttonStatus}
                         name={buttonText}
                         sx={{ marginLeft: 'auto', color: '#000' }}
                     >{buttonText}</Button>

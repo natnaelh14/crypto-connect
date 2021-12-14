@@ -29,11 +29,13 @@ import AvatarChoice from '../AvatarChoice/avatar-choice.component';
 type ModalProps = {
   open: boolean,
   handleClose: () => void,
+  userRefetch: () => void
 }
 
 const UpdateUserProfile = ({
   open,
   handleClose,
+  userRefetch
 }: ModalProps) => {
 
   const currentUser = useAppSelector((state) => state.currentUser);
@@ -72,7 +74,7 @@ const UpdateUserProfile = ({
         );
         var avatarUrl = resumeRes.data.secure_url
       }
-      const { data } = await updateUserProfile({
+      await updateUserProfile({
         variables: {
           id: userInfo.id,
           handle: userInfo.handle,
@@ -87,7 +89,9 @@ const UpdateUserProfile = ({
           birth_date: birthDate,
           isActive: userInfo.isActive
         },
-      });
+      }).then(() => {
+        userRefetch()
+      })
       handleClose();
     } catch (e) {
       handleClose();
