@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/system";
-import { Button, CircularProgress, Grid, IconButton, Typography, TextField } from "@mui/material";
+import { Grid, IconButton, Typography, TextField } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Link as RouteLink } from "react-router-dom";
 const Moment = require('moment')
@@ -26,7 +26,6 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 
 const Messages = () => {
   const { messagesId } = useParams<{ messagesId: string | undefined }>();
-
   if (messagesId) {
     var currentUser = useAppSelector(state => state.currentUser)
     var { loading: currentUserLoading, user } = currentUser
@@ -46,10 +45,8 @@ const Messages = () => {
   if (data) {
     var { messages } = data;
   }
-
   const [messageText, setMessageText] = useState<string>("");
   const [addMessage, { data: addMessageData, loading, error }] = useMutation(ADD_MESSAGE)
-
   const handleSendMessage = () => {
     try {
       if (messageText) {
@@ -68,7 +65,6 @@ const Messages = () => {
       return e;
     }
   }
-
   const getMessages = () => {
     refetch()
   }
@@ -160,7 +156,6 @@ const Messages = () => {
             </div>
           )}
         </div>
-
       </Fade>
     </MessagesContainer>
   )

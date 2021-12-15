@@ -89,15 +89,16 @@ const RightSidebar = () => {
                 <WhoToFollowLoading />
               </>
             )}
-            {(searchText && usersArray) && (
-              usersArray.map((user) => <WhoToFollow key={user.id} id={user.id} handle={user.handle} avatar={user.avatar} isActive={user.isActive} userRefetch={refetch} whoToRefetch={whoToRefetch} />)
-            )}
-            {(!searchText && whoToFollowData) && (
-              whoToFollowData?.whoToFollowUsers.map((user: any) => {
-                return <WhoToFollow key={user.id} id={user.id} handle={user.handle} avatar={user.avatar} isActive={user.isActive} userRefetch={refetch} whoToRefetch={whoToRefetch} />
-              })
-
-            )}
+            <div style={{ overflowY: "scroll" }}>
+              {(searchText && usersArray) && (
+                usersArray.map((user) => <WhoToFollow key={user.id} id={user.id} handle={user.handle} avatar={user.avatar} isActive={user.isActive} userRefetch={refetch} whoToRefetch={whoToRefetch} />)
+              )}
+              {(!searchText && whoToFollowData) && (
+                whoToFollowData?.whoToFollowUsers.map((user: any) => {
+                  return <WhoToFollow key={user.id} id={user.id} handle={user.handle} avatar={user.avatar} isActive={user.isActive} userRefetch={refetch} whoToRefetch={whoToRefetch} />
+                })
+              )}
+            </div>
           </Box>
         </Box>
       </Box>

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Fade, Typography, Button, IconButton } from "@mui/material";
+import React from 'react';
+import { Fade, Typography, IconButton } from "@mui/material";
 import FriendRequestBox from '../FriendRequestBox/friend_request_box.component';
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { QUERY_FRIEND_REQUESTS } from '../../utils/queries';
 import { useAppSelector } from "../../app/hooks";
 import FriendRequestBoxLoading from '../FriendRequestBox/friend_request_box_loading.component';
@@ -31,7 +31,6 @@ const FriendRequests = () => {
     if (data) {
         var friendRequestsData = data.friendRequests
     }
-
     const getRequests = () => {
         refetch();
     }

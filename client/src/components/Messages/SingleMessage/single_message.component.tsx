@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/system";
-import { Button, CircularProgress, Grid, IconButton, Typography, Menu, MenuItem } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Grid, IconButton, Typography, Menu, MenuItem } from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Link as RouteLink } from "react-router-dom";
 const Moment = require('moment')
-import { Fade } from "@mui/material";
 import { QUERY_USER } from '../../../utils/queries';
 import { DELETE_MESSAGE } from '../../../utils/mutations';
 import { useQuery, useMutation } from '@apollo/client';
-import { useParams } from 'react-router-dom';
 import { userProps } from '../../../index.types';
 import { useAppSelector } from '../../../app/hooks';
 import Avatar from '@material-ui/core/Avatar';
-import SingleMessageLoading from './single_message_loading.component';
 
 type MsgProps = {
   msgId: string,
@@ -45,8 +41,6 @@ const SingleMessage = ({ msgId, senderId, sentAt, text, refetchMessages }: MsgPr
       .then(() => {
         refetchMessages()
       })
-      // refetchMessages();
-      // setAnchorEl(false);
     } catch (e) {
       return e;
     }
@@ -60,9 +54,6 @@ const SingleMessage = ({ msgId, senderId, sentAt, text, refetchMessages }: MsgPr
 
   return (
     <>
-      {/* {(loading || error || !userProfile.avatar) && (
-        <SingleMessageLoading />
-      )} */}
       {userProfile && (
         <Box
           padding="1rem"

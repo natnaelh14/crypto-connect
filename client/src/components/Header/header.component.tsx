@@ -7,7 +7,6 @@ import {
     HeaderContainer,
     LogoContainer,
     OptionsContainer,
-    OptionLink,
     OptionTag
 } from './header.styles';
 import { useAppSelector } from '../../app/hooks';

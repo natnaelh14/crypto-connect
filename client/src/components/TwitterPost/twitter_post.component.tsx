@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Grid, IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import IosShareIcon from "@mui/icons-material/IosShare";
@@ -10,7 +10,6 @@ const TwitterPost: React.FC<{ text: string }> = ({ text }) => {
     const currentUser = useAppSelector(state => state.currentUser)
     const { error: currentUserError, loading: currentUserLoading, user } = currentUser
     const userInfo: userProps = user
-
     const [openShareModal, setOpenShareModal] = useState(false);
     const handleModalClose = () => {
         setOpenShareModal(false)

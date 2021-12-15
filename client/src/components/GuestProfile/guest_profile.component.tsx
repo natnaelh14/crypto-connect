@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/system";
-import { Button, CircularProgress, Grid, IconButton, Typography, Fade } from "@mui/material";
+import { Button, Grid, IconButton, Typography, Fade } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import DateRangeIcon from "@mui/icons-material/DateRange";
@@ -315,7 +315,7 @@ const GuestProfile = () => {
                             </Box >
                             {(postsData?.posts && checkFriendData?.checkFriendship) &&
                                 postsData?.posts.map((post: any) => {
-                                    return <Post key={post.id} postId={post.id} userId={post.user_id} postTime={post.created_at} text={post.text} refetchPosts={() => {}} />
+                                    return <Post key={post.id} postId={post.id} userId={post.user_id} postTime={post.created_at} text={post.text} refetchPosts={() => { }} />
                                 }
                                 )
                             }
@@ -330,7 +330,7 @@ const GuestProfile = () => {
                     follow={followings}
                     title="Following"
                     action='Following'
-                    refetch={() => {}}
+                    refetch={() => { }}
                     buttonStatus={true}
                 />
             )}
@@ -341,7 +341,7 @@ const GuestProfile = () => {
                     follow={followers}
                     title='Followers'
                     action='Remove'
-                    refetch={() => {}}
+                    refetch={() => { }}
                     buttonStatus={true}
                 />
             )}

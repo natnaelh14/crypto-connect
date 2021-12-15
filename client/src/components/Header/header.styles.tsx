@@ -31,13 +31,6 @@ export const OptionsContainer = styled.div`
   }
 `;
 
-export const OptionLink = styled(NavLink)`
-  padding: 10px 15px;
-  margin: 0 10px;
-  cursor: pointer;
-  text-decoration: none;
-`;
-
 export const OptionTag = styled.div`
   padding: 10px 15px;
   margin: 0 10px;

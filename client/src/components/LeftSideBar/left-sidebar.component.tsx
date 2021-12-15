@@ -5,7 +5,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import TagIcon from "@mui/icons-material/Tag";
-import {Button, Box, IconButton, Hidden} from "@mui/material";
+import { Button, Box, IconButton, Hidden } from "@mui/material";
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import NotificationAddIcon from '@mui/icons-material/NotificationAdd';
@@ -28,15 +28,15 @@ const LeftSidebar = () => {
   const currentUser = useAppSelector(state => state.currentUser)
   const { user }: { user: userProps } = currentUser
   if (currentUser) {
-      var { loading, error, data } = useQuery(QUERY_FRIEND_REQUESTS, {
-          variables: {
-              id: user.id
-          },
-          pollInterval: 60000
-      });
+    var { loading, error, data } = useQuery(QUERY_FRIEND_REQUESTS, {
+      variables: {
+        id: user.id
+      },
+      pollInterval: 60000
+    });
   }
   if (data) {
-      var friendRequestsData = data.friendRequests
+    var friendRequestsData = data.friendRequests
   }
 
   const [openModal, setOpenModal] = React.useState(false);
@@ -49,7 +49,7 @@ const LeftSidebar = () => {
 
   return (
     <>
-      <Box sx = {{minWidth:'40px'}} >
+      <Box sx={{ minWidth: '40px' }} >
         <List>
           <NavLink
             to="/home/feed"
@@ -80,34 +80,28 @@ const LeftSidebar = () => {
               </Hidden>
             </ListItem>
           </NavLink>
-          {/* <NavLink
-            to={`/home/explore`}
-            style={{
-              textDecoration: "none",
-              color: "inherit",
-              backgroundColor: "inherit",
-            }}
-          >
-            <ListItem
-              button
-              sx={{
-                borderRadius: "28px",
-                // margin: ".5rem 0",
+          <Hidden lgUp>
+            <NavLink
+              to={`/home/explore`}
+              style={{
+                textDecoration: "none",
+                color: "inherit",
+                backgroundColor: "inherit",
               }}
             >
-              <ListItemIcon>
-                <TagIcon fontSize="medium" color="action" />
-              </ListItemIcon>
-              <Hidden lgDown>
-                <ListItemText
-                  primaryTypographyProps={{
-                    fontSize: "18px",
-                  }}
-                  primary="Explore"
-                />
-              </Hidden>
-            </ListItem>
-          </NavLink> */}
+              <ListItem
+                button
+                sx={{
+                  borderRadius: "28px",
+                  // margin: ".5rem 0",
+                }}
+              >
+                <ListItemIcon>
+                  <TagIcon fontSize="medium" color="action" />
+                </ListItemIcon>
+              </ListItem>
+            </NavLink>
+          </Hidden>
           <NavLink
             to={`/home/crypto`}
             style={{
@@ -167,7 +161,7 @@ const LeftSidebar = () => {
                     fontSize: "18px",
                     fontWeight: 'bold'
                   }}
-                  primary="FRIEND REQUESTS"
+                  primary="FOLLOW REQUESTS"
                   secondary={friendRequestsData?.length ? `(${friendRequestsData?.length})` : ""}
                 />
               </Hidden>

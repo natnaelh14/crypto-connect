@@ -10,7 +10,6 @@ type nameProps = {
 }
 
 const CryptoCurrency = ({ name }: nameProps) => {
-
     const [coinData, setCoinData] = useState<any>();
     const [coinDateData, setCoinDateData] = useState<any>();
     const [coinPriceData, setCoinPriceData] = useState<any>();
@@ -21,7 +20,6 @@ const CryptoCurrency = ({ name }: nameProps) => {
     const handleModalOpen = () => {
         setOpenModal(true);
     };
-
     const [modalData, setModalData] = useState({
         description: '',
         whitepaper: { link: "" },

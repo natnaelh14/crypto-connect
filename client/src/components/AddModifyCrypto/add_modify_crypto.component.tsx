@@ -20,6 +20,7 @@ const AddModifyCrypto = ({
     handleClose,
     userId
 }: ModalProps) => {
+    const [errorText, setErrorText] = useState<string>("");
     const [addCrypto, { }] = useMutation(ADD_CRYPTO);
     const [addHolding, setAddHolding] = useState("");
     const [addCoin, setAddCoin] = useState("")
@@ -46,6 +47,10 @@ const AddModifyCrypto = ({
                 setAddHolding("")
                 setAddCoin("")
         } catch (e) {
+            setErrorText("Unable to Add Crypto. Please Try Again.")
+            setTimeout(() => {
+                setErrorText("")
+            }, 3000);
             return e;
         }
     }
@@ -68,6 +73,7 @@ const AddModifyCrypto = ({
                     </DialogTitle>
                     <DialogContent style={{ height: '700px' }}>
                         <Box padding="1rem 1rem 0 1rem" borderBottom="1px solid #ccc">
+                            <Typography fontSize='1.2rem' textAlign='center' fontFamily='inherit' style={{ color: 'red' }} >{errorText}</Typography>
                             <Box sx={{
                                 display: 'flex',
                                 alignItems: 'center',
@@ -75,10 +81,9 @@ const AddModifyCrypto = ({
                             }}>
                                 <Autocomplete
                                     freeSolo
-                                    // id="free-solo-2-demo"
                                     disableClearable
                                     fullWidth
-                                    // sx={{ marginBottom: '3rem' }}
+                                    sx={{ paddingBottom: '1rem' }}
                                     options={coinsList.map((option) => option.name)}
                                     renderInput={(params) => (
                                         <TextField
@@ -99,6 +104,7 @@ const AddModifyCrypto = ({
                                     onValueChange={(values: any) => setAddHolding(values.value)}
                                     value={addHolding}
                                     variant="standard"
+                                    placeholder={"# of Coins"}
                                 />
                                 <Button onClick={handleAddCrypto} variant="contained">ADD</Button>
                             </Box>

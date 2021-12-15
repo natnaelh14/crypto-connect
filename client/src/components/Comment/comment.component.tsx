@@ -1,7 +1,6 @@
 import React from "react";
 import { Grid, IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';

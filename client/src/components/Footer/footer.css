@@ -4,15 +4,16 @@
     flex-direction: column;
     justify-content: center;
     background: linear-gradient(to bottom,rgba(255,255,255), rgba(212	234	248))!important;
-    background-image: linear-gradient(transparent, rgba(212 234 248));
-    background: -webkit-linear-gradient(transparent, rgba(212 234 248));
-    background: -moz-linear-gradient(transparent, rgba(212 234 248));
-    background: -ms-linear-gradient(transparent, rgba(212 234 248));
-    background: -o-linear-gradient(transparent, rgba(212 234 248));
+    background-image: linear-gradient(to bottom, transparent, rgba(212 234 248))!important;
+    background: -webkit-linear-gradient(transparent, rgba(212 234 248))!important;
+    background: -moz-linear-gradient(transparent, rgba(212 234 248))!important;
+    background: -ms-linear-gradient(transparent, rgba(212 234 248))!important;
+    background: -o-linear-gradient(transparent, rgba(212 234 248))!important;
     position:sticky;
     width: 100%;
     left:0;
     right:0;
+    height:100%;
   }
   
   .contact-link {

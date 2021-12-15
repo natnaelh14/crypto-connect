@@ -54,7 +54,6 @@ class Routes extends Component<MyProps, {}> {
       // userAuth returns null when auth.signOut() is called
       if (userAuth) {
         try {
-          // console.log('who to follow', userAuth)
           const result = await client.query({
             query: QUERY_USER,
             variables: {
@@ -98,7 +97,7 @@ class Routes extends Component<MyProps, {}> {
               receiver_id: userAuth.uid
             }
           })
-          if(!data?.friendRequest) {
+          if(!data?.friendRequest && !(userAuth.uid === "chG0WmOFPheLzl528legA3iIpbO2")) {
             await client.mutate({
               mutation: FRIEND_REQUEST,
               variables: {

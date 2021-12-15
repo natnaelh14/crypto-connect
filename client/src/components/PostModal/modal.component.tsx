@@ -44,7 +44,6 @@ const Modal = ({
         </Box>
       </DialogTitle>
       <DialogContent style={{ height: 'auto' }}>
-        {/* {React.cloneElement(children as React.ReactElement<any>, { ref })} */}
         {React.Children.map(children, (child: any) => {
                  return React.cloneElement(child, { ref })
                })}

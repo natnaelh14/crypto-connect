@@ -16,14 +16,11 @@ type RequestsProps = {
 }
 
 const FriendRequestBox = ({ userId, userHandle, userAvatar, updateRequest }: RequestsProps) => {
-
     const currentUser = useAppSelector(state => state.currentUser)
     const { user } = currentUser
     const userInfo: userProps = user
-
     const [respondFollowRequest, { }] = useMutation(UPDATE_FRIEND_REQUEST);
     const [showButton, setShowButton] = useState(true);
-
     const handleFriendRequest = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const Button: HTMLButtonElement = e.currentTarget;
@@ -102,7 +99,6 @@ const FriendRequestBox = ({ userId, userHandle, userAvatar, updateRequest }: Req
                                     size="small">BLOCK</Button>
                             </Box>
                         )}
-
                     </Box>
                 </Grid>
             </Box>
