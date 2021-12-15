@@ -68,11 +68,10 @@ const FollowBox = ({ id, handle, avatar, buttonText, refetch, buttonStatus }: fo
                 >
                     {handle}
                 </Typography>
-                {showButton && (
+                {(showButton && buttonStatus) && (
                     <Button
                         variant="outlined"
                         onClick={handleRemoveFollow}
-                        disabled={buttonStatus}
                         name={buttonText}
                         sx={{ marginLeft: 'auto', color: '#000' }}
                     >{buttonText}</Button>

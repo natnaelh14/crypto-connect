@@ -96,6 +96,9 @@ const Profile = () => {
 
     useEffect(() => {
         userRefetch()
+        refetch()
+        followingRefetch()
+        followerRefetch()
     }, [])
 
     let pending = currentUserLoading || followerLoading || followingLoading || postsLoading || followingError || followerError || postsError || currentUserError || userLoading || userError
@@ -293,7 +296,7 @@ const Profile = () => {
                     title="Following"
                     action='Following'
                     refetch={followingRefetch}
-                    buttonStatus={false}
+                    buttonStatus={true}
                 />
             )}
             {openFollowerModal && (
@@ -304,7 +307,7 @@ const Profile = () => {
                     title='Followers'
                     action='Remove'
                     refetch={followerRefetch}
-                    buttonStatus={false}
+                    buttonStatus={true}
                 />
             )}
         </ProfileContainer>

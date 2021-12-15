@@ -69,6 +69,10 @@ const Messages = () => {
     refetch()
   }
 
+  useEffect(() => {
+    refetch()
+  }, [])
+
   return (
     <MessagesContainer>
       <Fade in={true} timeout={1000}>

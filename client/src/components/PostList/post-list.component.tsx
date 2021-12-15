@@ -13,11 +13,9 @@ import { userProps } from '../../index.types';
 import RefreshIcon from '@mui/icons-material/Refresh';
 
 const PostList: React.FC = () => {
-
   const currentUser = useAppSelector(state => state.currentUser)
   const { error: currentUserError, loading: currentUserLoading, user } = currentUser
   const userInfo: userProps = user
-
   const { error: postsError, loading: postsLoading, data, refetch } = useQuery(QUERY_POSTS_BY_FOLLOWING, {
     variables: {
       user_id: userInfo.id
@@ -33,6 +31,10 @@ const PostList: React.FC = () => {
       created_at: Date
     }> | undefined = [...postsByFollowing].sort((a: any, b: any) => new Moment(b.created_at).format('YYYYMMDDHHMMSS') - new Moment(a.created_at).format('YYYYMMDDHHMMSS'));
   }
+
+  useEffect(() => {
+    refetch();
+  }, [])
 
   return (
     <PostListContainer>

@@ -65,6 +65,10 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
+  },
+  footer: {
+    background: "linear-gradient(to bottom,rgba(255,255,255), rgba(212	234	248))!important",
+    backgroundImage: "linear-gradient(to bottom, transparent, rgba(212 234 248))!important",
   }
 }));
 
@@ -111,8 +115,10 @@ const SignIn = () => {
         </Fade>
         <ScrollArrow />
       </div>
-        <AboutUsPage />
-      <Footer />
+      <AboutUsPage />
+      <div className={classes.footer}>
+        <Footer />
+      </div>
     </>
   );
 }

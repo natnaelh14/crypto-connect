@@ -2,6 +2,7 @@ import { Typography, useTheme } from "@mui/material";
 import { Button, Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import { NavLink } from "react-router-dom";
 import { userProps } from '../../index.types';
 import { useAppSelector } from '../../app/hooks';
@@ -19,6 +20,15 @@ type userInfoProps = {
   userRefetch: () => void,
   whoToRefetch: () => void
 };
+
+const useStyles = makeStyles((theme) => ({
+    smallScreen: {
+      "@media (max-width: 1400px)": {
+          display: 'flex', 
+          flexDirection: 'column'
+      }
+    }
+}))
 
 const WhoToFollow = ({ id, handle, avatar, isActive, userRefetch, whoToRefetch }: userInfoProps) => {
   const currentUser = useAppSelector(state => state.currentUser)
@@ -57,10 +67,12 @@ const WhoToFollow = ({ id, handle, avatar, isActive, userRefetch, whoToRefetch }
     }
   }
 
+  const classes = useStyles();
   const theme = useTheme();
+
   return (
-    <Box margin="1rem 0">
-      <Grid container alignItems="center">
+    <Box margin="1rem 0" >
+      <Grid container alignItems="center" className={classes.smallScreen}>
         <Grid item sx={{ paddingRight: "12px" }}>
           <NavLink to={`/home/profile/${id}`}>
             <Avatar style={{ height: "50px", width: "50px" }} alt="recommended-user" src={avatar ? avatar : noAvatar} />
