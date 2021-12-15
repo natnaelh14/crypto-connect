@@ -65,6 +65,10 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
+  },
+  aboutUs: {
+    background: "linear-gradient(to bottom,rgba(255,255,255), rgba(212	234	248))!important",
+    backgroundImage: "linear-gradient(to bottom, transparent, rgba(212 234 248))!important",
   }
 }));
 
@@ -111,7 +115,9 @@ const SignIn = () => {
         </Fade>
         <ScrollArrow />
       </div>
+      <div className={classes.aboutUs}>
         <AboutUsPage />
+      </div>
       <Footer />
     </>
   );
