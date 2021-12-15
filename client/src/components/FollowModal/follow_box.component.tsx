@@ -18,15 +18,12 @@ type followProps = {
 }
 
 const FollowBox = ({ id, handle, avatar, buttonText, refetch, buttonStatus }: followProps) => {
-
     const [removeFollowing, { }] = useMutation(REMOVE_FOLLOWING);
     const [removeFollower, { }] = useMutation(REMOVE_FOLLOWER);
     const [showButton, setShowButton] = useState(true);
-
     const currentUser = useAppSelector(state => state.currentUser)
     const { user } = currentUser
     const userInfo: userProps = user
-
     const handleRemoveFollow = async (e: React.MouseEvent<HTMLButtonElement>) => {
         const Button: HTMLButtonElement = e.currentTarget;
         if (Button.name === "Following") {
@@ -37,7 +34,7 @@ const FollowBox = ({ id, handle, avatar, buttonText, refetch, buttonStatus }: fo
                 }
             }).then(() => {
                 refetch()
-            } )
+            })
         }
         if (Button.name === "Remove") {
             await removeFollower({
@@ -80,7 +77,6 @@ const FollowBox = ({ id, handle, avatar, buttonText, refetch, buttonStatus }: fo
                         sx={{ marginLeft: 'auto', color: '#000' }}
                     >{buttonText}</Button>
                 )}
-
             </Grid>
         </Box>
     )

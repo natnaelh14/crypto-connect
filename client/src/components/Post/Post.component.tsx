@@ -57,16 +57,13 @@ const Post = ({ postId, text, userId, postTime, refetchPosts }: postProps) => {
     if (dislikeData) {
         var { reactionsByPost: dislikeList } = dislikeData;
     }
-
     const [openShareModal, setOpenShareModal] = useState(false);
     const handleModalClose = () => {
         setOpenShareModal(false)
     };
-
     const currentUser = useAppSelector(state => state.currentUser)
     const { user } = currentUser
     const userInfo: userProps = user
-
     const { data: userPostData, refetch: userReactionRefetch } = useQuery(QUERY_REACTIONS_BY_USER_POST, {
         variables: {
             user_id: userInfo.id,
@@ -76,7 +73,6 @@ const Post = ({ postId, text, userId, postTime, refetchPosts }: postProps) => {
     if (userPostData) {
         var { reactionsByUserAndPost } = userPostData;
     }
-
     const checkShareText: any = text.substring(
         text.lastIndexOf("@") + 1,
         text.lastIndexOf("-")
@@ -88,10 +84,8 @@ const Post = ({ postId, text, userId, postTime, refetchPosts }: postProps) => {
             },
         });
     }
-
     const [deletePost, { }] = useMutation(DELETE_POST);
     const [displayComment, setDisplayComment] = useState(false);
-
     const handleDeletePost = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         await deletePost({ variables: { id: postId } }).then(() => {

@@ -38,7 +38,6 @@ const UpdateUserProfile = ({
   handleClose,
   userRefetch
 }: ModalProps) => {
-
   const currentUser = useAppSelector((state) => state.currentUser);
   const { user } = currentUser
   const userInfo: userProps = user
@@ -47,7 +46,6 @@ const UpdateUserProfile = ({
         id: userInfo.id
     }
 });
-
   const [bio, setBio] = useState<string>(userData?.userProfile?.bio)
   const [city, setCity] = useState<string>(userData?.userProfile?.city)
   const [state, setState] = useState<string>(userData?.userProfile?.state)
@@ -58,15 +56,12 @@ const UpdateUserProfile = ({
   const [birthDate, setBirthDate] = useState<Date | any>(userData?.userProfile?.birth_date)
   const [updateUserProfile, { data, loading, error }] = useMutation(UPDATE_USER_PROFILE)
   const [openModal, setOpenModal] = useState<boolean>(false);
-
   const handleSampleAvatar = (avatar: string) => {
     setSampleAvatar(avatar)
   }
-
   const handleModalClose = () => {
     setOpenModal(false);
   }
-
   const handleUpdateProfile = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
@@ -102,7 +97,6 @@ const UpdateUserProfile = ({
     } catch (e) {
       handleClose();
       return e;
-      // throw new Error('Unable to Update Profile.')
     }
   };
 
@@ -267,7 +261,6 @@ const UpdateUserProfile = ({
           />
         )}
       </Dialog>
-
     </>
   );
 }

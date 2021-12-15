@@ -6,7 +6,6 @@ import './scroll-arrow.css';
 const ScrollArrow = () => {
     const [showScroll, setShowScroll] = useState(false)
     const [showDownScroll, setShowDownScroll] = useState(true)
-
     const checkScrollTop = () => {
         if (!showScroll && window.pageYOffset > 400) {
             setShowScroll(true)
@@ -14,7 +13,6 @@ const ScrollArrow = () => {
             setShowScroll(false)
         }
     };
-
     const checkScrollDown = () => {
         if (!showDownScroll && window.pageYOffset <= 400) {
             setShowDownScroll(true)
@@ -22,18 +20,14 @@ const ScrollArrow = () => {
             setShowDownScroll(false)
         }
     }
-
     const scrollTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
-
     const scrollBottom = () => {
         window.scrollTo({ top: 1200, behavior: 'smooth' });
     };
-
     window.addEventListener('scroll', checkScrollTop)
     window.addEventListener('scroll', checkScrollDown)
-
 
     return (
         <>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Fade, Typography, Grid, Box } from "@mui/material";
+import { Typography, Grid, Box } from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import feature from './feature.jpg';
@@ -22,13 +22,14 @@ const useStyles = makeStyles((theme) => ({
     },
     featureText: {
         lineHeight: 2,
-        textIndent: '-1.4em',
+        textIndent: '-2.5em',
         padding: '10px',
         fontFamily: 'inherit',
         textAlign: 'left',
         "&::before": {
             content: '▹',
             paddingRight: '1em',
+            marginLeft: '1em',
             color: 'red'
         },
         "@media (max-width: 1300px)": {

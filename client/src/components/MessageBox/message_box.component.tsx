@@ -45,10 +45,6 @@ const MessageBox = ({ msgId, msgHandle, msgAvatar, currentUser }: MessageProps) 
             <Box width='100%' >
               <Grid
                 container
-              // justifyContent="space-between"
-              // alignItems="center"
-              // flexWrap="nowrap"
-              // width='100%'
               >
                 <Grid width='100%'
                 >
@@ -57,7 +53,7 @@ const MessageBox = ({ msgId, msgHandle, msgAvatar, currentUser }: MessageProps) 
                       {msgHandle}
                     </Typography>
                     <Typography ml='0.25rem' fontFamily='inherit' sx={{ fontSize: "15px", color: "#555" }}>
-                      @{msgHandle.trim().replace(/ /g,'').toLowerCase()}
+                      @{msgHandle.trim().replace(/ /g, '').toLowerCase()}
                     </Typography>
                     <Typography fontFamily='inherit' sx={{ marginLeft: 'auto', fontSize: "15px", color: "#555" }}>
                       Seen

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormControl, InputLabel, MenuItem, Select, TextField, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Typography } from "@mui/material";
+import { TextField, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from '@material-ui/icons/Send';
@@ -19,10 +19,8 @@ type ModalProps = {
 }
 
 const ShareModal = ({ open, handleClose, shareText, textAuthor, currentUserId, currentUserName, currentUserAvatar }: ModalProps) => {
-
     const [messageText, setMessageText] = useState<string>(`@${textAuthor}- ${shareText}`);
     const [addPost, { data }] = useMutation(ADD_POST);
-
     const handleAddPost = async () => {
         await addPost({
             variables: {
@@ -101,7 +99,6 @@ const ShareModal = ({ open, handleClose, shareText, textAuthor, currentUserId, c
                 </Button>
             </DialogActions>
         </Dialog>
-
     )
 }
 

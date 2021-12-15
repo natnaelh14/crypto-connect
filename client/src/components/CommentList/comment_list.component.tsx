@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { Grid, IconButton, Typography, Input, Button } from "@mui/material";
+import { Grid, IconButton, Input, Button } from "@mui/material";
 import { Box } from "@mui/system";
 import { QUERY_COMMENTS } from '../../utils/queries';
 import Comment from '../Comment/comment.component';

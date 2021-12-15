@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FormControl, OutlinedInput, InputAdornment, Typography, IconButton } from "@mui/material";
 const CoinImage = require('./coin.png')
 import { Box } from "@mui/system";

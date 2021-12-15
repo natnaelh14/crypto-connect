@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Carousel from 'react-material-ui-carousel';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
@@ -16,7 +16,7 @@ import { CryptoPageContainer, CryptoDataContainer, CryptoDoughnutContainer, Cryp
 import { makeStyles } from '@material-ui/core/styles';
 import CryptoPageLoading from './loading/crypto_page_loading';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     carouselFormat: {
         width: '300px',
         height: '500px'

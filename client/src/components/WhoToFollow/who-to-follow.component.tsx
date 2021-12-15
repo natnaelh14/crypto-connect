@@ -21,18 +21,15 @@ type userInfoProps = {
 };
 
 const WhoToFollow = ({ id, handle, avatar, isActive, userRefetch, whoToRefetch }: userInfoProps) => {
-
   const currentUser = useAppSelector(state => state.currentUser)
   const { error, loading, user } = currentUser
   const userInfo: userProps = user
-
   const { error: checkFriendError, loading: checkFriendLoading, data: checkFriendData, refetch: checkRefetch } = useQuery(QUERY_CHECK_FRIENDSHIP, {
     variables: {
       follower: userInfo.id,
       followed: id
     }
   })
-
   const { error: friendRequestError, loading: friendRequestLoading, data: friendRequestData, refetch: queryFriendRefetch } = useQuery(QUERY_FRIEND_REQUEST, {
     variables: {
       receiver_id: id,
