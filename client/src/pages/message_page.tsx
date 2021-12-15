@@ -34,6 +34,10 @@ const MessagePage = () => {
     refetch()
   }
 
+  useEffect(() => {
+    refetch()
+  }, [])
+
   return (
     <MessagesContainer>
       <Fade in={true} timeout={1000}>
@@ -75,11 +79,13 @@ const MessagePage = () => {
                 <MessageBoxLoading />
               </>
             )}
-            <Box sx={{ display: 'flex', justifyContent: 'center' }} >
-              <IconButton size="medium" onClick={getMessages} >
-                <RefreshIcon fontSize="small" />
-              </IconButton>
-            </Box>
+            {messengers && (
+              <Box sx={{ display: 'flex', justifyContent: 'center' }} >
+                <IconButton size="medium" onClick={getMessages} >
+                  <RefreshIcon fontSize="small" />
+                </IconButton>
+              </Box>
+            )}
             {messengers && (
               messengers.map((msg: any) => {
                 return <MessageBox key={msg.id} currentUser={userInfo.id} msgId={msg.id} msgHandle={msg.handle} msgAvatar={msg.avatar} />

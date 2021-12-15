@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '3rem !important',
         color: '#222060',
         marginBottom: '1rem',
-        fontFamily: 'Prompt',
+        fontFamily: 'Prompt !important',
         textAlign: 'center',
         "@media (max-width: 800px)": {
             fontSize: '2rem !important'
