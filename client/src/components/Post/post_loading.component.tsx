@@ -8,8 +8,9 @@ const PostLoading = () => {
         <>
             <Box
                 padding="1rem"
+                width='100%'
             >
-                <Grid container flexWrap="nowrap">
+                <Grid container flexWrap="nowrap" width='100%'>
                     <Grid item sx={{ paddingRight: "1rem" }}>
                         <Skeleton
                             circle
@@ -19,16 +20,16 @@ const PostLoading = () => {
                         />
                     </Grid>
                     <Grid item >
-                        <Box>
+                        <Box width='100%'>
                             <Grid
                                 container
                                 justifyContent="space-between"
                                 alignItems="center"
                                 flexWrap="nowrap"
                             >
-                                <Grid item>
+                                <Grid item width='100%'>
                                     <Box display="flex">
-                                        <Skeleton count={3} width={500} />
+                                        <Skeleton count={3} width={800} />
                                     </Box>
                                 </Grid>
                             </Grid>

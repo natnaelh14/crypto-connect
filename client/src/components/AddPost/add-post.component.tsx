@@ -117,10 +117,16 @@ const AddPost = ({ refetchPosts }: postProps) => {
                     onClick={handleAddPost}
                     disabled={postText.length === 0}
                     variant="contained"
-                    color="primary"
                     sx={{
-                      fontSize: "12px",
-                      fontFamily: 'inherit'
+                      textTransform: "capitalize",
+                      fontFamily: 'inherit',
+                      borderRadius: '12px',
+                      fontSize: '12px',
+                      mt: "4px",
+                      background: "black",
+                      "&:hover": {
+                        background: "#333",
+                      },
                     }}
                   >
                     POST

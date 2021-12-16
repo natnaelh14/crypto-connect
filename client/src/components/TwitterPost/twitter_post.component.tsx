@@ -18,6 +18,7 @@ const TwitterPost: React.FC<{ text: string }> = ({ text }) => {
     return (
         <>
             <Box
+                // width='auto'
                 padding="1rem"
                 sx={{
                     "&:hover": {

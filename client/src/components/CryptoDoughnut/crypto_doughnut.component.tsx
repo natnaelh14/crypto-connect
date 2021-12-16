@@ -64,7 +64,9 @@ const CryptoDoughnut: React.FC<{ currentUser: string }> = ({ currentUser }) => {
                             <Connector visible={true} />
                         </Label>
                     </Series>
-                    <Size width={500} />
+                    <Size
+                        width={400}
+                    />
                     <Legend
                         margin={0}
                         verticalAlignment="bottom"
@@ -75,7 +77,8 @@ const CryptoDoughnut: React.FC<{ currentUser: string }> = ({ currentUser }) => {
                         <Format type="currency" />
                     </Tooltip>
                 </PieChart>
-            )}
+            )
+            }
         </>
     )
 }

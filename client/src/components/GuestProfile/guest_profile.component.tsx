@@ -134,8 +134,9 @@ const GuestProfile = () => {
         }
     }
 
-    let pending = userLoading || userError || postsLoading || postsError || followerError || followerLoading || followingError || followingLoading
+    let pending = userLoading || !checkFriendRequestData || !checkFriendData || !postsData
     const currentMood = userData?.userProfile?.status
+
     return (
         <div style={{ width: '75%', margin: '20px' }}>
             {(pending) && (

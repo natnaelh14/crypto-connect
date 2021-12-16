@@ -55,7 +55,15 @@ const CryptoPage = () => {
     return (
         <CryptoPageContainer>
             <Fade in={true} timeout={1000}>
-                <Box sx={{ border: '1px solid #cdcdcd', padding: '20px' }} >
+                <Box sx={{ 
+                    border: '1px solid #cdcdcd', 
+                    padding: '20px', 
+                    width: '100%',
+                    "@media (max-width: 1000px)": {
+                        paddingLeft: "0px",
+                        paddingRight: '0px'
+                      } 
+                    }} >
                     {(pending) ? (
                         <CryptoPageLoading />
                     ) : (
@@ -81,7 +89,16 @@ const CryptoPage = () => {
                                     <CryptoDoughnut currentUser={userInfo.id} />
                                 </CryptoDoughnutContainer>
                             </CryptoDataContainer>
-                            <Box textAlign="right" padding="10px 20px">
+                            <Box 
+                            textAlign="right" 
+                            padding="10px 20px"
+                            sx={{
+                                "@media (max-width: 1200px)": {
+                                    marginTop: '1rem',
+                                    textAlign: "center"
+                                  }
+                            }}
+                            >
                                 <Button
                                     size="small"
                                     onClick={handleModalOpen}

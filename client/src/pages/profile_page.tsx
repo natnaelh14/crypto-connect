@@ -103,13 +103,20 @@ const Profile = () => {
 
     let pending = currentUserLoading || followerLoading || followingLoading || postsLoading || followingError || followerError || postsError || currentUserError || userLoading || userError
     let currentMood = userData?.userProfile?.status
+    
     return (
         <ProfileContainer>
             {(pending) && (
                 <ProfilePageLoading />
             )}
             <Fade in={true} timeout={1000}>
-                <div style={{ padding: '20px' }}>
+                <Box 
+                sx={{ 
+                    padding: '20px',
+                    "@media (max-width: 1000px)": {
+                        padding: "0px"
+                      }
+                    }}>
                     <Box>
                         <Box borderBottom="1px solid #ccc" padding="8px 20px">
                             <Grid container alignItems="center">
@@ -203,7 +210,14 @@ const Profile = () => {
                                         </Box>
                                     )}
                                     {userData?.userProfile?.birth_date && (
-                                        <Box display="flex" marginLeft="1rem">
+                                        <Box 
+                                        display="flex" 
+                                        marginLeft="1rem"
+                                        sx={{"@media (max-width: 550px)": {
+                                            marginLeft: "0rem"
+                                          }
+                                        }}
+                                        >
                                             <DateRangeIcon htmlColor="#555" />
                                             <Typography fontFamily='inherit' sx={{ ml: "6px", color: "#555" }}>
                                                 {Moment(userData?.userProfile?.birth_date).format('MMMM Do YYYY')}
@@ -279,7 +293,7 @@ const Profile = () => {
                             </Box>
                         </Box>
                     </Box>
-                </div>
+                </Box>
             </Fade>
             {openUpdateModal && (
                 <UpdateUserProfile

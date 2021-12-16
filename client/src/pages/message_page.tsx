@@ -43,7 +43,16 @@ const MessagePage = () => {
       <Fade in={true} timeout={1000}>
         <div style={{ border: '1px solid #cdcdcd', height: "90vh", padding: '20px' }}>
           <Typography fontFamily='inherit' variant='h5' textAlign='center' >Messages</Typography>
-          <Box display='flex' justifyContent='flex-end'>
+          <Box 
+          display='flex' 
+          justifyContent='flex-end'
+          sx={{
+            "@media (max-width: 1200px)": {
+              display: "flex",
+              justifyContent: "center"
+            }
+          }}
+          >
             <Button
               size="small"
               onClick={() => setOpenModal(true)}
@@ -51,7 +60,6 @@ const MessagePage = () => {
                 textTransform: "capitalize",
                 fontFamily: 'inherit',
                 borderRadius: "12px",
-                marginLeft: 'auto',
                 padding: "10px",
                 fontSize: '15px',
                 mt: "4px",
@@ -62,7 +70,7 @@ const MessagePage = () => {
               }}
               variant="contained"
             >
-              SEND MESSAGE
+              NEW MESSAGE
             </Button>
           </Box>
           <Box

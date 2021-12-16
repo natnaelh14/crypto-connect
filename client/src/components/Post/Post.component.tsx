@@ -144,6 +144,9 @@ const Post = ({ postId, text, userId, postTime, refetchPosts }: postProps) => {
                         "&:hover": {
                             backgroundColor: "#eee",
                         },
+                        "@media (max-width: 1000px)": {
+                            padding: "0.25rem"
+                          }
                     }}
                 >
                     <Grid container flexWrap="nowrap">

@@ -55,11 +55,13 @@ const FriendRequests = () => {
                                 <FriendRequestBoxLoading />
                             </>
                         )}
-                        <Box sx={{ display: 'flex', justifyContent: 'center' }} >
-                            <IconButton size="medium" onClick={getRequests} >
-                                <RefreshIcon fontSize="small" />
-                            </IconButton>
-                        </Box>
+                        {friendRequestsData && (
+                            <Box sx={{ display: 'flex', justifyContent: 'center' }} >
+                                <IconButton size="medium" onClick={getRequests} >
+                                    <RefreshIcon fontSize="small" />
+                                </IconButton>
+                            </Box>
+                        )}
                         {friendRequestsData && (
                             friendRequestsData.map((user: any) => {
                                 return <FriendRequestBox key={user.id} userId={user.id} userHandle={user.handle} userAvatar={user.avatar} updateRequest={refetch} />
