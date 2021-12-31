@@ -36,26 +36,26 @@ const Modal = ({
   return (
     <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
       <DialogTitle>
-        <Typography textAlign='center' style={{fontSize: '20px'}}>{modalTitle}</Typography>
+        <Typography textAlign='center' style={{fontSize: "20px"}}>{modalTitle}</Typography>
         <Box textAlign="right" borderBottom="1px solid #ccc">
           <IconButton onClick={handleClose}>
             <CloseIcon />
           </IconButton>
         </Box>
       </DialogTitle>
-      <DialogContent style={{ height: 'auto' }}>
+      <DialogContent style={{ height: "auto" }}>
         {React.Children.map(children, (child: any) => {
                  return React.cloneElement(child, { ref })
                })}
       </DialogContent>
-      <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
+      <DialogActions style={{ display: "flex", justifyContent: "center" }}>
         <Button
           type="submit"
           size="small"
           sx={{
             textTransform: "capitalize",
             padding: "6px 20px",
-            marginBottom: '20px',
+            marginBottom: "20px",
             width: "60%",
             background: "black",
             "&:hover": {

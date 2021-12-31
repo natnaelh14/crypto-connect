@@ -1,5 +1,5 @@
-import React from 'react'
-import { Line } from 'react-chartjs-2';
+import React from "react"
+import { Line } from "react-chartjs-2";
 
 type GraphProps = {
     coinDates: Array<string>,
@@ -11,11 +11,11 @@ const CoinGraph = ({ coinDates, coinPrices }: GraphProps) => {
         labels: coinDates,
         datasets: [
             {
-                label: 'Past 30 days',
+                label: "Past 30 days",
                 data: coinPrices,
                 fill: false,
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgba(255, 99, 132, 0.2)',
+                backgroundColor: "rgb(255, 99, 132)",
+                borderColor: "rgba(255, 99, 132, 0.2)",
             },
         ],
     };

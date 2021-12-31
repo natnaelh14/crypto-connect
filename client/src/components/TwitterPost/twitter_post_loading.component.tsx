@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import { Box } from "@mui/system";
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const TwitterPostLoading = () => {
 

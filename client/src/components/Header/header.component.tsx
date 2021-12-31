@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { getCurrentUser } from '../../redux/user.selectors';
-import { ReactComponent as Logo } from '../../assets/logo.svg';
-import { auth } from '../../firebase/firebase.utils';
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { getCurrentUser } from "../../redux/user.selectors";
+import { ReactComponent as Logo } from "../../assets/logo.svg";
+import { auth } from "../../firebase/firebase.utils";
 import {
     HeaderContainer,
     LogoContainer,
     OptionsContainer,
     OptionTag
-} from './header.styles';
-import { useAppSelector } from '../../app/hooks';
+} from "./header.styles";
+import { useAppSelector } from "../../app/hooks";
 
 const Header = (props: any) => {
     const currentUser = useAppSelector((state) => state.currentUser);

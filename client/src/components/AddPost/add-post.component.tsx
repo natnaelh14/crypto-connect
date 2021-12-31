@@ -2,14 +2,14 @@
 import React, { useState } from "react";
 import { Button, Grid, Input, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { Box } from "@mui/system";
-import { useAppSelector } from '../../app/hooks';
-import { useQuery, useMutation } from '@apollo/client';
+import { useAppSelector } from "../../app/hooks";
+import { useQuery, useMutation } from "@apollo/client";
 import { ADD_POST, UPDATE_USER_PROFILE } from "../../utils/mutations";
-import { QUERY_USER } from '../../utils/queries';
-import { userProps } from '../../index.types';
-import AddPostLoading from './add_post_loading.component';
-import noAvatar from '../../img/no-avatar.png';
-import Avatar from '@material-ui/core/Avatar';
+import { QUERY_USER } from "../../utils/queries";
+import { userProps } from "../../index.types";
+import AddPostLoading from "./add_post_loading.component";
+import noAvatar from "../../img/no-avatar.png";
+import Avatar from "@material-ui/core/Avatar";
 
 type postProps = {
   refetchPosts: () => void
@@ -60,7 +60,7 @@ const AddPost = ({ refetchPosts }: postProps) => {
         }
       })
     } catch (e) {
-      throw new Error('Unable to Update Profile')
+      throw new Error("Unable to Update Profile")
     }
   }
 
@@ -84,7 +84,7 @@ const AddPost = ({ refetchPosts }: postProps) => {
                   disableUnderline
                   type="text"
                   placeholder="What's new in Crypto World?"
-                  sx={{ width: "100%", fontFamily: 'inherit' }}
+                  sx={{ width: "100%", fontFamily: "inherit" }}
                 />
               </Box>
               <Box
@@ -101,7 +101,7 @@ const AddPost = ({ refetchPosts }: postProps) => {
                       defaultValue={mood}
                       variant="standard"
                       onChange={handleChangeMood}
-                      sx={{ fontFamily: 'inherit' }}
+                      sx={{ fontFamily: "inherit" }}
                     >
                       <MenuItem value='HAPPY'>HAPPY 😀</MenuItem>
                       <MenuItem value='SAD'>SAD 😔</MenuItem>
@@ -119,9 +119,9 @@ const AddPost = ({ refetchPosts }: postProps) => {
                     variant="contained"
                     sx={{
                       textTransform: "capitalize",
-                      fontFamily: 'inherit',
-                      borderRadius: '12px',
-                      fontSize: '12px',
+                      fontFamily: "inherit",
+                      borderRadius: "12px",
+                      fontSize: "12px",
                       mt: "4px",
                       background: "black",
                       "&:hover": {

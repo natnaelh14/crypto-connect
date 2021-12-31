@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 
 const MessageBoxLoading = () => {
@@ -12,8 +12,8 @@ const MessageBoxLoading = () => {
                 padding="1rem"
                 width='100%'
                 sx={{
-                    marginTop: '10px',
-                    marginBottom: '10px',
+                    marginTop: "10px",
+                    marginBottom: "10px",
                 }}
             >
                 <Grid container flexWrap="nowrap">
@@ -31,13 +31,13 @@ const MessageBoxLoading = () => {
                         >
                             <Grid width='100%'
                             >
-                                <Box sx={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: "space-around" }}>
+                                <Box sx={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
                                     <Typography>
                                         <Skeleton
                                             width={100}
                                         />
                                     </Typography>
-                                    <Typography sx={{ marginLeft: 'auto'}}>
+                                    <Typography sx={{ marginLeft: "auto"}}>
                                         <Skeleton
                                             width={25}
                                         />
@@ -46,9 +46,9 @@ const MessageBoxLoading = () => {
                                 <Box>
                                     <Typography
                                         sx={{
-                                            display: '-webkit-box',
-                                            overflow: 'hidden',
-                                            WebkitBoxOrient: 'vertical',
+                                            display: "-webkit-box",
+                                            overflow: "hidden",
+                                            WebkitBoxOrient: "vertical",
                                             WebkitLineClamp: 1,
                                         }}
                                     >

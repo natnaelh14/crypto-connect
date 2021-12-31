@@ -4,18 +4,18 @@ import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import { ReactComponent as Logo } from '../../assets/logo.svg';
-import { signInWithGoogle } from '../../firebase/firebase.utils';
-import { signInWithGithub } from '../../firebase/firebase.utils';
-import { signInWithTwitter } from '../../firebase/firebase.utils';
-import { GoogleLoginButton, GithubLoginButton, TwitterLoginButton } from 'react-social-login-buttons';
-import coinImage from './coin.jpeg';
-import AboutUsPage from '../AboutUs/about-us.component';
-import Footer from '../Footer/footer.component';
+import { ReactComponent as Logo } from "../../assets/logo.svg";
+import { signInWithGoogle } from "../../firebase/firebase.utils";
+import { signInWithGithub } from "../../firebase/firebase.utils";
+import { signInWithTwitter } from "../../firebase/firebase.utils";
+import { GoogleLoginButton, GithubLoginButton, TwitterLoginButton } from "react-social-login-buttons";
+import coinImage from "./coin.jpeg";
+import AboutUsPage from "../AboutUs/about-us.component";
+import Footer from "../Footer/footer.component";
 import ScrollArrow from "../ScrollArrow/scroll-arrow.component";
 function Copyright() {
   return (
-    <Typography style={{ fontFamily: 'inherit' }} variant="body2" color="textSecondary" align="center">
+    <Typography style={{ fontFamily: "inherit" }} variant="body2" color="textSecondary" align="center">
       {"Copyright © Crypto Connect "}
       {new Date().getFullYear()}
       {". All Rights Reserved."}
@@ -25,7 +25,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: '120px',
+    marginTop: "120px",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-around",
@@ -41,26 +41,26 @@ const useStyles = makeStyles((theme) => ({
   },
   form: {
     width: "100%",
-    marginTop: '0.5rem',
+    marginTop: "0.5rem",
     display: "flex",
     alignItems: "center",
-    flexDirection: 'column'
+    flexDirection: "column"
   },
   textFont: {
     fontFamily: "inherit",
-    color: '#55595C',
-    textAlign: 'center'
+    color: "#55595C",
+    textAlign: "center"
   },
   image: {
     "@media (max-width: 1300px)": {
       height: "400px",
       width: "500px",
-      marginBottom: '40px'
+      marginBottom: "40px"
     },
     "@media (max-width: 800px)": {
       height: "200px",
       width: "300px",
-      marginBottom: '40px'
+      marginBottom: "40px"
     }
   },
   submit: {
@@ -95,16 +95,16 @@ const SignIn = () => {
             >
               <div className={classes.paper}>
                 <Logo className='logo' />
-                <Typography className={classes.textFont} style={{ marginTop: '0.5rem', fontSize: '1.5rem' }} >
+                <Typography className={classes.textFont} style={{ marginTop: "0.5rem", fontSize: "1.5rem" }} >
                   WELCOME TO CRYPTO CONNECT
                 </Typography>
-                <Typography className={classes.textFont} style={{ marginTop: '0.5rem', fontSize: '1.2rem' }}>
+                <Typography className={classes.textFont} style={{ marginTop: "0.5rem", fontSize: "1.2rem" }}>
                   A cryptocurrency based social media application
                 </Typography>
                 <form className={classes.form} noValidate>
-                  <GoogleLoginButton style={{ width: '300px' }} onClick={signInWithGoogle} />
-                  <GithubLoginButton style={{ width: '300px' }} onClick={signInWithGithub} />
-                  <TwitterLoginButton style={{ width: '300px' }} onClick={signInWithTwitter} />
+                  <GoogleLoginButton style={{ width: "300px" }} onClick={signInWithGoogle} />
+                  <GithubLoginButton style={{ width: "300px" }} onClick={signInWithGithub} />
+                  <TwitterLoginButton style={{ width: "300px" }} onClick={signInWithTwitter} />
                   <Box mt={5}>
                     <Copyright />
                   </Box>

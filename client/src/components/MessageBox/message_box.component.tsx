@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 import { Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
-import { useQuery } from '@apollo/client';
-import { QUERY_MESSAGES } from '../../utils/queries';
-import Avatar from '@material-ui/core/Avatar';
+import { useQuery } from "@apollo/client";
+import { QUERY_MESSAGES } from "../../utils/queries";
+import Avatar from "@material-ui/core/Avatar";
 
 type MessageProps = {
   msgId: string,
@@ -31,8 +31,8 @@ const MessageBox = ({ msgId, msgHandle, msgAvatar, currentUser }: MessageProps) 
           padding="1rem"
           width='100%'
           sx={{
-            marginTop: '10px',
-            marginBottom: '10px',
+            marginTop: "10px",
+            marginBottom: "10px",
             "&:hover": {
               backgroundColor: "#eee",
             },
@@ -48,14 +48,14 @@ const MessageBox = ({ msgId, msgHandle, msgAvatar, currentUser }: MessageProps) 
               >
                 <Grid width='100%'
                 >
-                  <Box sx={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: "space-around" }}>
+                  <Box sx={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
                     <Typography fontFamily='inherit' sx={{ fontSize: "15px", color: "#555" }}>
                       {msgHandle}
                     </Typography>
                     <Typography ml='0.25rem' fontFamily='inherit' sx={{ fontSize: "15px", color: "#555" }}>
-                      @{msgHandle.trim().replace(/ /g, '').toLowerCase()}
+                      @{msgHandle.trim().replace(/ /g, "").toLowerCase()}
                     </Typography>
-                    <Typography fontFamily='inherit' sx={{ marginLeft: 'auto', fontSize: "15px", color: "#555" }}>
+                    <Typography fontFamily='inherit' sx={{ marginLeft: "auto", fontSize: "15px", color: "#555" }}>
                       Seen
                     </Typography>
                   </Box>
@@ -65,9 +65,9 @@ const MessageBox = ({ msgId, msgHandle, msgAvatar, currentUser }: MessageProps) 
                         sx={{
                           fontSize: "15px",
                           color: "#555",
-                          display: '-webkit-box',
-                          overflow: 'hidden',
-                          WebkitBoxOrient: 'vertical',
+                          display: "-webkit-box",
+                          overflow: "hidden",
+                          WebkitBoxOrient: "vertical",
                           WebkitLineClamp: 1,
                         }}
                       >

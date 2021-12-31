@@ -1,5 +1,5 @@
-import { GrCompass, GrLinkedinOption, GrGithub, GrMail } from 'react-icons/gr';
-import './footer.css';
+import { GrCompass, GrLinkedinOption, GrGithub, GrMail } from "react-icons/gr";
+import "./footer.css";
 
 const Footer = () => {
   return (

@@ -4,7 +4,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/system";
-import axios from 'axios';
+import axios from "axios";
 import {
   Typography,
   Avatar,
@@ -19,13 +19,13 @@ import {
   Select,
   MenuItem
 } from "@mui/material";
-import { useAppSelector } from '../../app/hooks';
-import { userProps } from '../../index.types';
-import { UPDATE_USER_PROFILE } from '../../utils/mutations';
-import { QUERY_USER } from '../../utils/queries';
-import { useMutation, useQuery } from '@apollo/client';
-import noAvatar from '../../img/no-avatar.png';
-import AvatarChoice from '../AvatarChoice/avatar-choice.component';
+import { useAppSelector } from "../../app/hooks";
+import { userProps } from "../../index.types";
+import { UPDATE_USER_PROFILE } from "../../utils/mutations";
+import { QUERY_USER } from "../../utils/queries";
+import { useMutation, useQuery } from "@apollo/client";
+import noAvatar from "../../img/no-avatar.png";
+import AvatarChoice from "../AvatarChoice/avatar-choice.component";
 
 type ModalProps = {
   open: boolean,
@@ -66,10 +66,10 @@ const UpdateUserProfile = ({
     e.preventDefault();
     try {
       if (avatar) {
-        var resumeData = new FormData();
+        const resumeData = new FormData();
         resumeData.append("upload_preset", "resume");
         resumeData.append("file", avatar[0]);
-        var resumeRes = await axios.post(
+        const resumeRes = await axios.post(
           `https://api.cloudinary.com/v1_1/doalzf6o2/image/upload`,
           resumeData
         );
@@ -104,27 +104,27 @@ const UpdateUserProfile = ({
     <>
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
         <DialogTitle>
-          <Typography fontFamily='inherit' textAlign='center' style={{ fontSize: '20px' }}>Update Profile</Typography>
+          <Typography fontFamily='inherit' textAlign='center' style={{ fontSize: "20px" }}>Update Profile</Typography>
           <Box textAlign="right" borderBottom="1px solid #ccc">
             <IconButton onClick={handleClose}>
               <CloseIcon />
             </IconButton>
           </Box>
         </DialogTitle>
-        <DialogContent style={{ height: 'auto' }}>
+        <DialogContent style={{ height: "auto" }}>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div>
               <Avatar
                 alt="Remy Sharp"
-                sx={{ width: "100px", height: "100px", margin: 'auto' }}
+                sx={{ width: "100px", height: "100px", margin: "auto" }}
                 src={userData?.userProfile?.avatar ? userData?.userProfile?.avatar : noAvatar}
               />
               <Typography fontFamily='inherit' textAlign='center' component="h1" variant="h6">
                 {userInfo?.handle}
               </Typography>
               <Typography fontFamily='inherit' textAlign='center' component="p" variant="subtitle2">
-                {`@${userInfo?.handle.trim().replace(/ /g,'').toLowerCase()}`}
+                {`@${userInfo?.handle.trim().replace(/ /g,"").toLowerCase()}`}
               </Typography>
               <form noValidate>
                 <TextField
@@ -133,7 +133,7 @@ const UpdateUserProfile = ({
                   minRows={3}
                   fullWidth
                   id="bio"
-                  sx={{ fontFamily: 'inherit' }}
+                  sx={{ fontFamily: "inherit" }}
                   label="Bio"
                   name="bio"
                   autoComplete="off"
@@ -150,7 +150,7 @@ const UpdateUserProfile = ({
                   name="city"
                   autoComplete="off"
                   autoFocus
-                  sx={{ fontFamily: 'inherit' }}
+                  sx={{ fontFamily: "inherit" }}
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                 />
@@ -163,7 +163,7 @@ const UpdateUserProfile = ({
                   name="state"
                   autoComplete="off"
                   autoFocus
-                  sx={{ fontFamily: 'inherit' }}
+                  sx={{ fontFamily: "inherit" }}
                   value={state}
                   onChange={(e) => setState(e.target.value)}
                 />
@@ -176,7 +176,7 @@ const UpdateUserProfile = ({
                   name="country"
                   autoComplete="off"
                   autoFocus
-                  sx={{ fontFamily: 'inherit' }}
+                  sx={{ fontFamily: "inherit" }}
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
                 />
@@ -184,13 +184,13 @@ const UpdateUserProfile = ({
                   style={{ marginTop: "15px", marginBottom: "15px" }}
                   fullWidth
                 >
-                  <FormLabel component="legend" sx={{ fontSize: '0.8rem' }} >Gender</FormLabel>
+                  <FormLabel component="legend" sx={{ fontSize: "0.8rem" }} >Gender</FormLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={gender}
                     label="Gender"
-                    sx={{ fontFamily: 'inherit' }}
+                    sx={{ fontFamily: "inherit" }}
                     onChange={(e) => setGender(e.target.value)}
                   >
                     <MenuItem value="MALE">Male</MenuItem>
@@ -203,7 +203,7 @@ const UpdateUserProfile = ({
                   variant="standard"
                   label="Birthday"
                   type="date"
-                  sx={{ fontFamily: 'inherit' }}
+                  sx={{ fontFamily: "inherit" }}
                   value={birthDate}
                   onChange={(e) => setBirthDate(e.target.value)}
                   style={{ width: 220 }}
@@ -213,14 +213,14 @@ const UpdateUserProfile = ({
                 />
                 <br />
                 <br />
-                <FormLabel component="legend" sx={{ fontSize: '0.8rem' }} >Avatar</FormLabel>
+                <FormLabel component="legend" sx={{ fontSize: "0.8rem" }} >Avatar</FormLabel>
                 <br />
-                <Button style={{ fontFamily: 'inherit' }} variant="outlined" component="label">
+                <Button style={{ fontFamily: "inherit" }} variant="outlined" component="label">
                   UPLOAD AVATAR
                   <input type="file" hidden onChange={(e) => setAvatar(e.target.files)} />
                 </Button>
                 <Button
-                  style={{ fontFamily: 'inherit', marginLeft: "1rem" }}
+                  style={{ fontFamily: "inherit", marginLeft: "1rem" }}
                   variant="outlined"
                   component="label"
                   onClick={() => setOpenModal(true)}
@@ -231,17 +231,17 @@ const UpdateUserProfile = ({
             </div>
           </Container>
         </DialogContent>
-        <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
+        <DialogActions style={{ display: "flex", justifyContent: "center" }}>
           <Button
             type="submit"
             size="small"
             sx={{
               textTransform: "capitalize",
               padding: "6px 20px",
-              marginBottom: '20px',
+              marginBottom: "20px",
               width: "60%",
               background: "black",
-              fontFamily: 'inherit',
+              fontFamily: "inherit",
 
               "&:hover": {
                 background: "#333",

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { FaArrowCircleUp, FaArrowCircleDown } from 'react-icons/fa';
-import './scroll-arrow.css';
+import React, { useState } from "react";
+import { FaArrowCircleUp, FaArrowCircleDown } from "react-icons/fa";
+import "./scroll-arrow.css";
 
 
 const ScrollArrow = () => {
@@ -21,18 +21,18 @@ const ScrollArrow = () => {
         }
     }
     const scrollTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: "smooth" });
     };
     const scrollBottom = () => {
-        window.scrollTo({ top: 1200, behavior: 'smooth' });
+        window.scrollTo({ top: 1200, behavior: "smooth" });
     };
-    window.addEventListener('scroll', checkScrollTop)
-    window.addEventListener('scroll', checkScrollDown)
+    window.addEventListener("scroll", checkScrollTop)
+    window.addEventListener("scroll", checkScrollDown)
 
     return (
         <>
-            <FaArrowCircleUp className="scrollTop" onClick={scrollTop} style={{ height: 60, display: showScroll ? 'flex' : 'none' }} />
-            <FaArrowCircleDown className="scrollTop" onClick={scrollBottom} style={{ height: 60, display: showDownScroll ? 'flex' : 'none' }} />
+            <FaArrowCircleUp className="scrollTop" onClick={scrollTop} style={{ height: 60, display: showScroll ? "flex" : "none" }} />
+            <FaArrowCircleDown className="scrollTop" onClick={scrollBottom} style={{ height: 60, display: showDownScroll ? "flex" : "none" }} />
         </>
     );
 }

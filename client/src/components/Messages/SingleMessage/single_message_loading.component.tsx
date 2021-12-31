@@ -1,7 +1,7 @@
 import { Box } from "@mui/system";
 import { Grid, Typography } from "@mui/material";
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const SingleMessageLoading = () => {
 
@@ -10,8 +10,8 @@ const SingleMessageLoading = () => {
             padding="1rem"
             width='100%'
             sx={{
-                marginTop: '10px',
-                marginBottom: '10px',
+                marginTop: "10px",
+                marginBottom: "10px",
                 "&:hover": {
                     backgroundColor: "#eee",
                 },
@@ -28,13 +28,13 @@ const SingleMessageLoading = () => {
                 </Grid>
                 <Box width='100%'>
                     <Grid width='100%'>
-                        <Box sx={{ width: '100%', display: 'flex', flexDirection: 'row' }}>
+                        <Box sx={{ width: "100%", display: "flex", flexDirection: "row" }}>
                             <Typography sx={{ fontSize: "15px", color: "#555" }}>
                                 <Skeleton
                                     width={100}
                                 />
                             </Typography>
-                            <Typography sx={{ marginLeft: 'auto', fontSize: "15px", color: "#555" }}>
+                            <Typography sx={{ marginLeft: "auto", fontSize: "15px", color: "#555" }}>
                                 <Skeleton
                                     width={100}
                                 />

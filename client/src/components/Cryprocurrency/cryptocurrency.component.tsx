@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { Grid, Button } from "@mui/material";
 import { Box } from "@mui/system";
-import CryptoChart from '../CryptoChart/crypto_chart.component';
-import CoinGraph from '../CoinGraph/coin_graph.component';
-import MoreInfoCryptoModal from '../MoreInfoCryptoModal/more_info_crypto_modal.component';
+import CryptoChart from "../CryptoChart/crypto_chart.component";
+import CoinGraph from "../CoinGraph/coin_graph.component";
+import MoreInfoCryptoModal from "../MoreInfoCryptoModal/more_info_crypto_modal.component";
 
 type nameProps = {
     name: string
@@ -21,7 +21,7 @@ const CryptoCurrency = ({ name }: nameProps) => {
         setOpenModal(true);
     };
     const [modalData, setModalData] = useState({
-        description: '',
+        description: "",
         whitepaper: { link: "" },
         org_structure: "",
         proof_type: ""
@@ -62,12 +62,12 @@ const CryptoCurrency = ({ name }: nameProps) => {
                     return response.json()
                 })
                 .then((res) => {
-                    let day = []
-                    let price = []
+                    const day = []
+                    const price = []
                     for (let i = 0; i < res.prices.length; i++) {
                         day.push(res.prices[i][0]);
                         price.push(res.prices[i][1]);
-                    };
+                    }
                     setCoinDateData(day);
                     setCoinPriceData(price);
                 })
@@ -94,12 +94,12 @@ const CryptoCurrency = ({ name }: nameProps) => {
                     <Grid item padding="1rem 1rem 1rem 1rem" border="1px solid #ccc">
                         <CryptoChart coinName={coinData.name} coinImage={coinData.image} coinRank={coinData.market_cap_rank} coinMarketCap={coinData.market_cap} coinCurrentPrice={coinData.current_price} coinATH={coinData.ath} />
                         <CoinGraph coinDates={coinDateData} coinPrices={coinPriceData} />
-                        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                        <Box sx={{ display: "flex", justifyContent: "center" }}>
                             <Button
                                 variant="contained"
                                 onClick={handleModalOpen}
                                 sx={{
-                                    backgroundColor: 'black', "&:hover": {
+                                    backgroundColor: "black", "&:hover": {
                                         background: "#333",
                                     },
                                 }}

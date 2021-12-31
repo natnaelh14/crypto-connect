@@ -1,25 +1,25 @@
-import React from 'react';
-import Carousel from 'react-material-ui-carousel';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import CryptoCurrency from '../components/Cryprocurrency/cryptocurrency.component';
+import React from "react";
+import Carousel from "react-material-ui-carousel";
+import SkipNextIcon from "@mui/icons-material/SkipNext";
+import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
+import CryptoCurrency from "../components/Cryprocurrency/cryptocurrency.component";
 import { Grid, Typography, Fade, Button } from "@mui/material";
 import { Box } from "@mui/system";
-import CryptoDoughnut from '../components/CryptoDoughnut/crypto_doughnut.component';
-import AddModifyCrypto from '../components/AddModifyCrypto/add_modify_crypto.component';
-import { userProps } from '../index.types';
-import { useAppSelector } from '../app/hooks';
-import { useQuery } from '@apollo/client';
-import { QUERY_CRYPTOS } from '../utils/queries';
-import TwitterPostList from '../components/TwitterPostList/twitter_post_list.component';
-import { CryptoPageContainer, CryptoDataContainer, CryptoDoughnutContainer, CryptoCarouselContainer } from './styles/crypto_page.styles';
-import { makeStyles } from '@material-ui/core/styles';
-import CryptoPageLoading from './loading/crypto_page_loading';
+import CryptoDoughnut from "../components/CryptoDoughnut/crypto_doughnut.component";
+import AddModifyCrypto from "../components/AddModifyCrypto/add_modify_crypto.component";
+import { userProps } from "../index.types";
+import { useAppSelector } from "../app/hooks";
+import { useQuery } from "@apollo/client";
+import { QUERY_CRYPTOS } from "../utils/queries";
+import TwitterPostList from "../components/TwitterPostList/twitter_post_list.component";
+import { CryptoPageContainer, CryptoDataContainer, CryptoDoughnutContainer, CryptoCarouselContainer } from "./styles/crypto_page.styles";
+import { makeStyles } from "@material-ui/core/styles";
+import CryptoPageLoading from "./loading/crypto_page_loading";
 
 const useStyles = makeStyles((theme) => ({
     carouselFormat: {
-        width: '300px',
-        height: '500px'
+        width: "300px",
+        height: "500px"
     }
 }))
 
@@ -50,18 +50,18 @@ const CryptoPage = () => {
         setOpenModal(false);
     };
 
-    let pending = currentUserError || currentUserLoading || cryptoError || cryptoLoading
+    const pending = currentUserError || currentUserLoading || cryptoError || cryptoLoading
 
     return (
         <CryptoPageContainer>
             <Fade in={true} timeout={1000}>
                 <Box sx={{ 
-                    border: '1px solid #cdcdcd', 
-                    padding: '20px', 
-                    width: '100%',
+                    border: "1px solid #cdcdcd", 
+                    padding: "20px", 
+                    width: "100%",
                     "@media (max-width: 1000px)": {
                         paddingLeft: "0px",
-                        paddingRight: '0px'
+                        paddingRight: "0px"
                       } 
                     }} >
                     {(pending) ? (
@@ -94,7 +94,7 @@ const CryptoPage = () => {
                             padding="10px 20px"
                             sx={{
                                 "@media (max-width: 1200px)": {
-                                    marginTop: '1rem',
+                                    marginTop: "1rem",
                                     textAlign: "center"
                                   }
                             }}
@@ -109,7 +109,7 @@ const CryptoPage = () => {
                                         borderRadius: "12px",
                                         "&:hover": {
                                             background: "#333",
-                                            fontFamily: 'inherit'
+                                            fontFamily: "inherit"
                                         },
                                     }}
                                     variant="contained"

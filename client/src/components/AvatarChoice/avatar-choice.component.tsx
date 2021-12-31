@@ -1,13 +1,13 @@
-import React from 'react'
+import React from "react"
 import { Typography, IconButton, Dialog } from "@mui/material";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/system";
-import { avatarsArray } from './avatars';
+import { avatarsArray } from "./avatars";
 import Avatar from "@material-ui/core/Avatar";
-import { AvatarContainer, SingleAvatar } from './avatar-choice.styles';
+import { AvatarContainer, SingleAvatar } from "./avatar-choice.styles";
 
 type ModalProps = {
     open: boolean,
@@ -27,20 +27,19 @@ const AvatarChoice = ({ open, handleClose, handleSampleAvatar }: ModalProps) => 
     return (
         <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
             <DialogTitle>
-                <Typography fontFamily='inherit' textAlign='center' style={{ fontSize: '20px' }}>CHOOSE AVATAR</Typography>
+                <Typography fontFamily='inherit' textAlign='center' style={{ fontSize: "20px" }}>CHOOSE AVATAR</Typography>
                 <Box textAlign="right" borderBottom="1px solid #ccc">
                     <IconButton onClick={handleClose}>
                         <CloseIcon />
                     </IconButton>
                 </Box>
             </DialogTitle>
-            <DialogContent style={{ height: 'auto' }}>
+            <DialogContent style={{ height: "auto" }}>
                 <AvatarContainer>
                     {avatarsArray.map((photo, i) => {
-                        return <SingleAvatar value={photo} onClick={handleAvatarChoice}>
+                        return <SingleAvatar value={photo} key={i} onClick={handleAvatarChoice}>
                             <Avatar
                                 className='image'
-                                key={i}
                                 style={{ margin: "0.4rem", height: "75px", width: "75px" }}
                                 alt="sample-avatar"
                                 src={photo}
@@ -50,7 +49,7 @@ const AvatarChoice = ({ open, handleClose, handleSampleAvatar }: ModalProps) => 
                     }
                 </AvatarContainer>
             </DialogContent>
-            <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
+            <DialogActions style={{ display: "flex", justifyContent: "center" }}>
             </DialogActions>
         </Dialog>
     )

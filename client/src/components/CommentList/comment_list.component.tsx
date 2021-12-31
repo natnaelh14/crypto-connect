@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { useQuery, useMutation } from '@apollo/client';
+import React, { useState } from "react";
+import { useQuery, useMutation } from "@apollo/client";
 import { Grid, IconButton, Input, Button } from "@mui/material";
 import { Box } from "@mui/system";
-import { QUERY_COMMENTS } from '../../utils/queries';
-import Comment from '../Comment/comment.component';
-const Moment = require('moment');
-import { ADD_COMMENT } from '../../utils/mutations';
-import RefreshIcon from '@mui/icons-material/Refresh';
+import { QUERY_COMMENTS } from "../../utils/queries";
+import Comment from "../Comment/comment.component";
+const Moment = require("moment");
+import { ADD_COMMENT } from "../../utils/mutations";
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 type postListProps = {
     postId: number,
@@ -22,14 +22,14 @@ const CommentList = ({ postId, userId }: postListProps) => {
         variables: { post_id: postId },
     });
     if (data) {
-        var { comments } = data;
+        const { comments } = data;
         var commentArray: Array<{
             id: number,
             post_id: number,
             user_id: string,
             text: string,
             created_at: Date
-        }> | undefined = [...comments].sort((a: any, b: any) => new Moment(b.created_at).format('YYYYMMDDHHMMSS') - new Moment(a.created_at).format('YYYYMMDDHHMMSS'));
+        }> | undefined = [...comments].sort((a: any, b: any) => new Moment(b.created_at).format("YYYYMMDDHHMMSS") - new Moment(a.created_at).format("YYYYMMDDHHMMSS"));
     }
 
     const handleAddComment = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -71,9 +71,9 @@ const CommentList = ({ postId, userId }: postListProps) => {
                             size="small"
                             sx={{
                                 textTransform: "capitalize",
-                                fontFamily: 'inherit',
-                                borderRadius: '12px',
-                                fontSize: '12px',
+                                fontFamily: "inherit",
+                                borderRadius: "12px",
+                                fontSize: "12px",
                                 mt: "4px",
                                 background: "black",
                                 "&:hover": {
@@ -86,7 +86,7 @@ const CommentList = ({ postId, userId }: postListProps) => {
                     </Box>
                 </Grid>
             </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'center' }} >
+            <Box sx={{ display: "flex", justifyContent: "center" }} >
                 <IconButton size="medium" onClick={() => commentsRefetch()} >
                     <RefreshIcon fontSize="small" />
                 </IconButton>

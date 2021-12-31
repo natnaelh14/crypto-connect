@@ -4,13 +4,13 @@ import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { NavLink } from "react-router-dom";
-import { userProps } from '../../index.types';
-import { useAppSelector } from '../../app/hooks';
-import { useMutation, useQuery } from '@apollo/client';
-import { QUERY_CHECK_FRIENDSHIP, QUERY_FRIEND_REQUEST } from '../../utils/queries';
-import { FRIEND_REQUEST } from '../../utils/mutations';
+import { userProps } from "../../index.types";
+import { useAppSelector } from "../../app/hooks";
+import { useMutation, useQuery } from "@apollo/client";
+import { QUERY_CHECK_FRIENDSHIP, QUERY_FRIEND_REQUEST } from "../../utils/queries";
+import { FRIEND_REQUEST } from "../../utils/mutations";
 import Avatar from "@material-ui/core/Avatar";
-import noAvatar from '../../img/no-avatar.png';
+import noAvatar from "../../img/no-avatar.png";
 
 type userInfoProps = {
   id: string,
@@ -24,8 +24,8 @@ type userInfoProps = {
 const useStyles = makeStyles((theme) => ({
     smallScreen: {
       "@media (max-width: 1400px)": {
-          display: 'flex', 
-          flexDirection: 'column'
+          display: "flex", 
+          flexDirection: "column"
       }
     }
 }))
@@ -85,7 +85,7 @@ const WhoToFollow = ({ id, handle, avatar, isActive, userRefetch, whoToRefetch }
                 {handle}
               </Typography>
               <Typography ml='0.1rem' fontFamily='inherit' sx={{ fontSize: "11px", fontWeight: "500" }}>
-                @{handle.trim().replace(/ /g,'').toLowerCase()}
+                @{handle.trim().replace(/ /g,"").toLowerCase()}
               </Typography>
               {checkFriendData?.checkFriendship ? (
                 <Button
@@ -95,8 +95,8 @@ const WhoToFollow = ({ id, handle, avatar, isActive, userRefetch, whoToRefetch }
                   sx={{
                     borderRadius: theme.shape.borderRadius,
                     textTransform: "capitalize",
-                    fontFamily: 'inherit',
-                    fontSize: '10px',
+                    fontFamily: "inherit",
+                    fontSize: "10px",
                     mt: "4px",
                     background: "black",
                     "&:hover": {
@@ -107,9 +107,9 @@ const WhoToFollow = ({ id, handle, avatar, isActive, userRefetch, whoToRefetch }
                 >
                   FOLLOWING
                 </Button>
-              ): (userInfo.id === id || friendRequestData?.friendRequest?.status === 'BLOCKED') ? ( 
+              ): (userInfo.id === id || friendRequestData?.friendRequest?.status === "BLOCKED") ? ( 
                 <div />
-              ) : (friendRequestData?.friendRequest?.status === 'PENDING') ? ( 
+              ) : (friendRequestData?.friendRequest?.status === "PENDING") ? ( 
                 <Button
                 size="small"
                 disabled={true}
@@ -117,8 +117,8 @@ const WhoToFollow = ({ id, handle, avatar, isActive, userRefetch, whoToRefetch }
                 sx={{
                   borderRadius: theme.shape.borderRadius,
                   textTransform: "capitalize",
-                  fontFamily: 'inherit',
-                  fontSize: '10px',
+                  fontFamily: "inherit",
+                  fontSize: "10px",
                   mt: "4px",
                   background: "black",
                   "&:hover": {
@@ -137,8 +137,8 @@ const WhoToFollow = ({ id, handle, avatar, isActive, userRefetch, whoToRefetch }
                 sx={{
                   borderRadius: theme.shape.borderRadius,
                   textTransform: "capitalize",
-                  fontFamily: 'inherit',
-                  fontSize: '10px',
+                  fontFamily: "inherit",
+                  fontSize: "10px",
                   mt: "4px",
                   background: "black",
                   "&:hover": {

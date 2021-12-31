@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Grid, Typography, Button } from "@mui/material";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
-import { useMutation } from '@apollo/client';
-import { REMOVE_FOLLOWING, REMOVE_FOLLOWER } from '../../utils/mutations';
-import { useAppSelector } from '../../app/hooks';
-import { userProps } from '../../index.types';
+import { useMutation } from "@apollo/client";
+import { REMOVE_FOLLOWING, REMOVE_FOLLOWER } from "../../utils/mutations";
+import { useAppSelector } from "../../app/hooks";
+import { userProps } from "../../index.types";
 import Avatar from "@material-ui/core/Avatar";
 
 type followProps = {
@@ -64,7 +64,7 @@ const FollowBox = ({ id, handle, avatar, buttonText, refetch, buttonStatus }: fo
                     <Avatar style={{ width: "30px", height: "30px" }} alt="follow-user-image" src={avatar} />
                 </Link>
                 <Typography
-                    sx={{ ml: '50px', mt: '10px', fontSize: "16px", fontWeight: 500, textAlign: "center" }}
+                    sx={{ ml: "50px", mt: "10px", fontSize: "16px", fontWeight: 500, textAlign: "center" }}
                 >
                     {handle}
                 </Typography>
@@ -73,7 +73,7 @@ const FollowBox = ({ id, handle, avatar, buttonText, refetch, buttonStatus }: fo
                         variant="outlined"
                         onClick={handleRemoveFollow}
                         name={buttonText}
-                        sx={{ marginLeft: 'auto', color: '#000' }}
+                        sx={{ marginLeft: "auto", color: "#000" }}
                     >{buttonText}</Button>
                 )}
             </Grid>

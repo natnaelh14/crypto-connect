@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import { Fade, Typography, Button, IconButton } from "@mui/material";
 import { Box } from "@mui/system";
-import MessageBox from '../components/MessageBox/message_box.component';
-import { useQuery } from '@apollo/client';
-import { QUERY_MESSENGERS } from '../utils/queries';
-import { userProps } from '../index.types';
-import { useAppSelector } from '../app/hooks';
-import MessageBoxLoading from '../components/MessageBox/message_box_loading.component';
-import { MessagesContainer } from './styles/message_page.styles';
-import AddNewMessageModal from '../components/AddNewMessageModal/AddNewMessageModal.component';
-import RefreshIcon from '@mui/icons-material/Refresh';
+import MessageBox from "../components/MessageBox/message_box.component";
+import { useQuery } from "@apollo/client";
+import { QUERY_MESSENGERS } from "../utils/queries";
+import { userProps } from "../index.types";
+import { useAppSelector } from "../app/hooks";
+import MessageBoxLoading from "../components/MessageBox/message_box_loading.component";
+import { MessagesContainer } from "./styles/message_page.styles";
+import AddNewMessageModal from "../components/AddNewMessageModal/AddNewMessageModal.component";
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 const MessagePage = () => {
 
@@ -17,7 +17,7 @@ const MessagePage = () => {
   const { loading: userLoading, user } = currentUser
   const userInfo: userProps = user
 
-  let { loading, error, data, refetch } = useQuery(QUERY_MESSENGERS, {
+  const { loading, error, data, refetch } = useQuery(QUERY_MESSENGERS, {
     variables: { id: userInfo.id }
   });
 
@@ -41,7 +41,7 @@ const MessagePage = () => {
   return (
     <MessagesContainer>
       <Fade in={true} timeout={1000}>
-        <div style={{ border: '1px solid #cdcdcd', height: "90vh", padding: '20px' }}>
+        <div style={{ border: "1px solid #cdcdcd", height: "90vh", padding: "20px" }}>
           <Typography fontFamily='inherit' variant='h5' textAlign='center' >Messages</Typography>
           <Box 
           display='flex' 
@@ -58,10 +58,10 @@ const MessagePage = () => {
               onClick={() => setOpenModal(true)}
               sx={{
                 textTransform: "capitalize",
-                fontFamily: 'inherit',
+                fontFamily: "inherit",
                 borderRadius: "12px",
                 padding: "10px",
-                fontSize: '15px',
+                fontSize: "15px",
                 mt: "4px",
                 background: "black",
                 "&:hover": {
@@ -88,7 +88,7 @@ const MessagePage = () => {
               </>
             )}
             {messengers && (
-              <Box sx={{ display: 'flex', justifyContent: 'center' }} >
+              <Box sx={{ display: "flex", justifyContent: "center" }} >
                 <IconButton size="medium" onClick={getMessages} >
                   <RefreshIcon fontSize="small" />
                 </IconButton>

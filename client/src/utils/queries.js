@@ -234,4 +234,3 @@ export const QUERY_WHO_TO_FOLLOW_USERS = gql`
     }
   }
 `;
-

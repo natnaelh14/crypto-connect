@@ -1,21 +1,21 @@
 import React from "react";
 import { Grid, IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ThumbDownIcon from '@mui/icons-material/ThumbDown';
-import ThumbDownAltOutlinedIcon from '@mui/icons-material/ThumbDownAltOutlined';
-import DeleteIcon from '@mui/icons-material/Delete';
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
+import DeleteIcon from "@mui/icons-material/Delete";
 import IosShareIcon from "@mui/icons-material/IosShare";
-const Moment = require('moment');
-import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_USER, QUERY_REACTIONS_BY_COMMENT, QUERY_REACTIONS_BY_USER_COMMENT } from '../../utils/queries';
-import { DELETE_COMMENT, ADD_REACTION_COMMENT, DELETE_REACTION_COMMENT } from '../../utils/mutations';
-import { useAppSelector } from '../../app/hooks';
-import { userProps } from '../../index.types';
-import Avatar from '@material-ui/core/Avatar';
-import noAvatar from '../../img/no-avatar.png';
-import { Link } from 'react-router-dom';
+const Moment = require("moment");
+import { useQuery, useMutation } from "@apollo/client";
+import { QUERY_USER, QUERY_REACTIONS_BY_COMMENT, QUERY_REACTIONS_BY_USER_COMMENT } from "../../utils/queries";
+import { DELETE_COMMENT, ADD_REACTION_COMMENT, DELETE_REACTION_COMMENT } from "../../utils/mutations";
+import { useAppSelector } from "../../app/hooks";
+import { userProps } from "../../index.types";
+import Avatar from "@material-ui/core/Avatar";
+import noAvatar from "../../img/no-avatar.png";
+import { Link } from "react-router-dom";
 
 type commentProps = {
   commentId: number,
@@ -36,7 +36,7 @@ const Comment = ({ commentId, postId, userId, text, commentTime, commentsRefetch
   const { userProfile } = data;
   const { data: likeData, refetch: likesRefetch } = useQuery(QUERY_REACTIONS_BY_COMMENT, {
     variables: {
-      reaction_type: 'LIKE',
+      reaction_type: "LIKE",
       comment_id: commentId
     },
   });
@@ -45,7 +45,7 @@ const Comment = ({ commentId, postId, userId, text, commentTime, commentsRefetch
   }
   const { data: dislikeData, refetch: dislikesRefetch } = useQuery(QUERY_REACTIONS_BY_COMMENT, {
     variables: {
-      reaction_type: 'DISLIKE',
+      reaction_type: "DISLIKE",
       comment_id: commentId
     },
   });
@@ -74,7 +74,7 @@ const Comment = ({ commentId, postId, userId, text, commentTime, commentsRefetch
         commentsRefetch();
       })
     } catch (e) {
-      throw new Error('Unable to delete comment')
+      throw new Error("Unable to delete comment")
     }
   }
 
@@ -96,7 +96,7 @@ const Comment = ({ commentId, postId, userId, text, commentTime, commentsRefetch
         likesRefetch();
       })
     } catch (e) {
-      throw new Error('Unable to Add a Reaction')
+      throw new Error("Unable to Add a Reaction")
     }
   }
   const handleDeleteReaction = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -112,7 +112,7 @@ const Comment = ({ commentId, postId, userId, text, commentTime, commentsRefetch
         likesRefetch();
       })
     } catch (e) {
-      throw new Error('Unable to Delete a Reaction')
+      throw new Error("Unable to Delete a Reaction")
     }
   }
 
@@ -128,7 +128,7 @@ const Comment = ({ commentId, postId, userId, text, commentTime, commentsRefetch
       <Grid container flexWrap="nowrap">
         <Grid item sx={{ paddingRight: "1rem" }}>
           <Link to={`/home/profile/${userProfile?.id}`}>
-            <Avatar src={userProfile?.avatar ? userProfile?.avatar : noAvatar} alt='user-logo' style={{ width: '50px', height: '50px' }} />
+            <Avatar src={userProfile?.avatar ? userProfile?.avatar : noAvatar} alt='user-logo' style={{ width: "50px", height: "50px" }} />
           </Link>
         </Grid>
         <Box width="100%"
@@ -154,7 +154,7 @@ const Comment = ({ commentId, postId, userId, text, commentTime, commentsRefetch
                 <Typography fontFamily='inherit'
                   sx={{ fontSize: "15px", ml: "auto", color: "#555" }}
                 >
-                  {Moment(commentTime).format('MMM DD YY')}
+                  {Moment(commentTime).format("MMM DD YY")}
                 </Typography>
               </Box>
               <Box>
@@ -162,8 +162,8 @@ const Comment = ({ commentId, postId, userId, text, commentTime, commentsRefetch
                   {text}
                 </Typography>
               </Box>
-              <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                <Typography fontFamily='inherit' sx={{ fontSize: "15px", color: "#555", marginRight: '1rem' }}>
+              <Box sx={{ display: "flex", flexDirection: "row" }}>
+                <Typography fontFamily='inherit' sx={{ fontSize: "15px", color: "#555", marginRight: "1rem" }}>
                   {likeList ? likeList.length : 0}
                   <FavoriteIcon style={{ color: "#e25349" }} fontSize="small" />
                 </Typography>
@@ -181,7 +181,7 @@ const Comment = ({ commentId, postId, userId, text, commentTime, commentsRefetch
             marginTop=".8rem"
             width="100%"
           >
-            {(reactionsByUserAndComment && reactionsByUserAndComment.reaction_type === 'LIKE') ? (
+            {(reactionsByUserAndComment && reactionsByUserAndComment.reaction_type === "LIKE") ? (
               <IconButton size="small" onClick={handleDeleteReaction} >
                 <FavoriteIcon style={{ color: "#e25349" }} fontSize="small" />
               </IconButton>
@@ -190,7 +190,7 @@ const Comment = ({ commentId, postId, userId, text, commentTime, commentsRefetch
                 <FavoriteBorderIcon fontSize="small" />
               </IconButton>
             )}
-            {(reactionsByUserAndComment && reactionsByUserAndComment.reaction_type === 'DISLIKE') ? (
+            {(reactionsByUserAndComment && reactionsByUserAndComment.reaction_type === "DISLIKE") ? (
               <IconButton size="small" onClick={handleDeleteReaction} >
                 <ThumbDownIcon style={{ color: "#e25349" }} fontSize="small" />
               </IconButton>
