@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { ExplorePageContainer } from './styles/explore_page.styles';
+import { ExplorePageContainer } from "./styles/explore_page.styles";
 import { Search } from "@mui/icons-material";
 import { Input, Typography, Hidden, Fade } from "@mui/material";
 import { Box } from "@mui/system";
 import WhoToFollowSmall from "../components/WhoToFollow/who_to_follow_small.component";
 import { QUERY_USERS_LIST, QUERY_WHO_TO_FOLLOW_USERS } from "../utils/queries";
-import { useQuery } from '@apollo/client';
+import { useQuery } from "@apollo/client";
 import { useAppSelector } from "../app/hooks";
-import { userProps } from '../index.types';
-import WhoToFollowLoading from '../components/WhoToFollow/who_to_follow_loading.component';
+import { userProps } from "../index.types";
+import WhoToFollowLoading from "../components/WhoToFollow/who_to_follow_loading.component";
 
 const ExplorePage = () => {
   const currentUser = useAppSelector(state => state.currentUser)
@@ -22,7 +22,7 @@ const ExplorePage = () => {
     variables: { handle: searchText },
   });
   if (data) {
-    var { usersList } = data;
+    const { usersList } = data;
     var usersArray: Array<{
       id: string,
       handle: string,
@@ -30,7 +30,7 @@ const ExplorePage = () => {
       isActive: string
     }> | undefined = usersList
   }
-  let pending = userListLoading || userLostError || whoToFollowError || whoToFollowLoading || currentUserError || currentUserLoading;
+  const pending = userListLoading || userLostError || whoToFollowError || whoToFollowLoading || currentUserError || currentUserLoading;
 
   return (
     <ExplorePageContainer>
@@ -73,7 +73,7 @@ const ExplorePage = () => {
               borderRadius: "28px",
               padding: "10px 20px",
               margin: "1rem 0",
-              minHeight: '600px',
+              minHeight: "600px",
               display: "flex",
               // alignItems: "center",
               flexDirection: "column"

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
-import { createMemoryHistory } from 'history';
+import { connect } from "react-redux";
+import { createMemoryHistory } from "history";
 const history = createMemoryHistory();
 import Header from "../components/Header/header.component";
 import SignIn from "../components/SignIn/sign-in.component";
@@ -9,23 +9,23 @@ import RightSidebar from "../components/RightSideBar/right-sidebar.component";
 import { BrowserRouter as Switch, Route, Router, Redirect } from "react-router-dom";
 import PostList from "../components/PostList/post-list.component";
 import { FeedContainer } from "./Router.styles";
-import { setCurrentUser } from '../redux/actions/userActions';
-import { listPosts, listPostsByFollowing } from '../redux/actions/postActions';
-import { getCurrentUser } from '../redux/user.selectors';
-import { auth, createUserProfileDocument } from '../firebase/firebase.utils';
+import { setCurrentUser } from "../redux/actions/userActions";
+import { listPosts, listPostsByFollowing } from "../redux/actions/postActions";
+import { getCurrentUser } from "../redux/user.selectors";
+import { auth, createUserProfileDocument } from "../firebase/firebase.utils";
 import { gql } from "@apollo/client";
-import { client } from '../index';
-import { QUERY_USER, QUERY_POSTS_BY_FOLLOWING, QUERY_FRIEND_REQUEST } from '../utils/queries';
-import { CREATE_USER_PROFILE, FRIEND_REQUEST } from '../utils/mutations';
+import { client } from "../index";
+import { QUERY_USER, QUERY_POSTS_BY_FOLLOWING, QUERY_FRIEND_REQUEST } from "../utils/queries";
+import { CREATE_USER_PROFILE, FRIEND_REQUEST } from "../utils/mutations";
 import GuestProfile from "../components/GuestProfile/guest_profile.component";
 import ProfilePage from "../pages/profile_page";
-import CryptoPage from '../pages/crypto_page';
-import ChatPage from '../pages/chat_page';
-import ExplorePage from '../pages/explore_page';
-import NotificationPage from '../pages/notification_page';
-import MessagePage from '../pages/message_page';
+import CryptoPage from "../pages/crypto_page";
+import ChatPage from "../pages/chat_page";
+import ExplorePage from "../pages/explore_page";
+import NotificationPage from "../pages/notification_page";
+import MessagePage from "../pages/message_page";
 import Messages from "../components/Messages/messages.component";
-import FriendRequests from '../components/FriendRequests/friend_requests.component';
+import FriendRequests from "../components/FriendRequests/friend_requests.component";
 
 type MyProps = {
   setCurrentUser: any;
@@ -45,7 +45,7 @@ query posts($user_id: ID!) {
 }
 `;
 
-class Routes extends Component<MyProps, {}> {
+class Routes extends Component<MyProps, unknown> {
   unsubscribeFromAuth: any = null;
 
   componentDidMount = () => {
@@ -178,7 +178,7 @@ class Routes extends Component<MyProps, {}> {
       </Router>
     )
   }
-};
+}
 
 const mapStateToProps = (state: any) => ({
   currentUser: getCurrentUser(state),

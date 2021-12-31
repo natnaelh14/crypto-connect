@@ -4,10 +4,10 @@ import { Input, Typography, Hidden } from "@mui/material";
 import { Box } from "@mui/system";
 import WhoToFollow from "../WhoToFollow/who-to-follow.component";
 import { QUERY_USERS_LIST, QUERY_WHO_TO_FOLLOW_USERS } from "../../utils/queries";
-import { useQuery } from '@apollo/client';
+import { useQuery } from "@apollo/client";
 import { useAppSelector } from "../../app/hooks";
-import { userProps } from '../../index.types';
-import WhoToFollowLoading from '../WhoToFollow/who_to_follow_loading.component';
+import { userProps } from "../../index.types";
+import WhoToFollowLoading from "../WhoToFollow/who_to_follow_loading.component";
 
 const RightSidebar = () => {
 
@@ -23,7 +23,7 @@ const RightSidebar = () => {
     variables: { handle: searchText },
   });
   if (data) {
-    var { usersList } = data;
+    const { usersList } = data;
     var usersArray: Array<{
       id: string,
       handle: string,
@@ -32,7 +32,7 @@ const RightSidebar = () => {
     }> | undefined = usersList
   }
 
-  let pending = userListLoading || userLostError || whoToFollowError || whoToFollowLoading || currentUserError || currentUserLoading;
+  const pending = userListLoading || userLostError || whoToFollowError || whoToFollowLoading || currentUserError || currentUserLoading;
 
   return (
     <Hidden lgDown>
@@ -75,7 +75,7 @@ const RightSidebar = () => {
               borderRadius: "28px",
               padding: "10px 20px",
               margin: "1rem 0",
-              minHeight: '600px'
+              minHeight: "600px"
             }}
           >
             <Typography fontFamily='inherit' variant="h6" textAlign='center' sx={{ fontWeight: "bold" }}>

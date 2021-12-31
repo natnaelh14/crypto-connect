@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Grid, Typography, Button } from "@mui/material";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
-import { useAppSelector } from '../../app/hooks';
-import { useMutation } from '@apollo/client';
-import { UPDATE_FRIEND_REQUEST } from '../../utils/mutations';
-import { userProps } from '../../index.types';
-import Avatar from '@material-ui/core/Avatar';
+import { useAppSelector } from "../../app/hooks";
+import { useMutation } from "@apollo/client";
+import { UPDATE_FRIEND_REQUEST } from "../../utils/mutations";
+import { userProps } from "../../index.types";
+import Avatar from "@material-ui/core/Avatar";
 
 type RequestsProps = {
     userId: string,
@@ -41,8 +41,8 @@ const FriendRequestBox = ({ userId, userHandle, userAvatar, updateRequest }: Req
             <Box
                 padding="1rem"
                 sx={{
-                    marginTop: '10px',
-                    marginBottom: '10px',
+                    marginTop: "10px",
+                    marginBottom: "10px",
                     "&:hover": {
                         backgroundColor: "#eee",
                     },

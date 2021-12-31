@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 import { Fade, Typography, IconButton } from "@mui/material";
-import FriendRequestBox from '../FriendRequestBox/friend_request_box.component';
-import { useQuery } from '@apollo/client';
-import { QUERY_FRIEND_REQUESTS } from '../../utils/queries';
+import FriendRequestBox from "../FriendRequestBox/friend_request_box.component";
+import { useQuery } from "@apollo/client";
+import { QUERY_FRIEND_REQUESTS } from "../../utils/queries";
 import { useAppSelector } from "../../app/hooks";
-import FriendRequestBoxLoading from '../FriendRequestBox/friend_request_box_loading.component';
-import { FriendRequestsContainer } from './friend_request.styles';
+import FriendRequestBoxLoading from "../FriendRequestBox/friend_request_box_loading.component";
+import { FriendRequestsContainer } from "./friend_request.styles";
 import { Box } from "@mui/system";
-import RefreshIcon from '@mui/icons-material/Refresh';
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 type userProps = {
     id: string,
@@ -38,7 +38,7 @@ const FriendRequests = () => {
     return (
         <FriendRequestsContainer>
             <Fade in={true} timeout={1000}>
-                <div style={{ border: '1px solid #cdcdcd', height: "90vh", padding: '20px' }}>
+                <div style={{ border: "1px solid #cdcdcd", height: "90vh", padding: "20px" }}>
                     <Typography variant='h5' textAlign='center' >Friend Requests</Typography>
                     <Box
                         paddingBottom=".5rem"
@@ -56,7 +56,7 @@ const FriendRequests = () => {
                             </>
                         )}
                         {friendRequestsData && (
-                            <Box sx={{ display: 'flex', justifyContent: 'center' }} >
+                            <Box sx={{ display: "flex", justifyContent: "center" }} >
                                 <IconButton size="medium" onClick={getRequests} >
                                     <RefreshIcon fontSize="small" />
                                 </IconButton>

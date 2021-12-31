@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Button, Dialog, DialogActions, DialogContent, Autocomplete, DialogTitle, IconButton, Typography, TextField } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import NumberFormat from 'react-number-format';
+import NumberFormat from "react-number-format";
 import { Box } from "@mui/system";
-import { coinsList } from './coin';
-import { QUERY_CRYPTOS } from '../../utils/queries';
-import { useQuery, useMutation } from '@apollo/client';
-import { ADD_CRYPTO } from '../../utils/mutations';
-import CryptoUpdateInput from './CryptoUpdateInput/crypto_update_input.component';
+import { coinsList } from "./coin";
+import { QUERY_CRYPTOS } from "../../utils/queries";
+import { useQuery, useMutation } from "@apollo/client";
+import { ADD_CRYPTO } from "../../utils/mutations";
+import CryptoUpdateInput from "./CryptoUpdateInput/crypto_update_input.component";
 
 type ModalProps = {
     open: boolean,
@@ -64,26 +64,26 @@ const AddModifyCrypto = ({
             {cryptoByUserId && (
                 <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
                     <DialogTitle>
-                        <Typography fontFamily='inherit' textAlign='center' style={{ fontSize: '20px' }}>ADD/MODIFY CRYPTO</Typography>
+                        <Typography fontFamily='inherit' textAlign='center' style={{ fontSize: "20px" }}>ADD/MODIFY CRYPTO</Typography>
                         <Box textAlign="right" borderBottom="1px solid #ccc">
                             <IconButton onClick={handleClose}>
                                 <CloseIcon />
                             </IconButton>
                         </Box>
                     </DialogTitle>
-                    <DialogContent style={{ height: '700px' }}>
+                    <DialogContent style={{ height: "700px" }}>
                         <Box padding="1rem 1rem 0 1rem" borderBottom="1px solid #ccc">
-                            <Typography fontSize='1.2rem' textAlign='center' fontFamily='inherit' style={{ color: 'red' }} >{errorText}</Typography>
+                            <Typography fontSize='1.2rem' textAlign='center' fontFamily='inherit' style={{ color: "red" }} >{errorText}</Typography>
                             <Box sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                '& > :not(style)': { m: 1 },
+                                display: "flex",
+                                alignItems: "center",
+                                "& > :not(style)": { m: 1 },
                             }}>
                                 <Autocomplete
                                     freeSolo
                                     disableClearable
                                     fullWidth
-                                    sx={{ paddingBottom: '1rem' }}
+                                    sx={{ paddingBottom: "1rem" }}
                                     options={coinsList.map((option) => option.name)}
                                     renderInput={(params) => (
                                         <TextField
@@ -94,7 +94,7 @@ const AddModifyCrypto = ({
                                             onChange={(e) => setAddCoin(e.target.value)}
                                             InputProps={{
                                                 ...params.InputProps,
-                                                type: 'search',
+                                                type: "search",
                                             }}
                                         />
                                     )}
@@ -130,17 +130,17 @@ const AddModifyCrypto = ({
                             }
                         </Box>
                     </DialogContent>
-                    <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
+                    <DialogActions style={{ display: "flex", justifyContent: "center" }}>
                         <Button
                             type="submit"
                             size="small"
                             sx={{
                                 textTransform: "capitalize",
                                 padding: "6px 20px",
-                                marginBottom: '20px',
+                                marginBottom: "20px",
                                 width: "60%",
                                 background: "black",
-                                fontFamily: 'inherit',
+                                fontFamily: "inherit",
                                 "&:hover": {
                                     background: "#333",
                                 },

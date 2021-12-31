@@ -1,10 +1,10 @@
 import { Grid } from "@mui/material";
 import { Box } from "@mui/system";
-import { CryptoDataContainer, CryptoDoughnutContainer, CryptoCarouselContainer } from '../styles/crypto_page.styles';
-import TwitterPostLoading from '../../components/TwitterPost/twitter_post_loading.component';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-import { RectShape } from 'react-placeholder/lib/placeholders';
+import { CryptoDataContainer, CryptoDoughnutContainer, CryptoCarouselContainer } from "../styles/crypto_page.styles";
+import TwitterPostLoading from "../../components/TwitterPost/twitter_post_loading.component";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { RectShape } from "react-placeholder/lib/placeholders";
 
 
 const CryptoPageLoading = () => {
@@ -13,11 +13,11 @@ const CryptoPageLoading = () => {
             <CryptoDataContainer>
                 <CryptoCarouselContainer>
                     <Grid item padding="1rem 1rem 1rem 1rem" width='350px' height='450px' border="5px solid #ccc">
-                        <RectShape color='#cccccc' style={{ width: '300px', height: "400px" }} />
+                        <RectShape color='#cccccc' style={{ width: "300px", height: "400px" }} />
                     </Grid>
                 </CryptoCarouselContainer>
                 <CryptoDoughnutContainer>
-                    <RectShape color='#cccccc' style={{ width: '400px', height: "400px" }} />
+                    <RectShape color='#cccccc' style={{ width: "400px", height: "400px" }} />
                 </CryptoDoughnutContainer>
             </CryptoDataContainer>
             <Box textAlign="right" padding="10px 20px">

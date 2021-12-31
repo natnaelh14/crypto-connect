@@ -2,7 +2,7 @@ import {
   GroupContainer,
   FormInputContainer,
   FormInputLabel
-} from './form-input.styles';
+} from "./form-input.styles";
 
 type InputProps = {
     name: string,
@@ -16,7 +16,7 @@ const FormInput = ({ onChange, label, name, type, value}: InputProps) => (
   <GroupContainer>
     <FormInputContainer onChange={onChange} name={name} required type={type} />
     {label ? (
-      <FormInputLabel className={value.length ? 'shrink' : ''}>
+      <FormInputLabel className={value.length ? "shrink" : ""}>
         {label}
       </FormInputLabel>
     ) : null}

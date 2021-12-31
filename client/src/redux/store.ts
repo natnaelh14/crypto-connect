@@ -1,8 +1,8 @@
 import thunk from "redux-thunk";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { postListReducer, postListByFollowingReducer } from './reducers/postReducers';
-import { currentUserReducer } from './reducers/userReducers';
+import { postListReducer, postListByFollowingReducer } from "./reducers/postReducers";
+import { currentUserReducer } from "./reducers/userReducers";
 
 
 const reducer = combineReducers({

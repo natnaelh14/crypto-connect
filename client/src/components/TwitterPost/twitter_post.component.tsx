@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Grid, IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import IosShareIcon from "@mui/icons-material/IosShare";
-import ShareModal from '../ShareModal/share-modal.component';
+import ShareModal from "../ShareModal/share-modal.component";
 import { useAppSelector } from "../../app/hooks";
 import { userProps } from "../../index.types";
 

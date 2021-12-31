@@ -2,17 +2,17 @@ import { Box } from "@mui/system";
 import { Grid, Typography, Fade } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import DateRangeIcon from "@mui/icons-material/DateRange";
-import { GuestDataContainer, CryptoCarouselContainer, GuestUserInfoContainer, UserBioContainer } from './guest_profile.styles'
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-import { RectShape } from 'react-placeholder/lib/placeholders';
-import PostLoading from '../Post/post_loading.component';
+import { GuestDataContainer, CryptoCarouselContainer, GuestUserInfoContainer, UserBioContainer } from "./guest_profile.styles"
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { RectShape } from "react-placeholder/lib/placeholders";
+import PostLoading from "../Post/post_loading.component";
 
 const GuestProfileLoading = () => {
     return (
         <>
             <Fade in={true} timeout={1000}>
-                <div style={{ padding: '20px' }}>
+                <div style={{ padding: "20px" }}>
                     <Box borderBottom="1px solid #ccc" padding="8px 20px">
                         <Grid container alignItems="center">
                             <Grid item sx={{ mr: "10px" }}>
@@ -30,7 +30,7 @@ const GuestProfileLoading = () => {
                     </Box>
                     <GuestDataContainer>
                         <GuestUserInfoContainer>
-                            <Box padding="10px 20px" display="flex" alignItems="center" sx={{ flexDirection: 'column' }}>
+                            <Box padding="10px 20px" display="flex" alignItems="center" sx={{ flexDirection: "column" }}>
                                 <Skeleton
                                     circle
                                     height="150px"
@@ -77,7 +77,7 @@ const GuestProfileLoading = () => {
                             </UserBioContainer>
                         </GuestUserInfoContainer>
                         <CryptoCarouselContainer>
-                            <RectShape color='#cccccc' style={{ width: '400px', height: "400px" }} />
+                            <RectShape color='#cccccc' style={{ width: "400px", height: "400px" }} />
                         </CryptoCarouselContainer>
                     </GuestDataContainer>
                     <Box sx={{ overflowY: "scroll" }} >
@@ -94,7 +94,7 @@ const GuestProfileLoading = () => {
                                 <Skeleton width={70} />
                             </Typography>
                         </Box >
-                        <Box sx={{ width: 'auto' }}>
+                        <Box sx={{ width: "auto" }}>
                             <PostLoading />
                             <PostLoading />
                             <PostLoading />

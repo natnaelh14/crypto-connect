@@ -6,18 +6,18 @@ import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import TagIcon from "@mui/icons-material/Tag";
 import { Button, Box, IconButton, Hidden } from "@mui/material";
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import NotificationAddIcon from '@mui/icons-material/NotificationAdd';
+import NotificationAddIcon from "@mui/icons-material/NotificationAdd";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import ChatIcon from '@mui/icons-material/Chat';
+import ChatIcon from "@mui/icons-material/Chat";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { NavLink } from "react-router-dom";
 import AddPostModal from "../AddPostModal/add_post_modal.component";
-import { QUERY_FRIEND_REQUESTS } from '../../utils/queries';
-import { useAppSelector } from '../../app/hooks';
-import { useQuery } from '@apollo/client';
+import { QUERY_FRIEND_REQUESTS } from "../../utils/queries";
+import { useAppSelector } from "../../app/hooks";
+import { useQuery } from "@apollo/client";
 
 type userProps = {
   id: string,
@@ -49,7 +49,7 @@ const LeftSidebar = () => {
 
   return (
     <>
-      <Box sx={{ minWidth: '40px' }} >
+      <Box sx={{ minWidth: "40px" }} >
         <List>
           <NavLink
             to="/home/feed"
@@ -73,7 +73,7 @@ const LeftSidebar = () => {
                 <ListItemText
                   primaryTypographyProps={{
                     fontSize: "18px",
-                    fontFamily: 'inherit'
+                    fontFamily: "inherit"
                   }}
                   primary="HOME"
                 />
@@ -124,7 +124,7 @@ const LeftSidebar = () => {
                 <ListItemText
                   primaryTypographyProps={{
                     fontSize: "18px",
-                    fontFamily: 'inherit'
+                    fontFamily: "inherit"
                   }}
                   primary="CRYPTO"
                 />
@@ -154,12 +154,12 @@ const LeftSidebar = () => {
                   // sx={{ minWidth: '0'}}
                   primaryTypographyProps={{
                     fontSize: "18px",
-                    fontFamily: 'inherit'
+                    fontFamily: "inherit"
                   }}
                   secondaryTypographyProps={{
-                    color: 'red',
+                    color: "red",
                     fontSize: "18px",
-                    fontWeight: 'bold'
+                    fontWeight: "bold"
                   }}
                   primary="FOLLOW REQUESTS"
                   secondary={friendRequestsData?.length ? `(${friendRequestsData?.length})` : ""}
@@ -218,7 +218,7 @@ const LeftSidebar = () => {
                 <ListItemText
                   primaryTypographyProps={{
                     fontSize: "18px",
-                    fontFamily: 'inherit'
+                    fontFamily: "inherit"
                   }}
                   primary="MESSAGES"
                 />
@@ -277,7 +277,7 @@ const LeftSidebar = () => {
                 <ListItemText
                   primaryTypographyProps={{
                     fontSize: "18px",
-                    fontFamily: 'inherit'
+                    fontFamily: "inherit"
                   }}
                   primary="PROFILE"
                 />
@@ -292,7 +292,7 @@ const LeftSidebar = () => {
               sx={{
                 borderRadius: "28px",
                 padding: "10px",
-                fontFamily: 'inherit',
+                fontFamily: "inherit",
                 background: "black",
                 "&:hover": {
                   background: "#333",
@@ -307,7 +307,7 @@ const LeftSidebar = () => {
               onClick={handleModalOpen}
               sx={{
                 borderRadius: "28px",
-                marginLeft: '8px'
+                marginLeft: "8px"
                 // padding: "10px",
               }}
             >

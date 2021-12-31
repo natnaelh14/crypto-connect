@@ -7,34 +7,34 @@ import DateRangeIcon from "@mui/icons-material/DateRange";
 import { Link as RouteLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import Post from "../Post/Post.component";
-import { useParams } from 'react-router-dom';
-import { QUERY_USER, QUERY_POSTS, QUERY_CHECK_FRIENDSHIP, QUERY_FOLLOWERS, QUERY_FOLLOWINGS, QUERY_FRIEND_REQUEST } from '../../utils/queries';
-import { REMOVE_FOLLOWING, FRIEND_REQUEST } from '../../utils/mutations';
-import { useQuery, useMutation } from '@apollo/client';
-const Moment = require('moment')
+import { useParams } from "react-router-dom";
+import { QUERY_USER, QUERY_POSTS, QUERY_CHECK_FRIENDSHIP, QUERY_FOLLOWERS, QUERY_FOLLOWINGS, QUERY_FRIEND_REQUEST } from "../../utils/queries";
+import { REMOVE_FOLLOWING, FRIEND_REQUEST } from "../../utils/mutations";
+import { useQuery, useMutation } from "@apollo/client";
+const Moment = require("moment")
 import { userProps } from "../../index.types";
 import CryptoDoughnut from "../CryptoDoughnut/crypto_doughnut.component";
-import { useAppSelector } from '../../app/hooks';
-import { GuestDataContainer, CryptoCarouselContainer, GuestUserInfoContainer, UserBioContainer } from './guest_profile.styles';
-import GuestProfileLoading from './guest_profile_loading.component';
+import { useAppSelector } from "../../app/hooks";
+import { GuestDataContainer, CryptoCarouselContainer, GuestUserInfoContainer, UserBioContainer } from "./guest_profile.styles";
+import GuestProfileLoading from "./guest_profile_loading.component";
 import Avatar from "@material-ui/core/Avatar";
-import noAvatar from '../../img/no-avatar.png';
-import FollowModal from '../FollowModal/follow_modal.component';
+import noAvatar from "../../img/no-avatar.png";
+import FollowModal from "../FollowModal/follow_modal.component";
 
 const moodObj = (currentMood: string) => {
     switch (currentMood) {
-        case 'HAPPY':
-            return '😀';
-        case 'SAD':
-            return '😔';
-        case 'EXCITED':
-            return '😃';
-        case 'AMUSED':
-            return '🙂';
-        case 'OPTIMISTIC':
-            return '😊';
-        case 'FRUSTRATED':
-            return '😩';
+        case "HAPPY":
+            return "😀";
+        case "SAD":
+            return "😔";
+        case "EXCITED":
+            return "😃";
+        case "AMUSED":
+            return "🙂";
+        case "OPTIMISTIC":
+            return "😊";
+        case "FRUSTRATED":
+            return "😩";
         default:
             return "";
     }
@@ -55,17 +55,17 @@ const GuestProfile = () => {
                 id: profileId
             },
         });
-        var { loading: postsLoading, error: postsError, data: postsData } = useQuery(QUERY_POSTS, {
+        var { loading: postsLoading, error: postsError, data: postsData, refetch: postsRefetch } = useQuery(QUERY_POSTS, {
             variables: {
                 user_id: profileId
             },
         });
-        var { error: followerError, loading: followerLoading, data: followerData } = useQuery(QUERY_FOLLOWERS, {
+        var { error: followerError, loading: followerLoading, data: followerData, refetch: followerRefetch } = useQuery(QUERY_FOLLOWERS, {
             variables: {
                 id: profileId
             }
         });
-        var { error: followingError, loading: followingLoading, data: followingData } = useQuery(QUERY_FOLLOWINGS, {
+        var { error: followingError, loading: followingLoading, data: followingData, refetch: followingRefetch } = useQuery(QUERY_FOLLOWINGS, {
             variables: {
                 id: profileId
             }
@@ -134,17 +134,17 @@ const GuestProfile = () => {
         }
     }
 
-    let pending = userLoading || !checkFriendRequestData || !checkFriendData || !postsData
+    const pending = userLoading || !checkFriendRequestData || !checkFriendData || !postsData
     const currentMood = userData?.userProfile?.status
 
     return (
-        <div style={{ width: '75%', margin: '20px' }}>
+        <div style={{ width: "75%", margin: "20px" }}>
             {(pending) && (
                 <GuestProfileLoading />
             )}
             {(userData?.userProfile && checkFriendRequestData && checkFriendData) && (
                 <Fade in={true} timeout={1000}>
-                    <div style={{ padding: '20px' }}>
+                    <div style={{ padding: "20px" }}>
                         <Box borderBottom="1px solid #ccc" padding="8px 20px">
                             <Grid container alignItems="center">
                                 <Grid item sx={{ mr: "10px" }}>
@@ -166,7 +166,7 @@ const GuestProfile = () => {
                         </Box>
                         <GuestDataContainer>
                             <GuestUserInfoContainer>
-                                <Box padding="10px 20px" display="flex" alignItems="center" sx={{ flexDirection: 'column' }}>
+                                <Box padding="10px 20px" display="flex" alignItems="center" sx={{ flexDirection: "column" }}>
                                     <Avatar style={{ width: "100px", height: "100px" }} alt="guest-profile-image" src={userData?.userProfile?.avatar ? userData?.userProfile?.avatar : noAvatar} />
                                     {checkFriendData?.checkFriendship ? (
                                         <Button
@@ -175,7 +175,7 @@ const GuestProfile = () => {
                                             sx={{
                                                 textTransform: "capitalize",
                                                 padding: "6px 20px",
-                                                marginTop: '5px',
+                                                marginTop: "5px",
                                                 background: "black",
                                                 "&:hover": {
                                                     background: "#333",
@@ -192,7 +192,7 @@ const GuestProfile = () => {
                                             sx={{
                                                 textTransform: "capitalize",
                                                 padding: "6px 20px",
-                                                marginTop: '5px',
+                                                marginTop: "5px",
                                                 background: "black",
                                                 "&:hover": {
                                                     background: "#333",
@@ -211,7 +211,7 @@ const GuestProfile = () => {
                                             sx={{
                                                 textTransform: "capitalize",
                                                 padding: "6px 20px",
-                                                marginTop: '5px',
+                                                marginTop: "5px",
                                                 background: "black",
                                                 "&:hover": {
                                                     background: "#333",
@@ -233,20 +233,24 @@ const GuestProfile = () => {
                                         )}
                                     </Box>
                                     <Typography textAlign='center' sx={{ fontSize: "14px", color: "#555" }}>
-                                        @{userData?.userProfile?.handle.trim().replace(/ /g, '').toLowerCase()}
+                                        @{userData?.userProfile?.handle.trim().replace(/ /g, "").toLowerCase()}
                                     </Typography>
-                                    <Box display="flex">
-                                        <LocationOnIcon htmlColor="#555" />
-                                        <Typography textAlign='center' sx={{ ml: "6px", color: "#555" }}>
-                                            {userData?.userProfile?.city}, {userData?.userProfile?.state}, {userData?.userProfile?.country}
-                                        </Typography>
-                                    </Box>
-                                    <Box display="flex">
-                                        <DateRangeIcon htmlColor="#555" />
-                                        <Typography sx={{ ml: "6px", color: "#555" }}>
-                                            {Moment(userData?.userProfile?.birth_date).format('MMMM Do YYYY')}
-                                        </Typography>
-                                    </Box>
+                                    {(userData?.userProfile?.city || userData?.userProfile?.state || userData?.userProfile?.country) && (
+                                        <Box display="flex">
+                                            <LocationOnIcon htmlColor="#555" />
+                                            <Typography textAlign='center' sx={{ ml: "6px", color: "#555" }}>
+                                                {userData?.userProfile?.city}, {userData?.userProfile?.state}, {userData?.userProfile?.country}
+                                            </Typography>
+                                        </Box>
+                                    )}
+                                    {userData?.userProfile?.birth_date && (
+                                        <Box display="flex" mt='0.5rem'>
+                                            <DateRangeIcon htmlColor="#555" />
+                                            <Typography sx={{ ml: "6px", color: "#555" }}>
+                                                {Moment(userData?.userProfile?.birth_date).format("MMMM Do YYYY")}
+                                            </Typography>
+                                        </Box>
+                                    )}
                                 </Box>
                                 <UserBioContainer>
                                     <Typography fontSize="16px" color="#333" textAlign='center' padding="10px 0">
@@ -290,7 +294,7 @@ const GuestProfile = () => {
                                         </Box>
                                     </Box>
                                     <Box display="flex" justifyContent='center' marginTop='0.25rem'>
-                                        <Typography color="#555">Member Since {Moment(userData?.userProfile?.created_at).format('YYYY')}</Typography>
+                                        <Typography color="#555">Member Since {Moment(userData?.userProfile?.created_at).format("YYYY")}</Typography>
                                     </Box>
                                 </UserBioContainer>
                             </GuestUserInfoContainer>
@@ -316,7 +320,7 @@ const GuestProfile = () => {
                             </Box >
                             {(postsData?.posts && checkFriendData?.checkFriendship) &&
                                 postsData?.posts.map((post: any) => {
-                                    return <Post key={post.id} postId={post.id} userId={post.user_id} postTime={post.created_at} text={post.text} refetchPosts={() => { }} />
+                                    return <Post key={post.id} postId={post.id} userId={post.user_id} postTime={post.created_at} text={post.text} refetchPosts={postsRefetch} />
                                 }
                                 )
                             }
@@ -331,7 +335,7 @@ const GuestProfile = () => {
                     follow={followings}
                     title="Following"
                     action='Following'
-                    refetch={() => { }}
+                    refetch={followingRefetch}
                     buttonStatus={false}
                 />
             )}
@@ -342,7 +346,7 @@ const GuestProfile = () => {
                     follow={followers}
                     title='Followers'
                     action='Remove'
-                    refetch={() => { }}
+                    refetch={followerRefetch}
                     buttonStatus={false}
                 />
             )}

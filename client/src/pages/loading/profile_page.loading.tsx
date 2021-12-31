@@ -1,16 +1,16 @@
 import { Box } from "@mui/system";
 import { Grid, Typography } from "@mui/material";
 import { Fade } from "@mui/material";
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-import PostLoading from '../../components/Post/post_loading.component';
-import { RectShape } from 'react-placeholder/lib/placeholders';
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import PostLoading from "../../components/Post/post_loading.component";
+import { RectShape } from "react-placeholder/lib/placeholders";
 
 const ProfilePageLoading = () => {
     return (
         <>
             <Fade in={true} timeout={1000}>
-                <div style={{ padding: '20px' }}>
+                <div style={{ padding: "20px" }}>
                     <Box>
                         <Box borderBottom="1px solid #ccc" padding="8px 20px">
                             <Grid container alignItems="center">
@@ -29,7 +29,7 @@ const ProfilePageLoading = () => {
                         </Box>
                         <Box height="90vh" sx={{ overflowY: "scroll" }}>
                             <Box position="relative">
-                                <RectShape color='#cccccc' style={{ width: '100%', height: "300px" }} />
+                                <RectShape color='#cccccc' style={{ width: "100%", height: "300px" }} />
                                 <Box
                                     sx={{
                                         position: "absolute",
@@ -92,7 +92,7 @@ const ProfilePageLoading = () => {
                             <Box borderBottom="1px solid #ccc" marginLeft='1.25rem'>
                                 <Skeleton width={40} />
                             </Box>
-                            <Box sx={{ width: '100%' }}>
+                            <Box sx={{ width: "100%" }}>
                                 <PostLoading />
                                 <PostLoading />
                                 <PostLoading />

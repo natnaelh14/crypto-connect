@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Grid, Typography, Button } from "@mui/material";
 import { Box } from "@mui/system";
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const FriendRequestBoxLoading = () => {
 
@@ -11,8 +11,8 @@ const FriendRequestBoxLoading = () => {
             <Box
                 padding="1rem"
                 sx={{
-                    marginTop: '10px',
-                    marginBottom: '10px',
+                    marginTop: "10px",
+                    marginBottom: "10px",
                     "&:hover": {
                         backgroundColor: "#eee",
                     },

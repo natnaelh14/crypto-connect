@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import PieChart, { Legend, Series, Tooltip, Format, Label, Connector, Title, Subtitle, Size } from 'devextreme-react/pie-chart';
-import { QUERY_CRYPTOS } from '../../utils/queries';
-import { useQuery } from '@apollo/client';
+import React, { useEffect, useState } from "react";
+import PieChart, { Legend, Series, Tooltip, Format, Label, Connector, Title, Subtitle, Size } from "devextreme-react/pie-chart";
+import { QUERY_CRYPTOS } from "../../utils/queries";
+import { useQuery } from "@apollo/client";
 
 const CryptoDoughnut: React.FC<{ currentUser: string }> = ({ currentUser }) => {
     const { error: cryptoError, loading: cryptoLoading, data } = useQuery(QUERY_CRYPTOS, {
@@ -21,7 +21,7 @@ const CryptoDoughnut: React.FC<{ currentUser: string }> = ({ currentUser }) => {
     useEffect(() => {
         if (cryptoByUserId) {
             (async () => {
-                let cryptoArray: any = []
+                const cryptoArray: any = []
                 let total = 0
                 for (let i = 0; i < cryptoByUserId.length; i++) {
                     await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${cryptoByUserId[i].crypto_name}`)
@@ -42,7 +42,7 @@ const CryptoDoughnut: React.FC<{ currentUser: string }> = ({ currentUser }) => {
         }
     }, [cryptoByUserId])
 
-    let pending = cryptoError || cryptoLoading
+    const pending = cryptoError || cryptoLoading
 
     return (
         <>
@@ -54,7 +54,7 @@ const CryptoDoughnut: React.FC<{ currentUser: string }> = ({ currentUser }) => {
                     type="doughnut"
                     palette="Soft Pastel"
                     dataSource={cryptoData}
-                    style={{ fontFamily: 'inherit' }}
+                    style={{ fontFamily: "inherit" }}
                 >
                     <Title text="CRYPTO HOLDING">
                         <Subtitle text={`US$ ${cryptoTotal.toLocaleString()}`} />

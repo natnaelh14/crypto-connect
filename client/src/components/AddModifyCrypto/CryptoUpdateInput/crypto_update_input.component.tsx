@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { FormControl, OutlinedInput, InputAdornment, Typography, IconButton } from "@mui/material";
-const CoinImage = require('./coin.png')
+const CoinImage = require("./coin.png")
 import { Box } from "@mui/system";
-import { QUERY_SEARCH_API } from '../../../utils/queries';
-import { UPDATE_CRYPTO, DELETE_CRYPTO } from '../../../utils/mutations';
-import { useQuery, useMutation } from '@apollo/client';
-import SaveIcon from '@mui/icons-material/Save';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { QUERY_SEARCH_API } from "../../../utils/queries";
+import { UPDATE_CRYPTO, DELETE_CRYPTO } from "../../../utils/mutations";
+import { useQuery, useMutation } from "@apollo/client";
+import SaveIcon from "@mui/icons-material/Save";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 type cryptoProps = {
     name: string,
@@ -45,7 +45,7 @@ const CryptoUpdateInput = ({ name, holding, cryptoId, refreshCrypto }: cryptoPro
                     refreshCrypto()
                 })
             } catch (e) {
-                throw new Error('Unable to update CryptoCurrency')
+                throw new Error("Unable to update CryptoCurrency")
             }
         } else {
             return;
@@ -62,22 +62,22 @@ const CryptoUpdateInput = ({ name, holding, cryptoId, refreshCrypto }: cryptoPro
                 refreshCrypto();
             })
         } catch (e) {
-            throw new Error('Unable to delete CryptoCurrency')
+            throw new Error("Unable to delete CryptoCurrency")
         }
     }
 
     return (
         <>
-            <Box sx={{ marginBottom: '30px' }}>
+            <Box sx={{ marginBottom: "30px" }}>
                 <Box sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
                     // '& > :not(style)': { m: 1 },
                 }}>
                     <img src={image ? image : CoinImage} height='25' width='25' alt='crypto-image' />
                     <Typography fontFamily='inherit' ml='0.5rem'>{name.toUpperCase()}</Typography>
-                    <Box sx={{ position: 'absolute', left: '50%', display: 'flex', flexDirection: 'row' }}>
+                    <Box sx={{ position: "absolute", left: "50%", display: "flex", flexDirection: "row" }}>
                         <FormControl sx={{ m: 0.25, maxWidth: 150 }}>
                             <OutlinedInput
                                 id="outlined-adornment-amount"
@@ -90,7 +90,7 @@ const CryptoUpdateInput = ({ name, holding, cryptoId, refreshCrypto }: cryptoPro
                         </FormControl>
                         <Typography fontFamily='inherit' ml='0.5rem' display='flex' alignItems='center' > = ${(holding * currentPrice).toLocaleString()}</Typography>
                     </Box>
-                    <Box display='flex' sx={{ flexDirection: 'row', marginLeft: 'auto' }} >
+                    <Box display='flex' sx={{ flexDirection: "row", marginLeft: "auto" }} >
                         <IconButton onClick={handleCryptoUpdate}>
                             <SaveIcon />
                         </IconButton>

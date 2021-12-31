@@ -7,7 +7,6 @@ import {
   POST_LIST_SUCCESS,
 } from "../constants/postConstants";
 
-
 export const postListReducer = (state = { posts: [] }, action) => {
   switch (action.type) {
     case POST_LIST_REQUEST:
