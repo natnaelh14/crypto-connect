@@ -25,12 +25,14 @@ const SingleMessage = ({ msgId, senderId, sentAt, text, refetchMessages }: MsgPr
   const { user } = currentUser
   const loggedInUser: userProps = user
 
-  const { loading, error, data } = useQuery(QUERY_USER, {
+  const { loading, error, data: { userProfile } } = useQuery(QUERY_USER, {
+    skip: !senderId,
     variables: { id: senderId }
   });
-  if (data) {
-    var { userProfile }: { userProfile: userProps } = data;
-  }
+  // ! TEST
+  // if (data) {
+  //   var { userProfile }: { userProfile: userProps } = data;
+  // }
   const [anchorEl, setAnchorEl] = useState<any>(null);
   const open = Boolean(anchorEl);
   const [deleteMessage, { }] = useMutation(DELETE_MESSAGE);

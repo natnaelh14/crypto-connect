@@ -21,16 +21,18 @@ const FriendRequests = () => {
         user: userProps,
         loading: boolean
     } = currentUser
-    if (currentUser) {
-        var { loading, error, data, refetch } = useQuery(QUERY_FRIEND_REQUESTS, {
+    // ! TEST WORLD
+    // if (currentUser) {
+        // @ts-ignore
+        const { loading, error, data, refetch } = useQuery(QUERY_FRIEND_REQUESTS, {
             variables: {
-                id: user.id
+                id: user?.id
             }
         });
-    }
-    if (data) {
-        var friendRequestsData = data.friendRequests
-    }
+    // }
+    // if (data) {
+        const friendRequestsData = data?.friendRequests
+    // }
     const getRequests = () => {
         refetch();
     }

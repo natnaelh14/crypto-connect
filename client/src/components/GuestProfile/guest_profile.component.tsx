@@ -49,7 +49,8 @@ const GuestProfile = () => {
     if (profileId === userInfo.id) {
         history.push("/home/profile");
     }
-    if (profileId) {
+    // ! TEST WORLD
+    // if (profileId) {
         var { loading: userLoading, error: userError, data: userData } = useQuery(QUERY_USER, {
             variables: {
                 id: profileId
@@ -70,7 +71,7 @@ const GuestProfile = () => {
                 id: profileId
             }
         });
-    }
+    // }
 
     if (followerData) {
         var { followers } = followerData;
@@ -79,20 +80,20 @@ const GuestProfile = () => {
         var { followings } = followingData;
     }
 
-    if (profileId && userInfo) {
+    // if (profileId && userInfo) {
         var { data: checkFriendData, refetch } = useQuery(QUERY_CHECK_FRIENDSHIP, {
             variables: {
-                follower: userInfo.id,
+                follower: userInfo?.id,
                 followed: profileId
             }
         })
         var { data: checkFriendRequestData, refetch: requestRefetch } = useQuery(QUERY_FRIEND_REQUEST, {
             variables: {
-                sender_id: userInfo.id,
+                sender_id: userInfo?.id,
                 receiver_id: profileId
             }
         })
-    }
+    // }
 
     const [openFollowingModal, setOpenFollowingModal] = React.useState(false);
     const [openFollowerModal, setOpenFollowerModal] = React.useState(false);
