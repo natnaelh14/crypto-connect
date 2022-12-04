@@ -26,25 +26,28 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 
 const Messages = () => {
   const { messagesId } = useParams<{ messagesId: string | undefined }>();
-  if (messagesId) {
+  // !COULD BE ERROR
+  // if (messagesId) {
     const currentUser = useAppSelector(state => state.currentUser)
     var { loading: currentUserLoading, user } = currentUser
-    var { loading: guestLoading, data: guestData } = useQuery(QUERY_USER, {
+    var { loading: guestLoading, data: { userProfile } } = useQuery(QUERY_USER, {
+      skip: !messagesId,
       variables: { id: messagesId }
     });
-  }
-  if (guestData) {
-    var { userProfile }: { userProfile: userProps } = guestData;
-  }
-  if (user && messagesId) {
+  // }
+  // if (guestData) {
+  //   var { userProfile }: { userProfile: userProps } = guestData;
+  // }
+  // if (user && messagesId) {
     var userInfo: userProps = user
-    var { loading: messageLoading, error: messageError, data, refetch: messagesRefetch } = useQuery(QUERY_MESSAGES, {
-      variables: { sender_id: userInfo.id, receiver_id: messagesId },
+    var { loading: messageLoading, error: messageError, data: { messages }, refetch: messagesRefetch } = useQuery(QUERY_MESSAGES, {
+      skip: !userInfo?.id || !messagesId,
+      variables: { sender_id: userInfo?.id, receiver_id: messagesId },
     });
-  }
-  if (data) {
-    var { messages } = data;
-  }
+  // }
+  // if (data) {
+  //   var { messages } = data;
+  // }
   const [messageText, setMessageText] = useState<string>("");
   const [addMessage, { data: addMessageData, loading, error }] = useMutation(ADD_MESSAGE)
   const handleSendMessage = () => {
